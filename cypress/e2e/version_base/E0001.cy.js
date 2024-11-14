@@ -42,7 +42,6 @@ describe('Escenarios E2E para Ghost', function () {
 
         //And escribe el titulo del post
         let titulo = faker.lorem.word();
-        PostPage.clickInTitle();
         PostPage.writeTitle(titulo);
         // cy.screenshot('E0001-5-BS');
 
