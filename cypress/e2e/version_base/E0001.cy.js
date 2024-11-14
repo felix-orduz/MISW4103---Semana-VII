@@ -1,6 +1,6 @@
-import { LogIn } from "../../pages/version_rc/logIn";
-import { PostPage } from "../../pages/version_rc/postPage";
-import { PrincipalPage } from "../../pages/version_rc/principalPage";
+import { LogIn } from "../../pages/version_base/logIn";
+import { PostPage } from "../../pages/version_base/postPage";
+import { PrincipalPage } from "../../pages/version_base/principalPage";
 import { faker } from '@faker-js/faker';
 const data = require('../../fixtures/properties.json');
 
@@ -26,53 +26,45 @@ describe('Escenarios E2E para Ghost', function () {
     it('E0001 - Crear un post con titulo', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
-        cy.screenshot('E0001-1-RC');
+        // cy.screenshot('E0001-1-BS');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
-        cy.screenshot('E0001-2-RC');
+        // cy.screenshot('E0001-2-BS');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
-        cy.screenshot('E0001-3-RC');
+        // cy.screenshot('E0001-3-BS');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
-        cy.screenshot('E0001-4-RC');
+        // cy.screenshot('E0001-4-BS');
 
         //And escribe el titulo del post
         let titulo = faker.lorem.word();
+        PostPage.clickInTitle();
         PostPage.writeTitle(titulo);
-        cy.screenshot('E0001-5-RC');
+        // cy.screenshot('E0001-5-BS');
 
-        //And escribe el contenido del post
-        let contenido = faker.lorem.words();
-        PostPage.writeContent(contenido);
-        cy.screenshot('E0001-6-RC');
-
-        //And borra el contenido si hay algo
-        PostPage.clearContent();
-        cy.screenshot('E0001-7-RC');
+        //And da click en contenido
+        PostPage.clickInContent();
 
         //And le da click en el boton de Publish
         PostPage.publishPostButton();
-        cy.wait(1000);
-        cy.screenshot('E0001-8-RC');
-
-        //And le da click en el boton Continue, final review
-        PostPage.continueButton();
-        cy.screenshot('E0001-9-RC');
+        // cy.screenshot('E0001-8-BS');
 
         //And le da click en el boton Publish post, right now
         PostPage.publishPostButtonFinal();
-        cy.screenshot('E0001-10-RC');
+        cy.wait(1000);
+        // cy.screenshot('E0001-10-BS');
 
-        //When cierre el modal de confirmación de publicación
-        PostPage.closePublishModal();
+        //When se devuleva a la lista de posts
+        PostPage.clickBackToPosts();
+        cy.wait(1000);
 
         //Then debería ver el post publicado en la lista de posts
         PostPage.lastPostCreated(titulo, 'notClick');
         cy.wait(1000);
-        cy.screenshot('E0001-11-RC');
+        // cy.screenshot('E0001-11-BS');
     });
 });
