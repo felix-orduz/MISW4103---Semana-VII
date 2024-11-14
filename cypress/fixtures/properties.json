@@ -1,4 +1,5 @@
 {
     "email": "d.andrades@uniandes.edu.co",
-    "password": "ArpolisVI204*"
+    "password": "ArpolisVI204*",
+    "baseURL": "http://localhost:2368/ghost/#/signin"
 }
