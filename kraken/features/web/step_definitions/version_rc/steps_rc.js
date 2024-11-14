@@ -13,10 +13,10 @@ const {
   updatePostButton,
   clickBackToPosts,
   deletePost,
-} = require("../pages/post");
+} = require("../../pages/version_rc/post");
 
 const { getTitleTagSection, clickNewTag, writeNameTag, clickNombreTag,
-  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../pages/tag');
+  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../../pages/version_rc/tag');
 
 const {
   clickNewMember,
@@ -34,16 +34,16 @@ const {
   clickDeleteMember,
   confirmDeleteMember,
   verifyMemberDeleted
-} = require("../pages/member");
+} = require("../../pages/version_rc/member");
 
-const { logIn, logInButton } = require("../pages/login");
+const { logIn, logInButton } = require("../../pages/version_rc/login");
 const {
   getTitleAdmin,
   clickPosts,
   clickMembers,
   clickTags,
   clickPages
-} = require("../pages/principal");
+} = require("../../pages/version_rc/principal");
 
 const fs = require('fs'); // Asegúrate de requerir 'fs' al principio del archivo
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
@@ -98,7 +98,7 @@ Then("Titulo del post", async function () {
   await writeTitlePost(this.driver, titulo);
 });
 
-Then("Clic en Contenido", async function () {
+Then("Clic en Contenido post", async function () {
   await clickContentPost(this.driver);
 });
 
@@ -111,7 +111,7 @@ Then("Clic en el boton publish-flow", async function () {
   await clickNewPostPublishFlow(this.driver);
 });
 
-Then("Clic en el boton Continue", async function () {
+Then("Clic en el boton Continue post", async function () {
   await clickNewPostContinue(this.driver);
 });
 
@@ -119,7 +119,7 @@ Then("Clic en el boton Publish Post", async function () {
   await clickNewPostPublish(this.driver);
 });
 
-Then("Cierre el modal de confirmación", async function () {
+Then("Cierre el modal de confirmación post", async function () {
   await clickNewPostCloseModal(this.driver);
 });
 
@@ -138,7 +138,7 @@ Then("Valido el contenido del post", async function () {
   await viewContent(this.driver, contenido);
 });
 
-Then("Edito el titulo", async function () {
+Then("Edito el titulo del post", async function () {
   let tituloEditado = "Titulo de prueba editado";
   await writeTitlePost(this.driver, tituloEditado);
 });
@@ -148,7 +148,7 @@ Then("Edito contenido del post", async function () {
   await writeContentPost(this.driver, contenidoEditado);
 });
 
-Then("Clic en boton de Update", async function () {
+Then("Clic en boton de Update del post", async function () {
   await updatePostButton(this.driver);
 });
 
@@ -353,7 +353,7 @@ const {
   deletePage,
   clickPageUnPublish,
   clickPageRevertToDraft
-} = require('../pages/page');
+} = require('../../pages/version_rc/page');
 Then('Página de listado de Pages', async function () {
   await getTitlePageSection(this.driver);
 });
@@ -421,19 +421,9 @@ Then('Entro a la Page creada', async function () {
   await lastPageCreated(this.driver, titulo, "click");
 });
 
-Then('Valido el contenido del post', async function () {
-  let contenido = "Contenido de prueba";
-  await viewContent(this.driver, contenido);
-});
-
 Then('Edito el titulo de la Page', async function () {
   let tituloEditado = 'Titulo de prueba editado';
   await writeTitlePage(this.driver, tituloEditado);
-});
-
-Then('Edito contenido del post', async function () {
-  let contenidoEditado = "Contenido de prueba editado";
-  await writeContentPage(this.driver, contenidoEditado);
 });
 
 Then('Clic para devolverse a las Pages', async function () {

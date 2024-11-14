@@ -1,7 +1,7 @@
 Feature: Ghost
 
-@user5 @web
-Scenario: E0005 - Eliminamos un post previamente creado
+@user1 @web
+Scenario: E0001 - Crear un post con titulo
   Given I navigate to page principal
   And I enter email y password
   And I wait for 1 seconds
@@ -15,6 +15,5 @@ Scenario: E0005 - Eliminamos un post previamente creado
   And Clic en el boton publish-flow
   And Clic en el boton Continue post
   And Clic en el boton Publish Post
-  And Cierre el modal de confirmación post
-  When Clic derecho en el post creado
-  Then Elimino el post
+  When Cierre el modal de confirmación post
+  Then Valida Post publicado en la lista de posts

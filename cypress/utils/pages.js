@@ -1,4 +1,4 @@
-import { LogIn } from "../pages/logIn";
+import { LogIn } from "../pages/version_rc/logIn";
 const BASE_URL = "http://localhost:2368";
 
 export const data = {

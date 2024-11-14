@@ -1,7 +1,7 @@
 import {    
     CONTENT, 
     doLogIn
-} from "../utils/pages";
+} from "../../utils/pages";
 const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {

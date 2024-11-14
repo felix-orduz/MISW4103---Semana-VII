@@ -1,9 +1,9 @@
 const BASE_URL = "http://localhost:2368/";
-import { LogIn } from "../pages/logIn";
-import { MembersPage } from "../pages/membersPage";
-import { PrincipalPage } from "../pages/principalPage";
+import { LogIn } from "../../pages/version_rc/logIn";
+import { MembersPage } from "../../pages/version_rc/membersPage";
+import { PrincipalPage } from "../../pages/version_rc/principalPage";
 import { faker } from "@faker-js/faker";
-const data = require('../fixtures/properties.json');
+const data = require('../../fixtures/properties.json');
 
 // Configuración para ignorar una excepción específica que podría interrumpir la prueba
 Cypress.on("uncaught:exception", (err, runnable) => {

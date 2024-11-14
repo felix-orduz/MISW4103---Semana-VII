@@ -1,8 +1,8 @@
-import { LogIn } from "../pages/logIn";
-import { PostPage } from "../pages/postPage";
-import { PrincipalPage } from "../pages/principalPage";
+import { LogIn } from "../../pages/version_rc/logIn";
+import { PostPage } from "../../pages/version_rc/postPage";
+import { PrincipalPage } from "../../pages/version_rc/principalPage";
 import { faker } from '@faker-js/faker';
-const data = require('../fixtures/properties.json');
+const data = require('../../fixtures/properties.json');
 
 Cypress.on("uncaught:exception", (err, runnable) => {
     if (err.message.includes("The play() request was interrupted")) {

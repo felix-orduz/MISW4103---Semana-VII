@@ -1,8 +1,8 @@
-import { LogIn } from "../pages/logIn";
-import { PostPage } from "../pages/postPage";
-import { PrincipalPage } from "../pages/principalPage";
+import { LogIn } from "../../pages/version_rc/logIn";
+import { PostPage } from "../../pages/version_rc/postPage";
+import { PrincipalPage } from "../../pages/version_rc/principalPage";
 import { faker } from '@faker-js/faker';
-const data = require('../fixtures/properties.json');
+const data = require('../../fixtures/properties.json');
 
 Cypress.on("uncaught:exception", (err, runnable) => {
     if (err.message.includes("The play() request was interrupted")) {
@@ -23,7 +23,7 @@ describe('Escenarios E2E para Ghost', function () {
     });
   });
 
-    it('E0005 - Eliminamos un post previamente creado', function () {
+    it('E0002 - Crear un post con contenido', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
 
@@ -57,10 +57,10 @@ describe('Escenarios E2E para Ghost', function () {
         //And cierre el modal de confirmación de publicación
         PostPage.closePublishModal();
 
-        //When le de click derecho en el post creado
-        PostPage.lastPostCreated(titulo, 'rightClick');
+        //When le de click en el post creado
+        PostPage.lastPostCreated(titulo, 'click');
 
-        //Then le da click en el boton de delete y el post es eliminado
-        PostPage.deletePost();
+        //Then el contenido del post debería ser el que se escribió
+        PostPage.viewContent(contenido);
     });
 });

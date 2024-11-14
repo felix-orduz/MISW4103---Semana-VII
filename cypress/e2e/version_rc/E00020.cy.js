@@ -1,9 +1,9 @@
 const BASE_URL = "http://localhost:2368/";
-import { LogIn } from "../pages/logIn";
-import { MembersPage } from "../pages/membersPage";
-import { PrincipalPage } from "../pages/principalPage";
+import { LogIn } from "../../pages/version_rc/logIn";
+import { MembersPage } from "../../pages/version_rc/membersPage";
+import { PrincipalPage } from "../../pages/version_rc/principalPage";
 import { faker } from "@faker-js/faker";
-const data = require('../fixtures/properties.json');
+const data = require('../../fixtures/properties.json');
 
 Cypress.on("uncaught:exception", (err, runnable) => {
   if (err.message.includes("The play() request was interrupted")) {
@@ -23,7 +23,7 @@ describe("Escenarios E2E para Ghost", function () {
     });
   });
 
-  it("E00019 - Edit Member", function () {
+  it("E00020 - Delete Member", function () {
     // When Crear un nuevo miembro
     PrincipalPage.visitMembers(BASE_URL);
     cy.wait(2000);
@@ -31,34 +31,31 @@ describe("Escenarios E2E para Ghost", function () {
     MembersPage.clickNewMemberButton();
     cy.wait(2000);
 
-    const initialMemberData = {
+    const memberData = {
       name: faker.name.fullName(),
       email: faker.internet.email(),
       note: faker.lorem.sentence(),
     };
 
-    MembersPage.fillMemberForm(initialMemberData);
+    MembersPage.fillMemberForm(memberData);
     MembersPage.clickSaveButton();
 
     // Then Volver a la lista de miembros y buscar el miembro creado
     MembersPage.goToMembersList();
     cy.wait(2000);
 
-    MembersPage.clickMemberByEmail(initialMemberData.email);
+    // Then Seleccionar el miembro en la lista para editarlo
+    MembersPage.clickMemberByEmail(memberData.email);
 
-    // Then Editar el nombre del miembro
-    const updatedName = faker.name.fullName();
-    cy.get('input[data-test-input="member-name"]').clear().type(updatedName);
+    // Then Abrir el menú de acciones y confirmar eliminación
+    MembersPage.openMemberActions();
+    MembersPage.clickDeleteMember();
+    MembersPage.confirmDeleteMember();
 
-    // Then Guardar los cambios
-    MembersPage.clickSaveButton();
-    MembersPage.goToMembersList();
-
-    // Then Confirmar que el nombre ha cambiado en la lista
-    cy.contains("p.gh-members-list-email", initialMemberData.email)
-      .parent()
-      .within(() => {
-        cy.get("h3.gh-members-list-name").should("have.text", updatedName);
-      });
+    // Then Verificar que el miembro ya no está en la lista
+    MembersPage.getMembersList().then((membersList) => {
+      const member = membersList.find((m) => m.email === memberData.email);
+      expect(member).to.be.undefined;
+    });
   });
 });

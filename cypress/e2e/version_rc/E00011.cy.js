@@ -3,7 +3,7 @@ import {
     CONTENT, 
     addContentToPage, 
     confirmCreatePage 
-} from "../utils/pages";
+} from "../../utils/pages";
 const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {

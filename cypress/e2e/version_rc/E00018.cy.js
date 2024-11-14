@@ -1,9 +1,9 @@
 const BASE_URL = "http://localhost:2368/";
-import { LogIn } from "../pages/logIn";
-import { MembersPage } from "../pages/membersPage";
-import { PrincipalPage } from "../pages/principalPage";
+import { LogIn } from "../../pages/version_rc/logIn";
+import { MembersPage } from "../../pages/version_rc/membersPage";
+import { PrincipalPage } from "../../pages/version_rc/principalPage";
 import { faker } from "@faker-js/faker";
-const data = require('../fixtures/properties.json');
+const data = require('../../fixtures/properties.json');
 
 // Configuración para ignorar una excepción específica que podría interrumpir la prueba
 Cypress.on("uncaught:exception", (err, runnable) => {
@@ -25,7 +25,7 @@ describe("Escenarios E2E para Ghost", function () {
     });
   });
 
-  it("E00017 - Invalid Email Validation", function () {
+  it("E0018 - Validación de Email Inválido y Longitud de Nota", function () {
     // When Navegar a la sección de miembros y abrir el formulario para crear un nuevo miembro
     PrincipalPage.visitMembers(BASE_URL);
     cy.wait(2000);
@@ -40,11 +40,14 @@ describe("Escenarios E2E para Ghost", function () {
         expect(normalizedText).to.include("New member");
       });
 
+    // Then Generar texto de más de 500 caracteres para el campo de nota
+    const longNote = faker.lorem.words(100); // Genera un texto largo que excede los 500 caracteres
+
     // Then Generar un nombre y nota válidos, pero un email inválido
     const memberData = {
       name: faker.name.fullName(),
       email: "invalid-email-format", // Email inválido
-      note: faker.lorem.sentence(),
+      note: longNote,
     };
 
     // Then Llenar el formulario con el email inválido
@@ -54,6 +57,18 @@ describe("Escenarios E2E para Ghost", function () {
     MembersPage.clickSaveButton();
 
     // Then Verificar que se muestre el mensaje de error "Invalid Email."
-    MembersPage.getInvalidEmailMessageElement().should('contain.text', 'Invalid Email.');
+    MembersPage.getInvalidEmailMessageElement().should(
+      "contain.text",
+      "Invalid Email."
+    );
+    // Verificar que no se haya hecho ninguna solicitud POST ni PUT
+
+    // Then Verificar que el contador de caracteres indique que se ha excedido el límite y esté en rojo
+    cy.get("span.word-count")
+      .should("have.css", "color", "rgb(226, 84, 64)") // Color rojo
+      .and(($span) => {
+        const charCount = parseInt($span.text().trim());
+        expect(charCount).to.be.greaterThan(500);
+      });
   });
 });
