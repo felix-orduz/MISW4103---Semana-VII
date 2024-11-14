@@ -13,10 +13,10 @@ const {
   updatePostButton,
   clickBackToPosts,
   deletePost,
-} = require("../../pages/version_rc/post");
+} = require("../pages/version_rc/post");
 
 const { getTitleTagSection, clickNewTag, writeNameTag, clickNombreTag,
-  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../../pages/version_rc/tag');
+  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../pages/version_rc/tag');
 
 const {
   clickNewMember,
@@ -34,16 +34,16 @@ const {
   clickDeleteMember,
   confirmDeleteMember,
   verifyMemberDeleted
-} = require("../../pages/version_rc/member");
+} = require("../pages/version_rc/member");
 
-const { logIn, logInButton } = require("../../pages/version_rc/login");
+const { logIn, logInButton } = require("../pages/version_rc/login");
 const {
   getTitleAdmin,
   clickPosts,
   clickMembers,
   clickTags,
   clickPages
-} = require("../../pages/version_rc/principal");
+} = require("../pages/version_rc/principal");
 
 const fs = require('fs'); // Asegúrate de requerir 'fs' al principio del archivo
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
@@ -353,7 +353,7 @@ const {
   deletePage,
   clickPageUnPublish,
   clickPageRevertToDraft
-} = require('../../pages/version_rc/page');
+} = require('../pages/version_rc/page');
 Then('Página de listado de Pages', async function () {
   await getTitlePageSection(this.driver);
 });
