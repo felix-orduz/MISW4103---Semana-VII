@@ -1,7 +1,6 @@
 import { LogIn } from "../../pages/version_rc/logIn";
 import { PostPage } from "../../pages/version_rc/postPage";
 import { PrincipalPage } from "../../pages/version_rc/principalPage";
-import { faker } from '@faker-js/faker';
 const data = require('../../fixtures/properties.json');
 
 Cypress.on("uncaught:exception", (err, runnable) => {
@@ -40,11 +39,11 @@ describe('Escenarios E2E para Ghost', function () {
         PostPage.creationPostPage().should('have.value', '');
 
         //And escribe el titulo del post
-        let titulo = faker.lorem.word();
+        let titulo = 'titulo E0004'
         PostPage.writeTitle(titulo);
 
         //And escribe el contenido
-        let contenido = faker.lorem.words();
+        let contenido = 'contenido E0004'
         PostPage.writeContent(contenido);
         cy.screenshot('E0004-3-RC');
 
@@ -69,7 +68,7 @@ describe('Escenarios E2E para Ghost', function () {
         cy.screenshot('E0004-5-RC');
 
         //And edita el contenido del post
-        let contenidoEditado = faker.lorem.words();
+        let contenidoEditado = 'contenido editado E0004'
         PostPage.writeContent(contenidoEditado);
         cy.screenshot('E0004-6-RC');
 

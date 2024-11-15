@@ -1,0 +1,41 @@
+const reportPath = './screenshots/report.html';
+let htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VRT</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .image-group { display: flex; margin-bottom: 20px; }
+    .image-group img { margin-right: 10px; border: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Visual Regression Report</h1>
+    version1Images.forEach((image, index) => {
+        console.log('Procesando imagen:', image);
+        console.log('Imagen correspondiente en la versión 5.96:', version2Images[index]);
+        
+        const diffImage = `diff-${image}`;
+        htmlContent += `
+        <div class="image-group">
+            <div>
+            <h3>Ghost 4.5.0</h3>
+            <img src="screenshots/ghost-4.5/${image}" width="300" />
+            </div>
+            <div>
+            <h3>Ghost 5.96.0</h3>
+            <img src="screenshots/ghost-5.96/${version2Images[index]}" width="300" />
+            </div>
+            <div>
+            <h3>Difference</h3>
+            <img src="screenshots/comparisons/${diffImage}" width="300" />
+            </div>
+        </div>
+        `;
+    });
+</body>
+</html>
+
+fs.writeFileSync(reportPath, htmlContent);
+console.log('Report generated at:', reportPath);
