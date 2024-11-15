@@ -38,3 +38,23 @@ export function confirmCreatePage() {
         cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
     })
 }
+
+
+export class PagesPage {
+
+    static createPage(title, content) {}
+
+    static deletePageByTitle(title) {}
+
+    static addContentToPage(title, content) {
+        cy.get(CONTENT.pageTitleInput).type(title)
+        cy.get(CONTENT.pageContentInput).first().type(content)
+    }
+
+    static confirmCreatePage() {
+        cy.get(CONTENT.newPageModal).within(() => {
+            cy.get(CONTENT.continueCreationPageButton).first().click() // click en continuar
+            cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
+        })
+    }
+}
