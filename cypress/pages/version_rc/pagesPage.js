@@ -41,7 +41,6 @@ export function confirmCreatePage() {
 
 
 export class PagesPage {
-
     static doLogIn() {
         cy.fixture('properties.json').then((data) => {
             cy.visit(data.baseURL); // Go to log In URL
@@ -50,7 +49,25 @@ export class PagesPage {
         });
     }
 
-    static createPage(title, content) {}
+    static createPage(title, content) {
+        cy.fixture('properties.json').then((data) => {
+            cy.visit(data.adminBaseURL + "/#/editor/page"); // Go to log In URL
+
+            cy.get(CONTENT.pageTitleInput).type(title);
+            cy.get(CONTENT.pageContentInput).first().type(content);
+
+            cy.wait(100);
+            cy.get(CONTENT.publishPageButton).first().click(); 
+            
+            cy.get(CONTENT.newPageModal).within(() => {
+                cy.get(CONTENT.continueCreationPageButton).first().click() // click en continuar
+                cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
+            });
+
+            cy.wait(100);
+        });
+
+    }
 
     static deletePageByTitle(title) {
         cy.fixture('properties.json').then((data) => {
