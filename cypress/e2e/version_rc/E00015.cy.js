@@ -1,9 +1,7 @@
 import {   
     PagesPage, 
-    CONTENT, 
-    doLogIn
+    CONTENT
 } from "../../utils/pages";
-const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -11,13 +9,13 @@ describe('Test feature pages', () => {
     });
 
     beforeEach(()=>{
-        doLogIn();
+        PagesPage.doLogIn();
     });
 
    
     it("Escenario: Delete page", () => {
         //Given usuario logueado
-        cy.visit(BASE_URL + '/ghost/#/pages/')
+        PagesPage.goToPages();
         cy.screenshot('Before Delete');
 
         //When editar página
@@ -25,8 +23,8 @@ describe('Test feature pages', () => {
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         //Then borra la página
-        cy.get('button.settings-menu-toggle').first().click(); // click en menu lateral
-        cy.get('button[data-test-button="delete-post"]').first().click(); // click on delete button
+        PagesPage.getLateralMenuInPage().click(); // click en menu lateral
+        PagesPage.getDeletePageButton().click(); // click on delete button
 
         cy.wait(500)
 
