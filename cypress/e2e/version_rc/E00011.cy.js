@@ -3,7 +3,8 @@ import {
     PagesPage, 
     CONTENT, 
 } from "../../utils/pages";
-const BASE_URL = "http://localhost:2368";
+const PAGE_TITLE = "A New Page by Cypress";
+
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -15,7 +16,7 @@ describe('Test feature pages', () => {
     });
 
     afterEach(() => {
-        PagesPage.deletePageByTitle("");
+        PagesPage.deletePageByTitle(PAGE_TITLE);
     })
 
     it("Escenario 011: Create new page", () => {
@@ -27,9 +28,8 @@ describe('Test feature pages', () => {
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         //Then pone contenido
-        let title = "A New Page by Cypress";
         let content = " To live is to risk it all.";
-        PagesPage.addContentToPage(title, content);
+        PagesPage.addContentToPage(PAGE_TITLE, content);
 
         cy.wait(1000)
 
@@ -45,7 +45,7 @@ describe('Test feature pages', () => {
 
         // Then verifica que existe una Page creada
         PagesPage.getPublishPageModal.within(() => {
-            cy.get('h2').should('contain', title);
+            cy.get('h2').should('contain', PAGE_TITLE);
             cy.get('p').should('contain', content);
         });
 

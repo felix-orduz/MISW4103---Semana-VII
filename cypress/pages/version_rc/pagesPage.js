@@ -52,7 +52,19 @@ export class PagesPage {
 
     static createPage(title, content) {}
 
-    static deletePageByTitle(title) {}
+    static deletePageByTitle(title) {
+        cy.fixture('properties.json').then((data) => {
+            cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages
+
+            cy.get('div.posts-list').within(() => {
+                cy.get('h3.gh-content-entry-title')
+                    .first()
+                    .should('contain', title)
+                    .rightclick({ force: true });
+                    cy.get('[data-test-button="delete"]').first().click({ force: true });
+            });
+        });
+    }
 
     static addContentToPage(title, content) {
         cy.get(CONTENT.pageTitleInput).type(title)
