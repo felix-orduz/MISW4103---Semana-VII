@@ -66,6 +66,14 @@ export class PagesPage {
         })
     }
 
+    static getConfirmDeleteModal() {
+        return cy.get(CONTENT.newPageModal);
+    }
+
+    static clickOnDeletePage() {
+        return cy.get('button[data-test-button="delete-post-confirm"]').contains('Delete').click();
+    }
+
     static getPublishPageModal() {
         return cy.get('div[data-test-publish-flow="complete"]');
     }

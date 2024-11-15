@@ -1,4 +1,5 @@
-import {    
+import {   
+    PagesPage, 
     CONTENT, 
     doLogIn
 } from "../../utils/pages";
@@ -29,9 +30,9 @@ describe('Test feature pages', () => {
 
         cy.wait(500)
 
-        //Then confirma el borrado
-        cy.get(CONTENT.newPageModal).within(() => {
-            cy.get('button[data-test-button="delete-post-confirm"]').contains('Delete').click() // click en delete
+        //And confirma el borrado
+        PagesPage.getConfirmDeleteModal().within(() => {
+            PagesPage.clickOnDeletePage(); // click en delete
         })
 
         cy.wait(500)
