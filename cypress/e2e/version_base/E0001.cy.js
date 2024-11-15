@@ -26,6 +26,7 @@ describe('Escenarios E2E para Ghost', function () {
     it('E0001 - Crear un post con titulo', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
+        cy.wait(1000);
         cy.screenshot('E0001-1-BS');
 
         //And el administrador ve la página de listado de posts
@@ -41,19 +42,17 @@ describe('Escenarios E2E para Ghost', function () {
         //And escribe el titulo del post
         let titulo = faker.lorem.word();
         PostPage.writeTitle(titulo);
-        cy.screenshot('E0001-5-BS');
+        cy.screenshot('E0001-3-BS');
 
         //And da click en contenido
         PostPage.clickInContent();
 
         //And le da click en el boton de Publish
         PostPage.publishPostButton();
-        // cy.screenshot('E0001-8-BS');
 
         //And le da click en el boton Publish post, right now
         PostPage.publishPostButtonFinal();
         cy.wait(1000);
-        // cy.screenshot('E0001-10-BS');
 
         //When se devuelva a la lista de posts
         PostPage.clickBackToPosts();
@@ -62,6 +61,6 @@ describe('Escenarios E2E para Ghost', function () {
         //Then debería ver el post publicado en la lista de posts
         PostPage.lastPostCreated(titulo, 'notClick');
         cy.wait(1000);
-        // cy.screenshot('E0001-11-BS');
+        cy.screenshot('E0001-4-BS');
     });
 });

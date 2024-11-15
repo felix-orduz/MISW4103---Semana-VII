@@ -26,14 +26,14 @@ describe('Escenarios E2E para Ghost', function () {
     it('E0001 - Crear un post con titulo', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
-        // cy.screenshot('E0001-1-RC');
+        cy.screenshot('E0001-1-RC');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
-        // cy.screenshot('E0001-2-RC');
+        cy.screenshot('E0001-2-RC');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
@@ -41,24 +41,21 @@ describe('Escenarios E2E para Ghost', function () {
         //And escribe el titulo del post
         let titulo = faker.lorem.word();
         PostPage.writeTitle(titulo);
-        // cy.screenshot('E0001-5-RC');
+        cy.screenshot('E0001-3-RC');
 
         //And da click en contenido
         PostPage.clickInContent();
         cy.wait(1000);
-        
+
         //And le da click en el boton de Publish
         PostPage.publishPostButton();
         cy.wait(1000);
-        // cy.screenshot('E0001-8-RC');
 
         //And le da click en el boton Continue, final review
         PostPage.continueButton();
-        // cy.screenshot('E0001-9-RC');
 
         //And le da click en el boton Publish post, right now
         PostPage.publishPostButtonFinal();
-        // cy.screenshot('E0001-10-RC');
 
         //When cierre el modal de confirmación de publicación
         PostPage.closePublishModal();
@@ -66,6 +63,6 @@ describe('Escenarios E2E para Ghost', function () {
         //Then debería ver el post publicado en la lista de posts
         PostPage.lastPostCreated(titulo, 'notClick');
         cy.wait(1000);
-        // cy.screenshot('E0001-11-RC');
+        cy.screenshot('E0001-4-RC');
     });
 });
