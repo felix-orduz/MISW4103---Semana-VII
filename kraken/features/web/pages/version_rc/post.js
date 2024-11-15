@@ -59,7 +59,7 @@ module.exports = {
 
     viewContent: async function(driver, content) {
       const { expect } = await import('chai');
-      let contentFieldElement = await driver.$('[data-koenig-dnd-droppable="true"]');
+      let contentFieldElement = await driver.$('[data-kg="editor"]');
       let contentField = await contentFieldElement.getText();
       expect(contentField.trim()).to.include(content);
   },
@@ -79,9 +79,9 @@ module.exports = {
       return clic.click({ force: true });
   },
 
-  deletePostModal: async function (driver) {
-    let clic = await driver.$('[data-test-button="confirm"]');
-    return clic.click({ force: true });
+    deletePostModal: async function (driver) {
+      let clic = await driver.$('[data-test-button="confirm"]');
+      return clic.click({ force: true });
   }
 
 };
