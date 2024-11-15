@@ -13,6 +13,7 @@ const {
   updatePostButton,
   clickBackToPosts,
   deletePost,
+  deletePostModal,
 } = require("../pages/version_rc/post");
 
 const { getTitleTagSection, clickNewTag, writeNameTag, clickNombreTag,
@@ -176,8 +177,12 @@ Then("Clic derecho en el post creado", async function () {
   await lastPostCreated(this.driver, titulo, "rightClick");
 });
 
-Then("Elimino el post", async function () {
+Then("Clic en Elimino el post", async function () {
   await deletePost(this.driver);
+});
+
+Then('Elimino post', async function () {
+  await deletePostModal(this.driver);
 });
 
 //Tags

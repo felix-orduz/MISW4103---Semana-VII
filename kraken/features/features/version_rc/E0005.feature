@@ -16,5 +16,6 @@ Scenario: E0005 - Eliminamos un post previamente creado
   And Clic en el boton Continue post
   And Clic en el boton Publish Post
   And Cierre el modal de confirmación post
-  When Clic derecho en el post creado
-  Then Elimino el post
+  And Clic derecho en el post creado
+  When Clic en Elimino el post
+  Then Elimino post

@@ -77,6 +77,11 @@ module.exports = {
     deletePost: async function (driver) {
       let clic = await driver.$('[data-test-button="delete"]');
       return clic.click({ force: true });
+  },
+
+  deletePostModal: async function (driver) {
+    let clic = await driver.$('[data-test-button="confirm"]');
+    return clic.click({ force: true });
   }
 
 };
