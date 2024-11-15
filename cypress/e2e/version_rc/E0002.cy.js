@@ -26,38 +26,38 @@ describe('Escenarios E2E para Ghost', function () {
     it('E0002 - Crear un post con contenido', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
-        cy.screenshot('E0002-1-RC');
+        // cy.screenshot('E0002-1-RC');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
-        cy.screenshot('E0002-2-RC');
+        // cy.screenshot('E0002-2-RC');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
-        cy.screenshot('E0002-2-RC');
+        // cy.screenshot('E0002-2-RC');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
-        cy.screenshot('E0002-3-RC');
+        // cy.screenshot('E0002-3-RC');
 
         //And escribe el titulo del post
         let titulo = faker.lorem.word();
         PostPage.writeTitle(titulo);
-        cy.screenshot('E0002-4-RC');
+        // cy.screenshot('E0002-4-RC');
 
         //And escribe el contenido
         let contenido = faker.lorem.words();
         PostPage.writeContent(contenido);
-        cy.screenshot('E0002-5-RC');
+        // cy.screenshot('E0002-5-RC');
 
         //And le de click en el boton de Publish
         PostPage.publishPostButton();
         cy.wait(1000);
-        cy.screenshot('E0002-6-RC');
+        // cy.screenshot('E0002-6-RC');
 
         //And le da click en el boton Continue, final review
         PostPage.continueButton();
-        cy.screenshot('E0002-7-RC');
+        // cy.screenshot('E0002-7-RC');
 
         //And le da click en el boton Publish post, right now
         PostPage.publishPostButtonFinal();
@@ -73,6 +73,6 @@ describe('Escenarios E2E para Ghost', function () {
         //Then el contenido del post debería ser el que se escribió
         PostPage.viewContent(contenido);
         cy.wait(1000);
-        cy.screenshot('E0002-9-RC');
+        // cy.screenshot('E0002-9-RC');
     });
 });
