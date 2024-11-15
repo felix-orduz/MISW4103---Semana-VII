@@ -26,12 +26,15 @@ describe('Escenarios E2E para Ghost', function () {
     it('E0004 - Editar el contenido de un post previamente creado', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
+        cy.wait(1000);
+        cy.screenshot('E0004-1-RC');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
+        cy.screenshot('E0004-2-RC');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
@@ -43,6 +46,7 @@ describe('Escenarios E2E para Ghost', function () {
         //And escribe el contenido
         let contenido = faker.lorem.words();
         PostPage.writeContent(contenido);
+        cy.screenshot('E0004-3-RC');
 
         //And le de click en el boton de Publish
         PostPage.publishPostButton();
@@ -56,13 +60,18 @@ describe('Escenarios E2E para Ghost', function () {
 
         //And cierre el modal de confirmación de publicación
         PostPage.closePublishModal();
+        cy.wait(1000);
+        cy.screenshot('E0004-4-RC');
 
         //And le de click en el post creado
         PostPage.lastPostCreated(titulo, 'click');
+        cy.wait(1000);
+        cy.screenshot('E0004-5-RC');
 
         //And edita el contenido del post
         let contenidoEditado = faker.lorem.words();
         PostPage.writeContent(contenidoEditado);
+        cy.screenshot('E0004-6-RC');
 
         //And le de click en el boton de update
         PostPage.updatePostButton();
@@ -76,5 +85,7 @@ describe('Escenarios E2E para Ghost', function () {
 
         //Then el contenido del post debería ser el editado
         PostPage.viewContent(contenidoEditado);
+        cy.wait(1000);
+        cy.screenshot('E0004-7-RC');
     });
 });
