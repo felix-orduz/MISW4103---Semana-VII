@@ -1,8 +1,8 @@
+import { LogIn } from "../../pages/version_rc/logIn";
+
 import { 
-    doLogIn, 
+    PagesPage, 
     CONTENT, 
-    addContentToPage, 
-    confirmCreatePage 
 } from "../../utils/pages";
 const BASE_URL = "http://localhost:2368";
 
@@ -12,7 +12,7 @@ describe('Test feature pages', () => {
     });
 
     beforeEach(()=>{
-        doLogIn();
+        PagesPage.doLogIn();
     });
 
     it("Escenario 011: Create new page", () => {
@@ -27,7 +27,7 @@ describe('Test feature pages', () => {
 
         //Then pone contenido
         let content = " To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.";
-        addContentToPage("A New Page by Cypress", content)
+        PagesPage.addContentToPage("A New Page by Cypress", content)
 
         cy.wait(1000)
 
@@ -37,7 +37,7 @@ describe('Test feature pages', () => {
         cy.wait(500)
 
         //Then verifica que la página fue creada
-        confirmCreatePage();
+        PagesPage.confirmCreatePage();
 
         cy.wait(500)
         cy.screenshot('New Page')
