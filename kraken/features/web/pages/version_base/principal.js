@@ -1,10 +1,5 @@
 module.exports = {
-    getTitleAdmin: async function (driver) {
-        let titleField = await driver.$('.gh-nav-menu-details-sitetitle');
-        return titleField.getText();
-    },
-
-    clickPosts: async function (driver) {
+    clickPostsBS: async function (driver) {
         let clicButton = await driver.$('[href="#/posts/"]');
         return clicButton.click({force: true});
     },
