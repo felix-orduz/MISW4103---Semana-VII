@@ -2,6 +2,7 @@
   "name": "cypress",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,5 +15,8 @@
     "chai": "^5.1.2",
     "cypress": "^13.15.2",
     "kraken-node": "^1.0.24"
+  },
+  "devDependencies": {
+    "pixelmatch": "^6.0.0"
   }
 }
