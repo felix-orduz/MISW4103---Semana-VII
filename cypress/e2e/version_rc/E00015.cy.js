@@ -3,6 +3,8 @@ import {
     CONTENT
 } from "../../utils/pages";
 
+const PAGE_TITLE = "Page to be deleted"
+
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
         return false;
@@ -10,6 +12,7 @@ describe('Test feature pages', () => {
 
     beforeEach(()=>{
         PagesPage.doLogIn();
+        PagesPage.createPage(PAGE_TITLE, "Ramdon content");
     });
 
    
@@ -34,6 +37,8 @@ describe('Test feature pages', () => {
         })
 
         cy.wait(500)
+        // Then confimar que no exista una pagina.
+        cy.get(CONTENT.editPageButton).
         cy.screenshot('DELETE PAGE')
     });
 });
