@@ -20,7 +20,7 @@ export class PostPage {
     }
 
     static writeContent(content) {
-        return cy.get('p[data-koenig-dnd-droppable="true"]').first().type(content, {force: true});
+        return cy.get('[data-kg="editor"]').first().type(content, {force: true});
     }
 
     static clearContent() {
@@ -50,32 +50,32 @@ export class PostPage {
     static lastPostCreated(title, flag) {
         // Verifica si existe algún elemento en la lista de posts
         cy.get('body').then(($body) => {
-            if ($body.find('ol.posts-lit.gh-list').length) {
-                // Si existe, selecciona el primer elemento en la lista
+            if ($body.find('ol.posts-list.gh-list').length) {
                 cy.get('li.gh-list-row.gh-posts-list-item').first().within(() => {
-                    // Encuentra el post por data-test-post-id y guarda su ID
-                    if(flag === 'notClick') {
-                        cy.get('a').first().then(() => {
-                            cy.get('h3.gh-content-entry-title').first().should('include.text', title);
-                        });
-                    }
-
-                    else if(flag === 'click') {
-                        cy.get('a').first().then(() => {
-                            cy.get('h3.gh-content-entry-title').first().click({ force: true });
-                        });
-                    }
-
-                    else {
-                        cy.get('h3.gh-content-entry-title').first().rightclick({ force: true });
+                    let titleSelector = 'h3.gh-content-entry-title';
+                    
+                    if (flag === 'notClick') {
+                        cy.get(titleSelector).first().should('include.text', title);
+                    } else if (flag === 'click') {
+                        cy.get(titleSelector).first().click({ force: true });
+                    } else {
+                        cy.get(titleSelector).first().rightclick({ force: true });
                     }
                 });
+            } else {
+                cy.log('No posts found');
             }
         });
     }
 
     static updatePostButton() {
-        return cy.get('[data-test-button="publish-save"]').first().click({ force: true });
+        cy.get('.gh-publishmenu.ember-view').then(($update) => {
+            cy.get('div[role="button"]').first().click({ force: true });
+        });
+    }
+
+    static updatePostButtonFinal() {
+        return cy.get('.gh-btn.gh-btn-black.gh-publishmenu-button.gh-btn-icon.ember-view').first().click({ force: true });
     }
 
     static clickBackToPosts() {
@@ -83,7 +83,7 @@ export class PostPage {
     }
 
     static viewContent(content) {
-        return cy.get('p[data-koenig-dnd-droppable="true"]').first().should('be.visible').should('include.text', content);
+        return cy.get('[data-kg="editor"]').first().should('be.visible').should('include.text', content);
     }
 
     static deletePost() {

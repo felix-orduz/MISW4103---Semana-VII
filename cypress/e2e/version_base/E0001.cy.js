@@ -57,7 +57,7 @@ describe('Escenarios E2E para Ghost', function () {
         cy.wait(1000);
         // cy.screenshot('E0001-10-BS');
 
-        //When se devuleva a la lista de posts
+        //When se devuelva a la lista de posts
         PostPage.clickBackToPosts();
         cy.wait(1000);
 
