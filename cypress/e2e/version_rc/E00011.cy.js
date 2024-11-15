@@ -1,4 +1,3 @@
-import { LogIn } from "../../pages/version_rc/logIn";
 
 import { 
     PagesPage, 
@@ -15,19 +14,22 @@ describe('Test feature pages', () => {
         PagesPage.doLogIn();
     });
 
+    afterEach(() => {
+        PagesPage.deletePageByTitle("");
+    })
+
     it("Escenario 011: Create new page", () => {
         //Given usuario logueado
-        cy.visit(BASE_URL + '/ghost/#/pages/')
+        PagesPage.goToPages();
 
         //Then Crear nueva página
         cy.get(CONTENT.newPageButton).click(); //Click on New Page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
-        cy.intercept("PUT", "/ghost/api/admin/pages/*", {}).as("createPage");
-
         //Then pone contenido
-        let content = " To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.";
-        PagesPage.addContentToPage("A New Page by Cypress", content)
+        let title = "A New Page by Cypress";
+        let content = " To live is to risk it all.";
+        PagesPage.addContentToPage(title, content);
 
         cy.wait(1000)
 
@@ -36,10 +38,18 @@ describe('Test feature pages', () => {
 
         cy.wait(500)
 
-        //Then verifica que la página fue creada
-        PagesPage.confirmCreatePage();
+        //And confirma creacion de la página 
+        PagesPage.clickConfirmCreatePage();
 
         cy.wait(500)
+
+        // Then verifica que existe una Page creada
+        PagesPage.getPublishPageModal.within(() => {
+            cy.get('h2').should('contain', title);
+            cy.get('p').should('contain', content);
+        });
+
+        // Toma Screenshot
         cy.screenshot('New Page')
     });
 });
