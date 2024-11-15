@@ -25,6 +25,7 @@ describe('Escenarios E2E para Ghost', function () {
     it('E0001 - Crear un post con titulo', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
+        cy.wait(1000);
         cy.screenshot('E0001-1-RC');
 
         //And el administrador ve la página de listado de posts

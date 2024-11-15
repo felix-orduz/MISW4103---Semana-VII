@@ -4,11 +4,11 @@ import pixelmatch from 'pixelmatch';
 import { options } from '../vrt/vrt.config.js';
 
 // Ruta de las imagenes
-const imagesDir = './screenshots';
+const imagesDir = './cypress/screenshots';
 const version1Dir = `${imagesDir}/ghost-4.5`;
 const version2Dir = `${imagesDir}/ghost-5.96`;
 const outputDir = `${imagesDir}/comparisons`;
-console.log('version1Dir', version1Dir);
+
 // Asegúrate de que el directorio de salida exista
 fs.mkdirSync(outputDir, { recursive: true });
 
@@ -17,7 +17,6 @@ const version1Images = fs.readdirSync(version1Dir);
 const version2Images = fs.readdirSync(version2Dir);
 
 version1Images.forEach((image, index) => {
-  console.log(image);
   const img1Path = `${version1Dir}/${image}`;
   const img2Path = `${version2Dir}/${version2Images[index]}`;
   const diffPath = `${outputDir}/diff-${image}`;
