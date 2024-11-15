@@ -59,10 +59,20 @@ export class PagesPage {
         cy.get(CONTENT.pageContentInput).first().type(content)
     }
 
-    static confirmCreatePage() {
+    static clickConfirmCreatePage() {
         cy.get(CONTENT.newPageModal).within(() => {
             cy.get(CONTENT.continueCreationPageButton).first().click() // click en continuar
             cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
         })
+    }
+
+    static getPublishPageModal() {
+        return cy.get('div[data-test-publish-flow="complete"]');
+    }
+
+    static goToPages() {
+        cy.fixture('properties.json').then((data) => {
+            cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages
+        });
     }
 }
