@@ -66,6 +66,14 @@ export class PagesPage {
         })
     }
 
+    static getLateralMenuInPage() {
+        return cy.get('button.settings-menu-toggle').first();
+    }
+
+    static getDeletePageButton() {
+        return cy.get('button[data-test-button="delete-post"]').first();
+    }
+
     static getConfirmDeleteModal() {
         return cy.get(CONTENT.newPageModal);
     }
