@@ -57,10 +57,13 @@ describe('Escenarios E2E para Ghost', function () {
         //And cierre el modal de confirmación de publicación
         PostPage.closePublishModal();
 
-        //When le de click derecho en el post creado
+        //And le de click derecho en el post creado
         PostPage.lastPostCreated(titulo, 'rightClick');
 
-        //Then le da click en el boton de delete y el post es eliminado
+        //When le da click en el boton de delete
         PostPage.deletePost();
+
+        //Then el post es eliminado
+        PostPage.deletePostModal();
     });
 });
