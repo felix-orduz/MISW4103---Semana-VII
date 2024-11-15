@@ -42,6 +42,14 @@ export function confirmCreatePage() {
 
 export class PagesPage {
 
+    static doLogIn() {
+        cy.fixture('properties.json').then((data) => {
+            cy.visit(data.baseURL); // Go to log In URL
+            LogIn.logIn(data.email, data.password); // Enter credentials
+            LogIn.logInButton(); // Click on LogIn 
+        });
+    }
+
     static createPage(title, content) {}
 
     static deletePageByTitle(title) {}
