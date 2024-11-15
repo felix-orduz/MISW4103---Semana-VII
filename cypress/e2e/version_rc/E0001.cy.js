@@ -30,30 +30,23 @@ describe('Escenarios E2E para Ghost', function () {
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
-        // cy.screenshot('E0001-2-RC');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
-        // cy.screenshot('E0001-3-RC');
+        // cy.screenshot('E0001-2-RC');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
-        // cy.screenshot('E0001-4-RC');
 
         //And escribe el titulo del post
         let titulo = faker.lorem.word();
         PostPage.writeTitle(titulo);
         // cy.screenshot('E0001-5-RC');
 
-        //And escribe el contenido del post
-        let contenido = faker.lorem.words();
-        PostPage.writeContent(contenido);
-        // cy.screenshot('E0001-6-RC');
-
-        //And borra el contenido si hay algo
-        PostPage.clearContent();
-        // cy.screenshot('E0001-7-RC');
-
+        //And da click en contenido
+        PostPage.clickInContent();
+        cy.wait(1000);
+        
         //And le da click en el boton de Publish
         PostPage.publishPostButton();
         cy.wait(1000);
