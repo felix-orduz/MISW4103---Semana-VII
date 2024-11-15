@@ -12,6 +12,7 @@ const {
   lastPostCreatedBS,
   viewContentBS,
   updatePostButtonBS,
+  updatePostButtonFinalBS,
   clickBackToPostsBS,
   deletePostBS,
   deletePostModalBS,
@@ -193,6 +194,10 @@ Then("Edito contenido del post BS", async function () {
 
 Then("Clic en boton de Update del post BS", async function () {
   await updatePostButtonBS(this.driver);
+});
+
+Then('Clic en boton Update del post final BS', async function () {
+  await updatePostButtonFinalBS(this.driver);
 });
 
 Then("Clic para devolverse a los posts BS", async function () {

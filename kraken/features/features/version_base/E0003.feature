@@ -18,7 +18,7 @@ Scenario: E0003 - Editar el titulo de un post previamente creado
   And Clic para devolverse a los posts BS
   And Entro al post creado BS
   And Edito el titulo del post BS
-  And Clic en Contenido post BS
+  And Contenido del post BS
   And I wait for 1 seconds
   And Clic en boton de Update del post BS
   And Clic en boton Update del post final BS

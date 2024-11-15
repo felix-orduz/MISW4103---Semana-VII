@@ -69,6 +69,11 @@ module.exports = {
       return clic.click({ force: true });
     },
 
+    updatePostButtonFinalBS: async function(driver) {
+      let clic = await driver.$('.gh-btn.gh-btn-black.gh-publishmenu-button.gh-btn-icon.ember-view');
+      return clic.click({ force: true });
+    },
+
     clickBackToPostsBS: async function (driver) {
       let clic = await driver.$('.gh-editor-back-button.ember-view');
       return clic.click({ force: true });
