@@ -23,8 +23,8 @@ describe('Escenarios E2E para Ghost', function () {
     });
   });
 
-    it('E0003 - Editar el contenido de un post previamente creado', function () {
-        //Given que voy a la sección de posts
+    it('E0004 - Editar el contenido de un post previamente creado', function () {
+      //Given que voy a la sección de posts
       PrincipalPage.clickPosts();
       // cy.screenshot('E0001-1-BS');
 
