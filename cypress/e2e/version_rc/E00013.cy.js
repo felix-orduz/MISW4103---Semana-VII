@@ -3,6 +3,8 @@ import {
     PagesPage, 
 } from "../../page/version_rc/pagesPage";
 
+const PAGE_TITLE = "Page to be deleted"
+
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
         return false;
@@ -10,6 +12,7 @@ describe('Test feature pages', () => {
 
     beforeEach(()=>{
         PagesPage.doLogIn();
+        PagesPage.createPage(PAGE_TITLE, "Random content");
     });
 
     it("Escenario 013: Edit Page", () => {

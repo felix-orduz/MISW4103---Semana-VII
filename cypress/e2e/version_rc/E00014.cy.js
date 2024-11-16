@@ -1,7 +1,10 @@
 import {    
     CONTENT, 
-    doLogIn
+    PagesPage
 } from "../../page/version_rc/pagesPage";
+
+
+const PAGE_TITLE = "Page to be deleted"
 const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
@@ -10,12 +13,13 @@ describe('Test feature pages', () => {
     });
 
     beforeEach(()=>{
-        doLogIn();
+        PagesPage.doLogIn();
+        PagesPage.createPage(PAGE_TITLE, "Random content");
     });
 
     it("Escenario 014: Unpublish page", () => {
         //Given usuario logueado
-        cy.visit(BASE_URL + '/ghost/#/pages/')
+        PagesPage.goToPages();        
         cy.screenshot('Before Unpublish');
 
         //When editar página
