@@ -56,7 +56,7 @@ export class PagesPage {
             cy.get(CONTENT.pageTitleInput).type(title);
             cy.get(CONTENT.pageContentInput).first().type(content);
 
-            cy.wait(100);
+            cy.wait(200);
             cy.get(CONTENT.publishPageButton).first().click(); 
             
             cy.get(CONTENT.newPageModal).within(() => {
@@ -64,7 +64,7 @@ export class PagesPage {
                 cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
             });
 
-            cy.wait(100);
+            cy.wait(200);
         });
 
     }
