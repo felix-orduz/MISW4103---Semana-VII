@@ -1,10 +1,7 @@
 import { 
-    doLogIn, 
-    CONTENT, 
-    addContentToPage, 
-    confirmCreatePage 
-} from "../../utils/pages";
-const BASE_URL = "http://localhost:2368";
+    PagesPage, 
+    CONTENT,  
+} from "../../page/version_rc/pagesPage";
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -12,12 +9,13 @@ describe('Test feature pages', () => {
     });
 
     beforeEach(()=>{
-        doLogIn();
+        PagesPage.doLogIn();
     });
 
     it("Escenario 012: Create empty page", () => {
         //Given usuario logueado
-        cy.visit(BASE_URL + '/ghost/#/pages/')
+        PagesPage.goToPages();
+        cy.screenshot('E012 - Antes de crear la empty Page');
 
         //Then Crear nueva página
         cy.get(CONTENT.newPageButton).click(); //Click on New Page
@@ -26,8 +24,9 @@ describe('Test feature pages', () => {
         cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
 
         //Then pone contenido
-        let content = " To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.";
-        addContentToPage("A New Page by Cypress", content)
+        let content = " To live is to risk it all.";
+        let title = "A New Page by Cypress";
+        PagesPage.addContentToPage(title, content)
 
         cy.wait(500)
 
@@ -36,16 +35,17 @@ describe('Test feature pages', () => {
         cy.get(CONTENT.pageContentInput).first().clear();    
 
         cy.wait(500)
+        cy.screenshot('E012 - Pagina vacia');
 
         //Then publica la página
         cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
 
         cy.wait(500)
 
-        //Then verifica que la página fue creada
-        confirmCreatePage();
+        //And confirma la creacion de la Page
+        PagesPage.clickConfirmCreatePage();
 
         cy.wait(500)
-        cy.screenshot('New Page')
+        cy.screenshot('E012 - Creada Pagina vacia');
     });
 });
