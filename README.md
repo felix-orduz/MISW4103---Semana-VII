@@ -34,15 +34,15 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 ### Ejecución en Cypress
 - **Instalación de Cypress:** Cypress se instala con el comando `npm install cypress --save-dev`. Una vez instalado, puede verificar la versión en el archivo package.json la cual debe ser `13.5.2` para asegurar la compatibilidad con este repositorio.
   
-- **Configuración de credenciales:** En la ruta `cypress/fixtures/`, se encuentra el archivo `properties.json`, donde es necesario reemplazar los valores de `email`, `password` y `baseURL` con las credenciales para ejecutar las pruebas correctamente.
+- **Configuración de credenciales:** En la ruta `cypress/fixtures/`, se encuentra el archivo `properties.json`, donde es necesario reemplazar los valores de `email` y `password` con las credenciales para ejecutar las pruebas correctamente.
 
 - **Ejecución de pruebas**: Para iniciar las pruebas, se abre una terminal y se ejecuta el comando `npx cypress open`, lo que lanzará la interfaz de Cypress. A continuación, cree un nuevo proyecto apuntando al directorio donde se clonó el repositorio. Dentro de la carpeta e2e encontrarás dos subcarpetas:
 
-  **1.** version_rc: Contiene 20 archivos identificados con el código `E000XXX`, cada uno representando un escenario de prueba específico diseñado para la versión 5.96 de Ghost.<br>
+  **1. version_rc:** Contiene 20 archivos identificados con el código `E000XXX`, cada uno representando un escenario de prueba específico diseñado para la versión 5.96 de Ghost.<br>
   
-  **2.** version_base: Contiene 10 archivos también identificados con el código `E000XXX`, que corresponden a escenarios de prueba para la versión 4.5 de Ghost.
+  **2. version_base:** Contiene 10 archivos también identificados con el código `E000XXX`, que corresponden a escenarios de prueba para la versión 4.5 de Ghost.
 
- - Para ejecutar las pruebas, selecciona cada archivo `E000XXX.cy.js` y haz clic para ejecutarlo. Se recomienda realizar la ejecución de los archivos uno por uno para garantizar la ejecución exitosa de cada escenario de prueba.
+ - Para ejecutar las pruebas, selecciona cada archivo `E000XXX.cy.js` y haz clic para ejecutarlo. Se recomienda realizar la ejecución de los archivos uno por uno para garantizar la ejecución exitosa de cada escenario de prueba. Adicionalmente, para correr los escenarios de la carpeta `version_rc` debe estar desplegada la versión de Ghost `5.96` y para correr los escenarios de la carpeta `version_base` debe estar desplegada la versión de Ghost `4.5`.
  
 ### Ejecución Kraken
 - **Instalación de Kraken:** Para instalar Kraken, utiliza el comando `npm install kraken-node`. Después de la instalación, es importante verificar que todos los prerequisitos necesarios estén cumplidos. Ejecuta el comando `npx kraken-node doctor` para confirmar que todos los componentes requeridos están instalados. Si algún prerequisito falta, se debe instalar antes de ejecutar las pruebas.
