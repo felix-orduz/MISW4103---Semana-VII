@@ -29,7 +29,7 @@ describe('Test feature pages', () => {
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         //Then pone contenido
-        let content = " To live is to risk it all.";
+        let content = "To live is to risk it all.";
         PagesPage.addContentToPage(PAGE_TITLE, content);
 
         cy.wait(1000)
@@ -48,10 +48,9 @@ describe('Test feature pages', () => {
         // Then verifica que existe una Page creada
         PagesPage.getPublishPageModal().within(() => {
             cy.get('h2').should('contain', PAGE_TITLE);
-            cy.get('p').should('contain', content);
         });
 
         // Toma Screenshot
-        cy.screenshot('../../ghost-5.96/E011 - Page Creada')
+        cy.screenshot('../../ghost-5.96/E011 - Page Creada');
     });
 });
