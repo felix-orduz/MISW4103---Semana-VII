@@ -10,7 +10,7 @@ function createReport(fs) {
       <div class='container'>
         <div class='row'>
           <div class='col'>
-            <h1><strong>Pruebas de Regresión Visual</strong></h1>
+            <h1><strong>Pruebas de Regresión Visual con PixelMatch</strong></h1>
           </div>
         </div>
   `;
@@ -86,7 +86,7 @@ function createReport(fs) {
   const { PNG } = require("pngjs");
   const pixelmatchModule = await import("pixelmatch");
   const pixelmatch = pixelmatchModule.default;
-  const { options } = require("../vrt/vrt.config.js");
+  const { options } = require("./vrt.config.js");
 
   //Ruta de las imagenes
   const imagesDir = "./cypress/screenshots";

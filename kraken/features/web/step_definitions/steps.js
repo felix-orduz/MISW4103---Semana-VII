@@ -88,6 +88,15 @@ Given('I navigate to page principal BS', async function () {
   await this.driver.url(properties.Url);
 });
 
+//Screenshots
+Then('Tomo pantallazo BS {string}', async function (nombre) {
+  await this.driver.saveScreenshot(`./screenshots/ghost-4.5/${nombre}`);
+});
+
+Then('Tomo pantallazo {string}', async function (nombre) {
+  await this.driver.saveScreenshot(`./screenshots/ghost-5.96/${nombre}`);
+});
+
 //Seccion login rc
 When('I enter email y password', async function () {
     await logIn(this.driver, properties.Email, properties.Password);
