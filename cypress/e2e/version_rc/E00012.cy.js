@@ -26,7 +26,7 @@ describe('Test feature pages', () => {
         //Then pone contenido
         let content = " To live is to risk it all.";
         let title = "A New Page by Cypress";
-        PagesPage.addContentToPage(title, content)
+        PagesPage.addContentToPage(title, content);
 
         cy.wait(500)
 
