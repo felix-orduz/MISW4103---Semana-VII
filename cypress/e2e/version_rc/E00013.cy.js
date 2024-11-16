@@ -1,9 +1,7 @@
 import {    
     CONTENT, 
-    doLogIn,
-    addContentToPage
+    PagesPage, 
 } from "../../page/version_rc/pagesPage";
-const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -11,13 +9,13 @@ describe('Test feature pages', () => {
     });
 
     beforeEach(()=>{
-        doLogIn();
+        PagesPage.doLogIn();
     });
 
-    it("Escenario 013: Edit page", () => {
-        //Given usuario logueado
-        cy.visit(BASE_URL + '/ghost/#/pages/')
-        cy.screenshot('Before Edit');
+    it("Escenario 013: Edit Page", () => {
+        //Given usuario logueado con paginas creadas
+        PagesPage.goToPages();
+        cy.screenshot('E013 - Before Edit Page');
 
         //When Editar página
         cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
@@ -26,18 +24,22 @@ describe('Test feature pages', () => {
         cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
 
         //Then pone contenido
-        addContentToPage('Edited Page', 'Edited with cypress. by nf.ortiz 😊')
+        PagesPage.addContentToPage('Edited Page', 'Edited with cypress. by nf.ortiz 😊')
         cy.wait(1000)
 
         //Then update page
         cy.get(CONTENT.updatePageButton).first().click(); // click en update
 
         cy.wait(500)
+        cy.screenshot('E013 - Edited Content');
+
         cy.get('aside.gh-notifications').screenshot("edit notification");
 
         cy.wait(500)
 
         //Then se devuelve a la lista de páginas
-        cy.get(CONTENT.goToPagesButton).first().click();    
+        PagesPage.goToPages();
+        cy.screenshot('E013 - After Edit Page');
+ 
     });
 });
