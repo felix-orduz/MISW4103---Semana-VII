@@ -2,7 +2,7 @@
 import { 
     PagesPage, 
     CONTENT, 
-} from "../../page/version_base/pagesPage";
+} from "../../pages/version_base/pagesPage";
 const PAGE_TITLE = "A New Page by Cypress";
 
 
@@ -42,7 +42,7 @@ describe('Test feature pages', () => {
         cy.screenshot('../../ghost-4.5/E011 - Creando la Page');
 
         // Then verifica que existe una Page creada
-        
+
 
         // Toma Screenshot
         cy.screenshot('../../ghost-4.5/E011 - Page Creada')
