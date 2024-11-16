@@ -19,6 +19,8 @@ describe('Escenarios E2E para Ghost', function () {
         //Iniciamos sesion
         LogIn.logIn(data.email, data.password);
         LogIn.logInButton();
+        cy.screenshot('../../ghost-4.5/E0003-0-BS');
+        cy.wait(1000);
     });
   });
 
@@ -26,14 +28,14 @@ describe('Escenarios E2E para Ghost', function () {
       //Given que voy a la sección de posts
       PrincipalPage.clickPosts();
       cy.wait(1000);
-      cy.screenshot('E0003-1-BS');
+      cy.screenshot('../../ghost-4.5/E0003-1-BS');
 
       //And el administrador ve la página de listado de posts
       PostPage.getTitleSection().should('include.text', 'Posts');
 
       //And le da click en el boton New Post
       PostPage.clickNewPost();
-      cy.screenshot('E0003-2-BS');
+      cy.screenshot('../../ghost-4.5/E0003-2-BS');
 
       //And el administrador ve la página de creación de post
       PostPage.creationPostPage().should('have.value', '');
@@ -41,7 +43,7 @@ describe('Escenarios E2E para Ghost', function () {
       //And escribe el titulo del post
       let titulo = 'titulo E0003';
       PostPage.writeTitle(titulo);
-      cy.screenshot('E0003-3-BS');
+      cy.screenshot('../../ghost-4.5/E0003-3-BS');
 
       //And da click en contenido
       PostPage.clickInContent();
@@ -60,17 +62,17 @@ describe('Escenarios E2E para Ghost', function () {
       //And se devuelve a la lista de posts
       PostPage.clickBackToPosts();
       cy.wait(1000);
-      cy.screenshot('E0003-4-BS');
+      cy.screenshot('../../ghost-4.5/E0003-4-BS');
 
       //And le da click en el post creado
       PostPage.lastPostCreated(titulo, 'click');
       cy.wait(1000);
-      cy.screenshot('E0003-5-BS');
+      cy.screenshot('../../ghost-4.5/E0003-5-BS');
 
       //And edite el titulo del post
       let tituloEditado = 'titulo editado E0003';
       PostPage.writeTitle(tituloEditado);
-      cy.screenshot('E0003-6-BS');
+      cy.screenshot('../../ghost-4.5/E0003-6-BS');
 
       //And le de en el dropdwon de update
       PostPage.updatePostButton();
@@ -87,6 +89,6 @@ describe('Escenarios E2E para Ghost', function () {
       //Then el post editado se encuentra en la lista de posts
       PostPage.lastPostCreated(tituloEditado, 'notClick');
       cy.wait(1000);
-      cy.screenshot('E0003-7-BS');
+      cy.screenshot('../../ghost-4.5/E0003-7-BS');
   });
 });

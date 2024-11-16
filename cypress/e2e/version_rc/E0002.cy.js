@@ -19,6 +19,8 @@ describe('Escenarios E2E para Ghost', function () {
         //Iniciamos sesion
         LogIn.logIn(data.email, data.password);
         LogIn.logInButton();
+        cy.screenshot('../../ghost-5.96/E0002-0-RC');
+        cy.wait(1000);
     });
   });
 
@@ -26,14 +28,14 @@ describe('Escenarios E2E para Ghost', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
         cy.wait(1000);
-        cy.screenshot('E0002-1-RC');
+        cy.screenshot('../../ghost-5.96/E0002-1-RC');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
-        cy.screenshot('E0002-2-RC');
+        cy.screenshot('../../ghost-5.96/E0002-2-RC');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
@@ -41,12 +43,12 @@ describe('Escenarios E2E para Ghost', function () {
         //And escribe el titulo del post
         let titulo = 'titulo E0002';
         PostPage.writeTitle(titulo);
-        cy.screenshot('E0002-3-RC');
+        cy.screenshot('../../ghost-5.96/E0002-3-RC');
 
         //And escribe el contenido
         let contenido = 'contenido E0002';
         PostPage.writeContent(contenido);
-        cy.screenshot('E0002-4-RC');
+        cy.screenshot('../../ghost-5.96/E0002-4-RC');
 
         //And le de click en el boton de Publish
         PostPage.publishPostButton();
@@ -66,11 +68,11 @@ describe('Escenarios E2E para Ghost', function () {
         //When le de click en el post creado
         PostPage.lastPostCreated(titulo, 'click');
         cy.wait(1000);
-        cy.screenshot('E0002-5-RC');
+        cy.screenshot('../../ghost-5.96/E0002-5-RC');
 
         //Then el contenido del post debería ser el que se escribió
         PostPage.viewContent(contenido);
         cy.wait(1000);
-        cy.screenshot('E0002-6-RC');
+        cy.screenshot('../../ghost-5.96/E0002-6-RC');
     });
 });

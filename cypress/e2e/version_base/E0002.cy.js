@@ -19,6 +19,8 @@ describe('Escenarios E2E para Ghost', function () {
         //Iniciamos sesion
         LogIn.logIn(data.email, data.password);
         LogIn.logInButton();
+        cy.screenshot('../../ghost-4.5/E0002-0-BS');
+        cy.wait(1000);
     });
   });
 
@@ -26,14 +28,14 @@ describe('Escenarios E2E para Ghost', function () {
       //Given que voy a la sección de posts
       PrincipalPage.clickPosts();
       cy.wait(1000);
-      cy.screenshot('E0002-1-BS');
+      cy.screenshot('../../ghost-4.5/E0002-1-BS');
 
       //And el administrador ve la página de listado de posts
       PostPage.getTitleSection().should('include.text', 'Posts');
 
       //And le da click en el boton New Post
       PostPage.clickNewPost();
-      cy.screenshot('E0002-2-BS');
+      cy.screenshot('../../ghost-4.5/E0002-2-BS');
 
       //And el administrador ve la página de creación de post
       PostPage.creationPostPage().should('have.value', '');
@@ -41,7 +43,7 @@ describe('Escenarios E2E para Ghost', function () {
       //And escribe el titulo del post
       let titulo = 'titulo E0002';
       PostPage.writeTitle(titulo);
-      cy.screenshot('E0002-3-BS');
+      cy.screenshot('../../ghost-4.5/E0002-3-BS');
 
       //And da click en contenido
       PostPage.clickInContent();
@@ -49,7 +51,7 @@ describe('Escenarios E2E para Ghost', function () {
       //And escribe el contenido del post
       let contenido = 'contenido E0002';
       PostPage.writeContent(contenido);
-      cy.screenshot('E0002-4-BS');
+      cy.screenshot('../../ghost-4.5/E0002-4-BS');
 
       //And le da click en el boton de Publish
       PostPage.publishPostButton();
@@ -65,11 +67,11 @@ describe('Escenarios E2E para Ghost', function () {
       //When le da click en el post creado
       PostPage.lastPostCreated(titulo, 'click');
       cy.wait(1000);
-      cy.screenshot('E0002-5-BS');
+      cy.screenshot('../../ghost-4.5/E0002-5-BS');
 
       //Then deberia ver el contenido del post
       PostPage.viewContent(contenido);
       cy.wait(1000);
-      cy.screenshot('E0002-6-BS');
+      cy.screenshot('../../ghost-4.5/E0002-6-BS');
   });
 });
