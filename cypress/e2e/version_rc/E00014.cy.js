@@ -4,8 +4,7 @@ import {
 } from "../../page/version_rc/pagesPage";
 
 
-const PAGE_TITLE = "Page to be deleted"
-const BASE_URL = "http://localhost:2368";
+const PAGE_TITLE = "Page to be Unpublished"
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -20,7 +19,7 @@ describe('Test feature pages', () => {
     it("Escenario 014: Unpublish page", () => {
         //Given usuario logueado
         PagesPage.goToPages();        
-        cy.screenshot('Before Unpublish');
+        cy.screenshot('../../ghost-5.96/E014 - Before Unpublish');
 
         //When editar página
         cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
@@ -41,7 +40,7 @@ describe('Test feature pages', () => {
         
         cy.wait(500)
         cy.get('div[data-test-editor-post-status=""]').contains('Draft');
-        cy.screenshot('Set to draft state');
+        cy.screenshot('../../ghost-5.96/E014 - Set to draft state');
     });
    
 });
