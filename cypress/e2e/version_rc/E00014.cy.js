@@ -1,7 +1,7 @@
 import {    
     CONTENT, 
     PagesPage
-} from "../../page/version_rc/pagesPage";
+} from "../../pages/version_rc/pagesPage";
 
 
 const PAGE_TITLE = "Page to be Unpublished"
