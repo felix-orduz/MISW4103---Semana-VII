@@ -19,7 +19,6 @@ const version2Images = fs.readdirSync(version2Dir);
 version1Images.forEach((image, index) => {
   const img1Path = `${version1Dir}/${image}`;
   const img2Path = `${version2Dir}/${version2Images[index]}`;
-  const diffPath = `${outputDir}/diff-${image}`;
 
   const img1 = PNG.sync.read(fs.readFileSync(img1Path));
   const img2 = PNG.sync.read(fs.readFileSync(img2Path));
@@ -31,7 +30,11 @@ version1Images.forEach((image, index) => {
     img1.data, img2.data, diff.data, width, height, options
   );
 
-  fs.writeFileSync(diffPath, PNG.sync.write(diff));
+  const totalPixels = width * height;
+  const diffPercentage = String(((numDiffPixels / totalPixels) * 100).toFixed(2));
 
-  console.log(`Diff for ${image} completed: ${numDiffPixels} different pixels`);
+  let nombreImagen = image.slice(0, -4);
+  let diffPath = `${outputDir}` + '/' + nombreImagen + '-' + diffPercentage + '.png';
+
+  fs.writeFileSync(diffPath, PNG.sync.write(diff));
 });

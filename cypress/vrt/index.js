@@ -21,23 +21,32 @@ function createReport(escenarios) {
   `;
 
   for (let esc of escenarios) {
-    // Declaramos contador
+    //Declaramos contador
     let contador = 1;
     let flag = false;
 
     while (!flag) {
       try {
-        // Definimos rutas de imágenes
+        //Definimos rutas de imágenes
         let rutaImg1 = `./cypress/screenshots/ghost-4.5/${esc}-${contador}-BS.png`;
         let rutaImg2 = `./cypress/screenshots/ghost-5.96/${esc}-${contador}-RC.png`;
-        let diff = `./cypress/screenshots/comparisons/diff-${esc}-${contador}-BS.png`;
 
-        // Verificamos que las rutas existan
+        //Leer los archivos del directorio
+        let directoryPath = './cypress/screenshots/comparisons';
+        const files = fs.readdirSync(directoryPath);
+
+        //Filtrar los archivos que contienen la cadena con porcentaje
+        let searchString = `${esc}-${contador}-BS`;
+        const filteredFiles = files.filter(file => file.includes(searchString));
+        let porcentaje = filteredFiles[0].slice(-8, -4);
+        let diff = `./cypress/screenshots/comparisons/${esc}-${contador}-BS-${porcentaje}.png`;
+
+        //Verificamos que las rutas existan
         fs.accessSync(rutaImg1, fs.constants.F_OK);
         fs.accessSync(rutaImg2, fs.constants.F_OK);
         fs.accessSync(diff, fs.constants.F_OK);
 
-        // Pintamos las imágenes en tres columnas
+        //Pintamos las imágenes en tres columnas
         reportHTML += `
         <div class="row">
           <div class="col-12">
@@ -52,7 +61,7 @@ function createReport(escenarios) {
                     <img src="${rutaImg2}" alt="Imagen 2" class="img-fluid">
                 </div>
                 <div class="col-4" align="center">
-                    <h3>Imagen Diferencia</h3>
+                    <h3>Diferencia porcentual: ${porcentaje}%</h3>
                     <img src="${diff}" alt="Diferencia" class="img-fluid">
                 </div>
             </div>
@@ -61,16 +70,16 @@ function createReport(escenarios) {
       <hr/>
         `;
         
-        // Incrementamos el contador
+        //Incrementamos el contador
         contador++;
       } catch (error) {
-        // Si ocurre un error (por ejemplo, archivo no encontrado), dejamos de iterar
+        //Si archivo no encontrado, dejamos de iterar
         flag = true;
       }
     }
   }
 
-  // Cerrar la etiqueta HTML
+  //Cerrar la etiqueta HTML
   reportHTML += `
       </div>
     </body>
@@ -80,7 +89,7 @@ function createReport(escenarios) {
   return reportHTML;
 }
 
-// Generar el reporte y guardarlo en un archivo
+//Generar el reporte y guardarlo en un archivo
 let report = createReport(escenarios);  // Cambié el nombre a 'report' para evitar sobreescribir
 fs.writeFileSync(`./report_cypress.html`, report);
 console.log("Reporte generado exitosamente.");
