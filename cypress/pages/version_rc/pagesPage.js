@@ -70,7 +70,7 @@ export class PagesPage {
     }
 
     static deletePageByTitle(title) {
-        cy.fixture('properties.json').then((data) => {
+        cy.fixture('properties.json').then((data) => { cy.visit(data.adminBaseURL + "/#/dashboard");
             cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages
 
             cy.get('div.posts-list').within(() => {
