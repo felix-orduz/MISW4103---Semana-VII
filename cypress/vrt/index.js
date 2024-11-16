@@ -1,9 +1,6 @@
 const fs = require('fs');
 
-// Definimos los escenarios que queremos pintar
-let escenarios = ["E0001", "E0002", "E0003", "E0004"];
-
-function createReport(escenarios) {
+function createReport() {
   let reportHTML = `
   <html>
     <head>
@@ -20,66 +17,63 @@ function createReport(escenarios) {
         </div>
   `;
 
-  for (let esc of escenarios) {
-    //Declaramos contador
-    let contador = 1;
-    let flag = false;
+  // Definimos listas con imágenes de Ghost 4.5.0 y Ghost 5.96.0
+  let directoryPath = './cypress/screenshots';
+  let imgGhost45 = fs.readdirSync(directoryPath + '/ghost-4.5');
+  let imgGhost596 = fs.readdirSync(directoryPath + '/ghost-5.96');
+  let imgComp = fs.readdirSync(directoryPath + '/comparisons');
 
-    while (!flag) {
-      try {
-        //Definimos rutas de imágenes
-        let rutaImg1 = `./cypress/screenshots/ghost-4.5/${esc}-${contador}-BS.png`;
-        let rutaImg2 = `./cypress/screenshots/ghost-5.96/${esc}-${contador}-RC.png`;
+  if (imgGhost45.length === imgGhost596.length) {
+    for (let index = 0; index < imgGhost45.length; index++) {
+      // Verificamos que estamos tomando las mismas imágenes
+      let img1 = imgGhost45[index].slice(0, 6);
+      let img2 = imgGhost596[index].slice(0, 6);
+      let comp = imgComp[index].slice(0, 6);
 
-        //Leer los archivos del directorio
-        let directoryPath = './cypress/screenshots/comparisons';
-        const files = fs.readdirSync(directoryPath);
+      if (img1 === img2 && img2 === comp) {
+        // Definimos rutas de imágenes
+        let rutaImg1 = `./cypress/screenshots/ghost-4.5/${imgGhost45[index]}`;
+        let rutaImg2 = `./cypress/screenshots/ghost-5.96/${imgGhost596[index]}`;
+        let rutaComp = `./cypress/screenshots/comparisons/${imgComp[index]}`;
 
-        //Filtrar los archivos que contienen la cadena con porcentaje
-        let searchString = `${esc}-${contador}-BS`;
-        const filteredFiles = files.filter(file => file.includes(searchString));
-        let porcentaje = filteredFiles[0].slice(-8, -4);
-        let diff = `./cypress/screenshots/comparisons/${esc}-${contador}-BS-${porcentaje}.png`;
+        // Extraemos el porcentaje de diferencia
+        let porcentaje = imgComp[index].slice(-8, -4);
 
-        //Verificamos que las rutas existan
-        fs.accessSync(rutaImg1, fs.constants.F_OK);
-        fs.accessSync(rutaImg2, fs.constants.F_OK);
-        fs.accessSync(diff, fs.constants.F_OK);
+        // Extraemos el número de escenario
+        let escenario = imgGhost45[index].slice(0, 5);
 
-        //Pintamos las imágenes en tres columnas
+        // Pintamos las imágenes en tres columnas
         reportHTML += `
         <div class="row">
           <div class="col-12">
-            <h2 class="bg-primary text-white text-center p-3 rounded" align = "center"><strong>Escenario ${esc}</strong></h2>
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario ${escenario}</strong></h2>
             <div class="row">
-                <div class="col-4" align="center">
-                    <h3>Imagen 1 (Ghost 4.5.0)</h3>
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
                     <img src="${rutaImg1}" alt="Imagen 1" class="img-fluid">
                 </div>
-                <div class="col-4" align="center">
-                    <h3>Imagen 2 (Ghost 5.96.0)</h3>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
                     <img src="${rutaImg2}" alt="Imagen 2" class="img-fluid">
                 </div>
-                <div class="col-4" align="center">
+                <div class="col-4 text-center">
                     <h3>Diferencia porcentual: ${porcentaje}%</h3>
-                    <img src="${diff}" alt="Diferencia" class="img-fluid">
+                    <img src="${rutaComp}" alt="Diferencia" class="img-fluid">
                 </div>
             </div>
           </div>
         </div>
-      <hr/>
+        <hr/>
         `;
-        
-        //Incrementamos el contador
-        contador++;
-      } catch (error) {
-        //Si archivo no encontrado, dejamos de iterar
-        flag = true;
+      } else {
+        console.log('Las imágenes no coinciden');
       }
     }
+  } else {
+    console.log('El tamaño de las listas no coincide');
   }
 
-  //Cerrar la etiqueta HTML
+  // Cierre del HTML completo
   reportHTML += `
       </div>
     </body>
@@ -89,7 +83,7 @@ function createReport(escenarios) {
   return reportHTML;
 }
 
-//Generar el reporte y guardarlo en un archivo
-let report = createReport(escenarios);  // Cambié el nombre a 'report' para evitar sobreescribir
+// Generar el reporte y guardarlo en un archivo
+let report = createReport();
 fs.writeFileSync(`./report_cypress.html`, report);
 console.log("Reporte generado exitosamente.");
