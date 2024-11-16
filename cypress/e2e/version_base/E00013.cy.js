@@ -1,7 +1,7 @@
 import {    
     CONTENT, 
     PagesPage, 
-} from "../../page/version_rc/pagesPage";
+} from "../../page/version_base/pagesPage";
 
 const PAGE_TITLE = "Page to be deleted"
 

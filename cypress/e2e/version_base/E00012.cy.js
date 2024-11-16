@@ -1,7 +1,7 @@
 import { 
     PagesPage, 
     CONTENT,  
-} from "../../page/version_rc/pagesPage";
+} from "../../page/version_base/pagesPage";
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
