@@ -32,18 +32,18 @@ describe('Test feature pages', () => {
         let content = "To live is to risk it all.";
         PagesPage.addContentToPage(PAGE_TITLE, content);
 
-        cy.wait(1000)
+        cy.wait(1000);
 
         //Then publica la página
         cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
 
-        cy.wait(500)
+        cy.wait(500);
         cy.screenshot('../../ghost-5.96/E011 - Creando la Page');
 
         //And confirma creacion de la página 
         PagesPage.clickConfirmCreatePage();
 
-        cy.wait(500)
+        cy.wait(500);
 
         // Then verifica que existe una Page creada
         PagesPage.getPublishPageModal().within(() => {
@@ -52,5 +52,8 @@ describe('Test feature pages', () => {
 
         // Toma Screenshot
         cy.screenshot('../../ghost-5.96/E011 - Page Creada');
+
+        cy.wait(500);
+        PagesPage.closeModal();
     });
 });
