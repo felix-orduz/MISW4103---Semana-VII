@@ -38,14 +38,10 @@ describe('Test feature pages', () => {
         cy.screenshot('../../ghost-4.5/E012 - Pagina vacia');
 
         //Then publica la página
+        cy.get(CONTENT.publishPageButtonDropd).first().click(); // click en publicar
         cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
-
         cy.wait(500)
-
-        //And confirma la creacion de la Page
-        PagesPage.clickConfirmCreatePage();
-
-        cy.wait(500)
+        
         cy.screenshot('../../ghost-4.5/E012 - Creada Pagina vacia');
     });
 });
