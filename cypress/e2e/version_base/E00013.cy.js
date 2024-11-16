@@ -3,7 +3,7 @@ import {
     PagesPage, 
 } from "../../page/version_rc/pagesPage";
 
-const PAGE_TITLE = "Page to be Edited"
+const PAGE_TITLE = "Page to be deleted"
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
