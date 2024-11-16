@@ -12,7 +12,7 @@ describe('Test feature pages', () => {
 
     beforeEach(()=>{
         PagesPage.doLogIn();
-        PagesPage.createPage(PAGE_TITLE, "Ramdon content");
+        PagesPage.createPage(PAGE_TITLE, "Random content");
     });
 
    
@@ -38,7 +38,6 @@ describe('Test feature pages', () => {
 
         cy.wait(500)
         // Then confimar que no exista una pagina.
-        cy.get(CONTENT.editPageButton).
-        cy.screenshot('DELETE PAGE')
+        cy.screenshot('Page deleted')
     });
 });
