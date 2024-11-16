@@ -1,7 +1,7 @@
 import { 
     PagesPage, 
     CONTENT,  
-} from "../../page/version_base/pagesPage";
+} from "../../pages/version_base/pagesPage";
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -41,7 +41,7 @@ describe('Test feature pages', () => {
         cy.get(CONTENT.publishPageButtonDropd).first().click(); // click en publicar
         cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
         cy.wait(500)
-        
+
         cy.screenshot('../../ghost-4.5/E012 - Creada Pagina vacia');
     });
 });
