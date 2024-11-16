@@ -64,7 +64,7 @@ export class PagesPage {
                 cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
             });
 
-            cy.wait(200);
+            cy.wait(200);cy.visit(data.adminBaseURL + "/#/dashboard"); // Go to log In URL
         });
 
     }
