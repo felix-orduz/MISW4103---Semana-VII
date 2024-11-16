@@ -78,7 +78,7 @@ export class PagesPage {
                     .first()
                     .should('contain', title)
                     .rightclick({ force: true });
-                    cy.get('[data-test-button="delete"]').first().click({ force: true });
+                    cy.get('button[data-test-button="delete"]').first().click({ force: true });
             });
         });
     }
