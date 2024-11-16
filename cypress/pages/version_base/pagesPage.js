@@ -33,7 +33,7 @@ export class PagesPage {
 
             cy.wait(100);
             cy.get(CONTENT.publishPageButtonDropd).first().click(); 
-            
+
             cy.wait(100);
             cy.get(CONTENT.publishPageButton).first().click(); 
             
@@ -47,12 +47,20 @@ export class PagesPage {
         cy.fixture('properties.json').then((data) => {
             cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages
 
-            cy.get('div.posts-list').within(() => {
+            cy.get('section.view-container.content-list').within(() => {
                 cy.get('h3.gh-content-entry-title')
                     .first()
                     .should('contain', title)
-                    .rightclick({ force: true });
-                    cy.get('[data-test-button="delete"]').first().click({ force: true });
+                    .click({ force: true });
+            });
+
+            cy.wait(100);
+
+            cy.get('button.settings-menu-toggle[title="Settings"]').first().click();
+            cy.get('button.settings-menu-delete-button[type="button"]').first().click();
+
+            cy.get('div.modal-content').within(() => {
+                cy.get('button.gh-btn.gh-btn-red').first().click();
             });
         });
     }
