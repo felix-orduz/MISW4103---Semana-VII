@@ -2,9 +2,10 @@ import { LogIn } from "./logIn";
 
 export const CONTENT = {
     newPageButton: 'a[data-test-new-page-button=""]',
-    pageTitleInput: 'textarea[data-test-editor-title-input=""]',
+    pageTitleInput: 'textarea.gh-editor-title[placeholder="Page title"]',
     pageContentInput: 'p[data-koenig-dnd-droppable="true"]',
-    publishPageButton: 'button[data-test-button="publish-flow"]',
+    publishPageButtonDropd: 'div.gh-publishmenu-trigger[role="button"]',
+    publishPageButton: 'button.gh-publishmenu-button',
     newPageModal: 'div.epm-modal-container',
     continueCreationPageButton: 'button[data-test-button="continue"]',
     confirmCreationPageButton: 'span[data-test-task-button-state="idle"]',
@@ -31,12 +32,11 @@ export class PagesPage {
             cy.get(CONTENT.pageContentInput).first().type(content);
 
             cy.wait(100);
+            cy.get(CONTENT.publishPageButtonDropd).first().click(); 
+            
+            cy.wait(100);
             cy.get(CONTENT.publishPageButton).first().click(); 
             
-            cy.get(CONTENT.newPageModal).within(() => {
-                cy.get(CONTENT.continueCreationPageButton).first().click() // click en continuar
-                cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
-            });
 
             cy.wait(100);
         });

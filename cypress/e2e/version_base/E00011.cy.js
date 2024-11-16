@@ -2,7 +2,7 @@
 import { 
     PagesPage, 
     CONTENT, 
-} from "../../page/version_rc/pagesPage";
+} from "../../page/version_base/pagesPage";
 const PAGE_TITLE = "A New Page by Cypress";
 
 
@@ -34,19 +34,15 @@ describe('Test feature pages', () => {
 
         cy.wait(1000)
 
-        //Then publica la página
+        //And confirma publica la página
+        cy.get(CONTENT.publishPageButtonDropd).first().click(); // click en publicar
         cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
 
         cy.wait(500)
         cy.screenshot('../../ghost-4.5/E011 - Creando la Page');
 
-        //And confirma creacion de la página 
-        PagesPage.clickConfirmCreatePage();
-
-        cy.wait(500)
-
         // Then verifica que existe una Page creada
-        PagesPage.getPublishPageModal.within(() => {
+        PagesPage.getPublishPageModal().within(() => {
             cy.get('h2').should('contain', PAGE_TITLE);
             cy.get('p').should('contain', content);
         });

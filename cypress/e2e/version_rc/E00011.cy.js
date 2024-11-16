@@ -46,7 +46,7 @@ describe('Test feature pages', () => {
         cy.wait(500)
 
         // Then verifica que existe una Page creada
-        PagesPage.getPublishPageModal.within(() => {
+        PagesPage.getPublishPageModal().within(() => {
             cy.get('h2').should('contain', PAGE_TITLE);
             cy.get('p').should('contain', content);
         });
