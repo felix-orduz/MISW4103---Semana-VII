@@ -3,16 +3,16 @@ import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { options } from '../vrt/vrt.config.js';
 
-// Ruta de las imagenes
+//Ruta de las imagenes
 const imagesDir = './cypress/screenshots';
 const version1Dir = `${imagesDir}/ghost-4.5`;
 const version2Dir = `${imagesDir}/ghost-5.96`;
 const outputDir = `${imagesDir}/comparisons`;
 
-// Asegúrate de que el directorio de salida exista
+//Creamos directorio de salida
 fs.mkdirSync(outputDir, { recursive: true });
 
-// Obtener los nombres de las imágenes
+//Obtener los nombres de las imágenes
 const version1Images = fs.readdirSync(version1Dir);
 const version2Images = fs.readdirSync(version2Dir);
 
