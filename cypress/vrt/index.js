@@ -1,4 +1,4 @@
-import fs from "fs";
+const fs = require('fs');
 
 // Definimos los escenarios que queremos pintar
 let escenarios = ["E0001", "E0002", "E0003", "E0004"];
