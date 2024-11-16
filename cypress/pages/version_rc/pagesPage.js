@@ -64,13 +64,18 @@ export class PagesPage {
                 cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
             });
 
-            cy.wait(200);cy.visit(data.adminBaseURL + "/#/dashboard"); // Go to log In URL
+            cy.wait(200);
+            cy.get('div.modal-content').within(() => {
+                cy.get('button[title="Close"]').first().click();
+            });
+
+            cy.visit(data.adminBaseURL + "/#/dashboard"); // Go to log In URL
         });
 
     }
 
     static deletePageByTitle(title) {
-        cy.fixture('properties.json').then((data) => { cy.visit(data.adminBaseURL + "/#/dashboard");
+        cy.fixture('properties.json').then((data) => { 
             cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages
 
             cy.get('div.posts-list').within(() => {
@@ -78,8 +83,17 @@ export class PagesPage {
                     .first()
                     .should('contain', title)
                     .rightclick({ force: true });
+
+                    cy.wait(100);
+
                     cy.get('button[data-test-button="delete"]').first().click({ force: true });
             });
+        });
+    }
+
+    static closeModal() {
+        cy.get('div.modal-content').within(() => {
+            cy.get('button[title="Close"]').first().click();
         });
     }
 
