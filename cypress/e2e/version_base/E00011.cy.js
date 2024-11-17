@@ -24,11 +24,11 @@ describe('Test feature pages', () => {
         PagesPage.goToPages();
         cy.screenshot('../../ghost-4.5/E011 - Antes de crear la Page');
 
-        //Then Crear nueva página
+        // When there are not pages
         cy.get(CONTENT.newPageButton).click(); //Click on New Page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
-        //Then pone contenido
+        //Then Crear nueva página
         let content = "To live is to risk it all.";
         PagesPage.addContentToPage(PAGE_TITLE, content);
 

@@ -40,8 +40,7 @@ describe('Test feature pages', () => {
         cy.wait(500)
         cy.screenshot('../../ghost-5.96/E013 - Edited Content');
 
-        cy.get('aside.gh-notifications')
-            .screenshot("../../ghost-5.96/E013 - edit page notification");
+        PagesPage.getUpdatePageNotification().screenshot("../../ghost-5.96/E013 - edit page notification");
 
         cy.wait(500)
 

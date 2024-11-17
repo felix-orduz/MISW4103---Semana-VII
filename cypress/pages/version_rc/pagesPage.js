@@ -1,18 +1,6 @@
 import { LogIn } from "./logIn";
 const BASE_URL = "http://localhost:2368";
 
-export const data = {
-    "email": "d.andrades@uniandes.edu.co",
-    "password": "ArpolisVI204*"
-};
-
-export function doLogIn() {
-    cy.visit(BASE_URL + '/ghost/#/signin');
-    LogIn.logIn(data.email, data.password);
-    LogIn.logInButton();
-    cy.get('a[title="Dashboard"]').should('be.visible');
-}
-
 export const CONTENT = {
     newPageButton: 'a[data-test-new-page-button=""]',
     pageTitleInput: 'textarea[data-test-editor-title-input=""]',
@@ -26,19 +14,6 @@ export const CONTENT = {
     goToPagesButton: 'a[data-test-link="pages"]',
     unpublishPageButton: 'button[data-test-button="update-flow"]',
 }
-
-export function addContentToPage(title, content) {
-    cy.get(CONTENT.pageTitleInput).type(title)
-    cy.get(CONTENT.pageContentInput).first().type(content)
-}
-
-export function confirmCreatePage() {
-    cy.get(CONTENT.newPageModal).within(() => {
-        cy.get(CONTENT.continueCreationPageButton).first().click() // click en continuar
-        cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
-    })
-}
-
 
 export class PagesPage {
     static doLogIn() {
@@ -128,6 +103,22 @@ export class PagesPage {
 
     static getPublishPageModal() {
         return cy.get('div[data-test-publish-flow="complete"]');
+    }
+
+    static getUpdatePageNotification() {
+        return cy.get('aside.gh-notifications');
+    }
+
+    static getPageStatus() {
+        return cy.get('div[data-test-editor-post-status=""]');
+    }
+
+    static getUnPublishPageButton () {
+        return cy.get(CONTENT.unpublishPageButton);
+    }
+
+    static getRevertToDraftPageButton() {
+        return cy.get('button[data-test-button="revert-to-draft"]').first();
     }
 
     static goToPages() {

@@ -29,17 +29,19 @@ describe('Test feature pages', () => {
         cy.wait(500)
 
         //Then unpublish la página
-        cy.get(CONTENT.unpublishPageButton).contains('Unpublish').first().click(); // click en unpublish
+        PagesPage.getUnPublishPageButton()
+            .contains('Unpublish').first().click(); // click en unpublish
 
         cy.wait(500)
 
         //Then nueva pagina del modal
         cy.get(CONTENT.newPageModal).within(() => {
-            cy.get('button[data-test-button="revert-to-draft"]').first().click() // click en continuar
+            PagesPage.getRevertToDraftPageButton().click() // click en continuar
         })
         
         cy.wait(500)
-        cy.get('div[data-test-editor-post-status=""]').contains('Draft');
+        PagesPage.getPageStatus().contains('Draft');
+
         cy.screenshot('../../ghost-5.96/E014 - Set to draft state');
     });
    
