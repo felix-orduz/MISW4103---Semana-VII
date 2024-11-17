@@ -19,12 +19,13 @@ describe("Escenarios E2E para Ghost", function () {
         cy.visit(data.baseURL);
         LogIn.logIn(data.email, data.password);
         LogIn.logInButton();
-        cy.screenshot('../../ghost-4.5/E0017-0-BS');
+        cy.screenshot('../../ghost-4.5/E00017-0-BS');
         cy.wait(1000);
     });
   });
 
   it("E00017 - Invalid Email Validation", function () {
+    //Given que voy a la sección de members
     PrincipalPage.visitMembers(BASE_URL);
 
     const memberData = {
@@ -34,31 +35,37 @@ describe("Escenarios E2E para Ghost", function () {
     };
 
     cy.wait(3000);
-    cy.screenshot('../../ghost-4.5/E0017-1-BS');
+    cy.screenshot('../../ghost-4.5/E00017-1-BS');
 
+    //And verifico que estoy en la página de members
     MembersPage.getScreenTitle().should("include.text", "Members");
-    cy.screenshot('../../ghost-4.5/E0017-2-BS');
+    cy.screenshot('../../ghost-4.5/E00017-2-BS');
 
+    //And doy click en el boton de nuevo member
     MembersPage.clickNewMemberButton();
     cy.wait(2000);
-    cy.screenshot('../../ghost-4.5/E0017-3-BS');
+    cy.screenshot('../../ghost-4.5/E00017-3-BS');
 
+    //And pongo un nuevo member
     MembersPage.getScreenTitle()
       .invoke("text")
       .then((text) => {
         const normalizedText = text.trim().replace(/\s+/g, " ");
         expect(normalizedText).to.include("New member");
       });
-    cy.screenshot('../../ghost-4.5/E0017-4-BS');
+    cy.screenshot('../../ghost-4.5/E00017-4-BS');
 
+    //And lleno el formulario de member
     MembersPage.fillMemberForm(memberData);
-    cy.screenshot('../../ghost-4.5/E0017-5-BS');
+    cy.screenshot('../../ghost-4.5/E00017-5-BS');
 
+    //When doy click en el boton de guardar
     MembersPage.clickSaveButton();
     cy.wait(3000);
-    cy.screenshot('../../ghost-4.5/E0017-6-BS');
+    cy.screenshot('../../ghost-4.5/E00017-6-BS');
 
+    //Then se muestra un mensaje de error
     MembersPage.getInvalidEmailMessageElement().should('contain.text', 'Invalid Email.');
-    cy.screenshot('../../ghost-4.5/E0017-7-BS');
+    cy.screenshot('../../ghost-4.5/E00017-7-BS');
   });
 });
