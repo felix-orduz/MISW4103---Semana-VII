@@ -1,91 +1,129 @@
-const { create } = require("domain");
-let fs = require("fs");
-let path = require("path");
-
-function createReport() {
+function createReport(fs) {
   let reportHTML = `
-    <html>
-      <head>
-        <title>Comparación de Imágenes</title>
-        <link rel="stylesheet" href="index.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-      </head>
-      <body>
-        <div class='container'>
-          <div class='row'>
-            <div class='col'>
-              <h1><strong>Pruebas de Regresión Visual con ResembleJS</strong></h1>
-            </div>
+  <html>
+    <head>
+      <title>Comparación de Imágenes</title>
+      <link rel="stylesheet" href="index.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <body>
+      <div class='container'>
+        <div class='row'>
+          <div class='col'>
+            <h1><strong>Pruebas de Regresión Visual con ResembleJS</strong></h1>
           </div>
+        </div>
   `;
 
-  try {
-    let directoryPath = "./kraken/reports";
+  // Definimos listas con imágenes de Ghost 4.5.0 y Ghost 5.96.0
+  let directoryPath = "./kraken/screenshots";
+  let imgGhost45 = fs.readdirSync(directoryPath + "/ghost-4.5");
+  let imgGhost596 = fs.readdirSync(directoryPath + "/ghost-5.96");
+  let imgComp = fs.readdirSync(directoryPath + "/comparisons");
 
-    // Leer directorios principales
-    let files = fs.readdirSync(directoryPath, { withFileTypes: true });
-    let folders = files
-      .filter((file) => file.isDirectory())
-      .map((folder) => folder.name);
+  if (imgGhost45.length === imgGhost596.length) {
+    for (let index = 0; index < imgGhost45.length; index++) {
+      // Verificamos que estamos tomando las mismas imágenes
+      let img1 = imgGhost45[index].slice(0, 7);
+      let img2 = imgGhost596[index].slice(0, 7);
+      let comp = imgComp[index].slice(0, 7);
+      
+      if (img1 === img2 && img2 === comp) {
+        // Definimos rutas de imágenes
+        let rutaImg1 = `./kraken/screenshots/ghost-4.5/${imgGhost45[index]}`;
+        let rutaImg2 = `./kraken/screenshots/ghost-5.96/${imgGhost596[index]}`;
+        let rutaComp = `./kraken/screenshots/comparisons/${imgComp[index]}`;
 
-      if (folders.length !== 2) {
-      throw new Error("Se requieren al menos dos carpetas para comparar.");
-    }
-    
-    // Leer imágenes de las dos carpetas y las de comparación
-    let dir1 = fs.readdirSync(path.join(directoryPath, folders[0], 'screenshots'));
-    let dir2 = fs.readdirSync(path.join(directoryPath, folders[1], 'screenshots'));
-    let imgComp = fs.readdirSync(path.join('./kraken', "comparisons"));
+        // Extraemos el porcentaje de diferencia
+        let porcentaje = imgComp[index].slice(-8, -4);
 
-    if (dir1.length === dir2.length) {
-      for (let index = 0; index < dir1.length; index++) {
-        let rutaImg1 = `${directoryPath}/${folders[0]}/screenshots/${dir1[index]}`;
-        let rutaImg2 = `${directoryPath}/${folders[1]}/screenshots/${dir2[index]}`;
-        let rutaComp = `kraken/comparisons/${imgComp[index]}`;
-        let escenario = `Escenario ${index + 1}`;
-        let porcentaje = 0; // Sustituir por la comparación real
-        console.log(rutaImg1);
+        // Extraemos el número de escenario
+        let escenario = imgGhost45[index].slice(0, 5);
+
+        // Pintamos las imágenes en tres columnas
         reportHTML += `
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>${escenario}</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="${rutaImg1}" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="${rutaImg2}" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: ${porcentaje}%</h3>
-                      <img src="${rutaComp}" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario ${escenario}</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="${rutaImg1}" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="${rutaImg2}" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: ${porcentaje}%</h3>
+                    <img src="${rutaComp}" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         `;
+      } else {
+        console.log("Las imágenes no coinciden");
+        console.log(index, img1, img2, comp);
       }
-    } else {
-      console.log("El tamaño de las listas no coincide.");
     }
-
-    reportHTML += `
-          </div>
-        </body>
-      </html>
-    `;
-
-    return reportHTML;
-  } catch (err) {
-    console.error("Error generando el reporte:", err);
-    throw err;
+  } else {
+    console.log("El tamaño de las listas no coincide");
   }
+
+  // Cierre del HTML completo
+  reportHTML += `
+      </div>
+    </body>
+  </html>
+  `;
+
+  return reportHTML;
 }
 
-// Generar el reporte y guardarlo en un archivo
-let report = createReport();
-fs.writeFileSync("./report_kraken.html", report);
-console.log("Reporte generado exitosamente.");
+(async () => {
+  const fs = require("fs");
+  const compareImages = require("resemblejs/compareImages");
+  const { options } = require("./config.json");
+
+  const imagesDir = "./kraken/screenshots";
+  const version1Dir = `${imagesDir}/ghost-4.5`;
+  const version2Dir = `${imagesDir}/ghost-5.96`;
+  const outputDir = `${imagesDir}/comparisons`;
+
+  // Crear directorio de salida
+  fs.mkdirSync(outputDir, { recursive: true });
+
+  // Obtener nombres de las imágenes
+  const version1Images = fs.readdirSync(version1Dir);
+  const version2Images = fs.readdirSync(version2Dir);
+
+  // Validar que las listas tengan el mismo tamaño
+  if (version1Images.length !== version2Images.length) {
+    console.error("Las listas de imágenes no coinciden en tamaño.");
+    return;
+  }
+
+  // Comparar imágenes
+  for (let index = 0; index < version1Images.length; index++) {
+    const img1Path = `${version1Dir}/${version1Images[index]}`;
+    const img2Path = `${version2Dir}/${version2Images[index]}`;
+
+    const data = await compareImages(
+      fs.readFileSync(img1Path),
+      fs.readFileSync(img2Path),
+      options
+    );
+
+    const nombreImagen = version1Images[index].slice(0, -4);
+    const diffPercentage = data.misMatchPercentage;
+    const diffPath = `${outputDir}/${nombreImagen}-${diffPercentage}.png`;
+
+    fs.writeFileSync(diffPath, data.getBuffer());
+  }
+
+  // Generar el reporte
+  const report = createReport(fs);
+  fs.writeFileSync(`./report_kraken.html`, report);
+})();

@@ -23,4 +23,3 @@ Scenario: E0002 - Crear un post contenido
   And Clic para devolverse a los posts BS
   When Entro al post creado BS
   Then Valido el contenido del post BS
-  And Tomo pantallazo BS "E0002-5-BS.png"

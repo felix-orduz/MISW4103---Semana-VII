@@ -33,4 +33,3 @@ Scenario: E0004 - Editar el contenido de un post previamente creado
   And Clic para devolverse a los posts BS
   When Entro al post editado BS
   Then Valido el contenido del post editado BS
-  And Tomo pantallazo BS "E0004-7-BS.png"

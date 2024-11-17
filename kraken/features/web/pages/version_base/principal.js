@@ -1,7 +1,6 @@
 module.exports = {
-    clickPostsBS: async function (driver) {
-        let clicButton = await driver.$('[href="#/posts/"]');
-        return clicButton.click({force: true});
+    clickPostsBS: async function (driver, url) {
+        return await driver.url(url);
     },
 
     clickPages: async function (driver){
@@ -9,8 +8,8 @@ module.exports = {
         return clicButton.click({force: true});
     },
 
-    clickTags: async function (driver) {
-        let clicButton = await driver.$('[data-test-nav="tags"]');
+    clickTagsBS: async function (driver) {
+        let clicButton = await driver.$('[href="#/tags/"]');
         return clicButton.click({force: true});
     },
 
