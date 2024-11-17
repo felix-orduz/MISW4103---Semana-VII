@@ -31,4 +31,3 @@ Scenario: E0003 - Editar el titulo de un post previamente creado
   And Tomo pantallazo "E0003-6-RC.png"
   When Clic para devolverse a los posts
   Then Valida titulo del Post editado en la lista de posts
-  And Tomo pantallazo "E0003-7-RC.png"

@@ -22,4 +22,3 @@ Scenario: E0001 - Crear un post con titulo
   And Clic en el boton Publish Post
   When Cierre el modal de confirmación post
   Then Valida Post publicado en la lista de posts
-  And Tomo pantallazo "E0001-5-RC.png"

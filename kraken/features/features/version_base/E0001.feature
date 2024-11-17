@@ -22,4 +22,3 @@ Scenario: E0001 - Crear un post con titulo
   And Clic en el boton publish final BS
   When Clic para devolverse a los posts BS
   Then Valida Post publicado en la lista de posts BS
-  And Tomo pantallazo BS "E0001-5-BS.png"

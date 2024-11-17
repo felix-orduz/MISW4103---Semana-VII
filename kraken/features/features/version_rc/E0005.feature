@@ -24,5 +24,4 @@ Scenario: E0005 - Eliminamos un post previamente creado
   And Clic derecho en el post creado
   And Tomo pantallazo "E0005-5-RC.png"
   When Clic en Elimino el post
-  And Tomo pantallazo "E0005-6-RC.png"
   Then Elimino post
