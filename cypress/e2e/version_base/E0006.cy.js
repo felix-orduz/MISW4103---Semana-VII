@@ -21,6 +21,7 @@ describe('Escenarios E2E para Ghost', function () {
         LogIn.logInButton();
         cy.screenshot('../../ghost-4.5/E0006-0-BS');
         cy.wait(1000);
+        cy.viewport(1536, 960);
     });
   });
 

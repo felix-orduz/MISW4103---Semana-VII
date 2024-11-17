@@ -11,7 +11,7 @@ export class PrincipalPage {
     }
 
     static clickTags() {
-        return cy.get('[href="#/tags/"]').click({ force: true });
+        return cy.get('[href="#/tags/"]').first().click({ force: true });
     }
 
     static visitMembers(BASE_URL) {

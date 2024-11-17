@@ -5,7 +5,10 @@ const { Given, When, Then, Before } = require('@cucumber/cucumber');
 //Version base
 const { getTitleTagSectionBS, clickNewTagBS, writeNameTagBS, clickNombreTagBS,
     clickDescriptionTagBS, writeDescriptionTagBS, clickNewTagSaveBS, clickDeleteTagBS, clickDeleteConfirmTagBS, lastTagCreatedBS, clicTagBS, clickNewTagValidateBS } = require('../pages/version_base/tag');
-    
+const {
+  clickPostsBS, clickTagsBS
+} = require("../pages/version_base/principal");
+
   Then('Página de listado de tags BS', async function () {
     await getTitleTagSectionBS(this.driver);
    });

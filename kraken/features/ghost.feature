@@ -1,35 +1,36 @@
 Feature: Ghost
 
-@user4 @web
-Scenario: E0004 - Editar el contenido de un post previamente creado
-  Given I navigate to page principal
-  And Tomo pantallazo "E0004-0-RC.png"
-  And I enter email y password
+@user9 @web
+Scenario: E0009 - Crear un tag duplicado nombre y la descripción.
+  Given I navigate to page principal BS
+    And Tomo pantallazo BS "E0009-0-BS.png"
+  And I enter email y password BS
   And I wait for 1 seconds
-  And Tomo pantallazo "E0004-1-RC.png"
-  And I clic to Sign in
-  And Clic en la sección de Posts
-  And Página de listado de posts
-  And Tomo pantallazo "E0004-2-RC.png"
-  And Clic en el boton New Post
-  And Titulo del post
-  And Clic en Contenido post
-  And I wait for 1 seconds
-  And Contenido del post
-  And Tomo pantallazo "E0004-3-RC.png"
-  And Clic en el boton publish-flow
-  And Clic en el boton Continue post
-  And Tomo pantallazo "E0004-4-RC.png"
-  And Clic en el boton Publish Post
-  And Cierre el modal de confirmación post
-  And Entro al post creado
-  And Clic en Contenido post
-  And I wait for 1 seconds
-  And Edito contenido del post
-  And Tomo pantallazo "E0004-5-RC.png"
-  And Clic en boton de Update del post
-  And Tomo pantallazo "E0004-6-RC.png"
-  And Clic para devolverse a los posts
-  When Entro al post creado
-  Then Valido el contenido del post editado
-  And Tomo pantallazo "E0004-7-RC.png"
+    And Tomo pantallazo BS "E0009-1-BS.png"
+  And I clic to Sign in BS
+  And Clic en la sección de Tags BS
+  And Página de listado de tags BS
+    And Tomo pantallazo BS "E0009-2-BS.png"
+  And Clic en el boton New tag BS
+  And Nombre del tag "New Tag1" BS
+    And Tomo pantallazo BS "E0009-3-BS.png"
+  And Clic en Descripción del tag BS
+  And Descripción del tag "Contenido de tag1" BS
+    And Tomo pantallazo BS "E0009-4-BS.png"
+  And Clic en el boton guardar BS
+    And Tomo pantallazo BS "E0009-5-BS.png"
+  And Clic en la sección de Tags BS
+  And Valida Tag publicado en la lista de tags "New Tag1" BS
+    And Tomo pantallazo BS "E0009-6-BS.png"
+  And Clic en el boton New tag BS
+    And Tomo pantallazo BS "E0009-7-BS.png"
+  And Nombre del tag "New Tag1" BS
+    And Tomo pantallazo BS "E0009-8-BS.png"
+  And Clic en Descripción del tag BS
+  And Descripción del tag "Contenido de tag1" BS
+    And Tomo pantallazo BS "E0009-9-BS.png"
+  And Clic en el boton guardar BS
+    And Tomo pantallazo BS "E0009-10-BS.png"
+  Then Clic en la sección de Tags BS
+    And Tomo pantallazo BS "E0009-11-BS.png"
+  When Valida Tag publicado en la lista de tags "New Tag1" BS

@@ -20,6 +20,7 @@ describe("Escenarios E2E para Ghost", function () {
     LogIn.logInButton();
     cy.screenshot('../../ghost-4.5/E0009-0-BS');
     cy.wait(1000);
+    cy.viewport(1536, 960);
   });
 
   it("E0009 - Crear un tag duplicado nombre y la descripción.", function () {

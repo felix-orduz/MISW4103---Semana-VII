@@ -22,7 +22,7 @@ const {
 
 const { logInBS, logInButtonBS } = require("../pages/version_base/login");
 const {
-  clickPostsBS,
+  clickPostsBS, clickTagsBS
 } = require("../pages/version_base/principal");
 
 //Version rc
@@ -120,6 +120,10 @@ await logInButtonBS(this.driver);
 //Principal base
 Then("Clic en la sección de Posts BS", async function () {
   await clickPostsBS(this.driver);
+});
+
+Then("Clic en la sección de Tags BS", async function () {
+  await clickTagsBS(this.driver);
 });
 
 //Principal rc
