@@ -28,18 +28,20 @@ describe('Test feature pages', () => {
 
         cy.wait(500)
 
-        //Then unpublish la página
+        //And da click en unpublish Página
         PagesPage.getUnPublishPageButton()
             .contains('Unpublish').first().click(); // click en unpublish
 
         cy.wait(500)
 
-        //Then nueva pagina del modal
+        //And confirma unpublish Pagina del modal
         cy.get(CONTENT.newPageModal).within(() => {
             PagesPage.getRevertToDraftPageButton().click() // click en continuar
         })
         
+
         cy.wait(500)
+        // Then Verifica que el estado sea Draft
         PagesPage.getPageStatus().contains('Draft');
 
         cy.screenshot('../../ghost-5.96/E014 - Set to draft state');
