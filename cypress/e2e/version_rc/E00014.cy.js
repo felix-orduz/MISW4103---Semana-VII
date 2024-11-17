@@ -19,7 +19,7 @@ describe('Test feature pages', () => {
     it("Escenario 014: Unpublish page", () => {
         //Given usuario logueado
         PagesPage.goToPages();        
-        cy.screenshot('../../ghost-5.96/E014 - Before Unpublish');
+        cy.screenshot('../../ghost-5.96/E00014-0-RC');
 
         //When editar página
         PagesPage.getEditFirstPageButton().click(); //Click on Edit first page
@@ -44,7 +44,7 @@ describe('Test feature pages', () => {
         // Then Verifica que el estado sea Draft
         PagesPage.getPageStatus().contains('Draft');
 
-        cy.screenshot('../../ghost-5.96/E014 - Set to draft state');
+        cy.screenshot('../../ghost-5.96/E00014-1-RC');
     });
    
 });

@@ -22,7 +22,7 @@ describe('Test feature pages', () => {
     it("Escenario 011: Create new page", () => {
         //Given usuario logueado
         PagesPage.goToPages();
-        cy.screenshot('../../ghost-5.96/E011 - Antes de crear la Page');
+        cy.screenshot('../../ghost-5.96/E00011-0-RC');
 
         //Then Crear nueva página
         cy.get(CONTENT.newPageButton).click(); //Click on New Page
@@ -38,7 +38,7 @@ describe('Test feature pages', () => {
         cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
 
         cy.wait(500);
-        cy.screenshot('../../ghost-5.96/E011 - Creando la Page');
+        cy.screenshot('../../ghost-5.96/E00011-1-RC');
 
         //And confirma creacion de la página 
         PagesPage.clickConfirmCreatePage();
@@ -51,7 +51,7 @@ describe('Test feature pages', () => {
         });
 
         // Toma Screenshot
-        cy.screenshot('../../ghost-5.96/E011 - Page Creada');
+        cy.screenshot('../../ghost-5.96/E00011-2-RC');
 
         cy.wait(500);
         PagesPage.closeModal();

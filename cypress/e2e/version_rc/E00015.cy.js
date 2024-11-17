@@ -19,7 +19,7 @@ describe('Test feature pages', () => {
     it("Escenario: Delete page", () => {
         //Given usuario logueado
         PagesPage.goToPages();
-        cy.screenshot('../../ghost-5.96/E015 - Before Delete');
+        cy.screenshot('../../ghost-5.96/E00015-0-RC');
 
         //When editar página
         PagesPage.getEditFirstPageButton().click(); //Click on Edit first page
@@ -38,6 +38,6 @@ describe('Test feature pages', () => {
 
         cy.wait(500)
         // Then confimar que no exista una pagina.
-        cy.screenshot('../../ghost-5.96/E015 - Page deleted')
+        cy.screenshot('../../ghost-5.96/E00015-1-RC');
     });
 });

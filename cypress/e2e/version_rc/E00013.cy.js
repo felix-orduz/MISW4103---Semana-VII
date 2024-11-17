@@ -22,7 +22,7 @@ describe('Test feature pages', () => {
     it("Escenario 013: Edit Page", () => {
         //Given usuario logueado con paginas creadas
         PagesPage.goToPages();
-        cy.screenshot('../../ghost-5.96/E013 - Before Edit Page');
+        cy.screenshot('../../ghost-5.96/E00013-0-RC');
 
         //When Edita página
         cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
@@ -38,7 +38,7 @@ describe('Test feature pages', () => {
         cy.get(CONTENT.updatePageButton).first().click(); // click en update
 
         cy.wait(500)
-        cy.screenshot('../../ghost-5.96/E013 - Edited Content');
+        cy.screenshot('../../ghost-5.96/E00013-1-RC');
 
         PagesPage.getUpdatePageNotification().screenshot("../../ghost-5.96/E013 - edit page notification");
         cy.wait(500)
@@ -47,7 +47,7 @@ describe('Test feature pages', () => {
         PagesPage.goToPages();
         PagesPage.getListOfPages().contains(PAGE_TITLE);
 
-        cy.screenshot('../../ghost-5.96/E013 - After Edit Page');
+        cy.screenshot('../../ghost-5.96/E00013-2-RC');
  
     });
 });
