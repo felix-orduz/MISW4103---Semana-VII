@@ -1,5 +1,6 @@
 {
     "Url": "http://localhost:2368/ghost/#/signin",
     "Email": "d.andrades@uniandes.edu.co",
-    "Password": "ArpolisVI204*"
+    "Password": "ArpolisVI204*",
+    "postsURL": "http://localhost:2368/ghost/#/posts"
 }

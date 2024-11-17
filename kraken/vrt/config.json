@@ -1,19 +1,10 @@
 {
-  "options": {
-    "output": {
-      "errorColor": {
-        "red": 255,
-        "green": 0,
-        "blue": 255
-      },
-      "errorType": "movement",
-      "largeImageThreshold": 1200,
-      "useCrossOrigin": false,
-      "outputDiff": true
-    },
-    "scaleToSameSize": true,
-    "ignore": "antialiasing"
+  "output": {
+    "errorType": "movement",
+    "transparency": 0.5,
+    "largeImageThreshold": 1200,
+    "outputDiff": true
   },
-  "viewportHeight": 600,
-  "viewportWidth": 800
+  "scaleToSameSize": true,
+  "ignore": "antialiasing"
 }

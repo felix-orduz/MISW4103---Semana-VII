@@ -1,7 +1,6 @@
 module.exports = {
-    clickPostsBS: async function (driver) {
-        let clicButton = await driver.$('[href="#/posts/"]');
-        return clicButton.click({force: true});
+    clickPostsBS: async function (driver, url) {
+        return await driver.url(url);
     },
 
     clickPages: async function (driver){

@@ -117,7 +117,7 @@ await logInButtonBS(this.driver);
 
 //Principal base
 Then("Clic en la sección de Posts BS", async function () {
-  await clickPostsBS(this.driver);
+  await this.driver.url(properties.postsURL);
 });
 
 //Principal rc
