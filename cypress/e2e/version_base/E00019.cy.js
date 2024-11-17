@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:2368/";
-import { LogIn } from "../../pages/version_rc/logIn";
-import { MembersPage } from "../../pages/version_rc/membersPage";
-import { PrincipalPage } from "../../pages/version_rc/principalPage";
+import { LogIn } from "../../pages/version_base/logIn";
+import { MembersPage } from "../../pages/version_base/membersPage";
+import { PrincipalPage } from "../../pages/version_base/principalPage";
 import { faker } from "@faker-js/faker";
 const data = require('../../fixtures/properties.json');
 
@@ -17,13 +17,12 @@ describe("Escenarios E2E para Ghost", function () {
       cy.visit(data.baseURL);
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('../../ghost-5.96/E00019-0-RC');
+      cy.screenshot('../../ghost-4.5/E0019-0-BS');
       cy.wait(1000);
     });
   });
 
   it("E00019 - Edit Member", function () {
-    //Given que voy a la sección de members
     PrincipalPage.visitMembers(BASE_URL);
 
     const initialMemberData = {
@@ -33,52 +32,42 @@ describe("Escenarios E2E para Ghost", function () {
     };
 
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E00019-1-RC');
+    cy.screenshot('../../ghost-4.5/E0019-1-BS');
 
-    //And verifico que estoy en la página de members
     MembersPage.getScreenTitle().should("include.text", "Members");
-    cy.screenshot('../../ghost-5.96/E00019-2-RC');
+    cy.screenshot('../../ghost-4.5/E0019-2-BS');
 
-    //And doy click en el boton de nuevo member
     MembersPage.clickNewMemberButton();
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E00019-3-RC');
+    cy.screenshot('../../ghost-4.5/E0019-3-BS');
 
-    //And lleno el formulario de member
     MembersPage.fillMemberForm(initialMemberData);
-    cy.screenshot('../../ghost-5.96/E00019-4-RC');
+    cy.screenshot('../../ghost-4.5/E0019-4-BS');
 
-    //And doy click en el boton de guardar
     MembersPage.clickSaveButton();
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E00019-5-RC');
+    cy.screenshot('../../ghost-4.5/E0019-5-BS');
 
-    //And voy a la lista de members
     MembersPage.goToMembersList();
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E00019-6-RC');
+    cy.screenshot('../../ghost-4.5/E0019-6-BS');
 
-    //And doy click en el member por email
     MembersPage.clickMemberByEmail(initialMemberData.email);
-    cy.screenshot('../../ghost-5.96/E00019-7-RC');
+    cy.screenshot('../../ghost-4.5/E0019-7-BS');
 
-    //And borro el nombre y pongo uno nuevo
     const updatedName = faker.name.fullName();
     MembersPage.clearAndFillMemberName(updatedName);
-    cy.screenshot('../../ghost-5.96/E00019-8-RC');
+    cy.screenshot('../../ghost-4.5/E0019-8-BS');
 
-    //And doy click en el boton de guardar
     MembersPage.clickSaveButton();
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E00019-9-RC');
+    cy.screenshot('../../ghost-4.5/E0019-9-BS');
 
-    //When voy a la lista de members
     MembersPage.goToMembersList();
-    cy.screenshot('../../ghost-5.96/E00019-10-RC');
+    cy.screenshot('../../ghost-4.5/E0019-10-BS');
 
-    //Then verifico que el nombre del member se actualizó
     MembersPage.getMemberNameElement(initialMemberData.email).should("have.text", updatedName);
-    cy.screenshot('../../ghost-5.96/E00019-11-RC');
+    cy.screenshot('../../ghost-4.5/E0019-11-BS');
 
   });
 });

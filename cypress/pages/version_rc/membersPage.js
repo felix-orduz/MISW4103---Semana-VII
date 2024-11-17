@@ -62,4 +62,19 @@ export class MembersPage {
   static confirmDeleteMember() {
     return cy.get('button[data-test-button="confirm"]').click();
   }
+
+  static getAlertWordCount() {
+    return cy.get('span.word-count');
+  }
+
+  static clearAndFillMemberName(name) {
+    cy.get('input[data-test-input="member-name"]').clear().type(name);
+  }
+
+  static getMemberNameElement(email) {
+    return cy.contains("p.gh-members-list-email", email)
+      .parent()
+      .find("h3.gh-members-list-name");
+  }
+
 }

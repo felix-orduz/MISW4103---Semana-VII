@@ -1,4 +1,4 @@
-Feature: Ghost
+Feature: Ghost - Eliminar Miembro
 
 @user4 @web
 Scenario: E0004 - Editar el contenido de un post previamente creado

@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:2368/";
-import { LogIn } from "../../pages/version_rc/logIn";
-import { MembersPage } from "../../pages/version_rc/membersPage";
-import { PrincipalPage } from "../../pages/version_rc/principalPage";
+import { LogIn } from "../../pages/version_base/logIn";
+import { MembersPage } from "../../pages/version_base/membersPage";
+import { PrincipalPage } from "../../pages/version_base/principalPage";
 import { faker } from "@faker-js/faker";
 const data = require('../../fixtures/properties.json');
 
@@ -18,13 +18,13 @@ describe("Escenarios E2E para Ghost", function () {
       cy.visit(data.baseURL);
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('../../ghost-5.96/E00020-0-RC');
+      cy.screenshot('../../ghost-4.5/E0020-0-BS');
       cy.wait(1000);
     });
   });
 
   it("E00020 - Delete Member", function () {
-    //Given que voy a la sección de members
+
     PrincipalPage.visitMembers(BASE_URL);
 
     const memberData = {
@@ -33,55 +33,46 @@ describe("Escenarios E2E para Ghost", function () {
       note: faker.lorem.sentence(),
     };
 
+
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E00020-1-RC');
+    cy.screenshot('../../ghost-4.5/E0020-1-BS');
 
-    //And verifico que estoy en la página de members
     MembersPage.getScreenTitle().should("include.text", "Members");
-    cy.screenshot('../../ghost-5.96/E00020-2-RC');
+    cy.screenshot('../../ghost-4.5/E0020-2-BS');
 
-    //And doy click en el boton de nuevo member
     MembersPage.clickNewMemberButton();
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E00020-3-RC');
+    cy.screenshot('../../ghost-4.5/E0020-3-BS');
 
-    //And lleno el formulario de member
     MembersPage.fillMemberForm(memberData);
-    cy.screenshot('../../ghost-5.96/E00020-4-RC');
+    cy.screenshot('../../ghost-4.5/E0020-4-BS');
 
-    //And doy click en el boton de guardar
     MembersPage.clickSaveButton();
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E00020-5-RC');
+    cy.screenshot('../../ghost-4.5/E0020-5-BS');
 
-    //And voy a la lista de members
     MembersPage.goToMembersList();
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E00020-6-RC');
+    cy.screenshot('../../ghost-4.5/E0020-6-BS');
 
-    //And doy click en el member por email
     MembersPage.clickMemberByEmail(memberData.email);
-    cy.screenshot('../../ghost-5.96/E00020-7-RC');
+    cy.screenshot('../../ghost-4.5/E0020-7-BS');
 
-    //And doy click en el boton de acciones
-    MembersPage.openMemberActions();
-    cy.screenshot('../../ghost-5.96/E00020-8-RC');
+    // MembersPage.openMemberActions();
+    // cy.screenshot('../../ghost-4.5/E0020-8-BS');
 
-    //And doy click en el boton de eliminar
     MembersPage.clickDeleteMember();
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E00020-9-RC');
+    cy.screenshot('../../ghost-4.5/E0020-9-BS');
 
-    //When confirmo que quiero eliminar el member
     MembersPage.confirmDeleteMember();
-    cy.screenshot('../../ghost-5.96/E00020-10-RC');
+    cy.screenshot('../../ghost-4.5/E0020-10-BS');
 
-    //Then verifico que el member ya no existe
     MembersPage.getMembersList().then((membersList) => {
       const member = membersList.find((m) => m.email === memberData.email);
       expect(member).to.be.undefined;
     });
-    cy.screenshot('../../ghost-5.96/E00020-11-RC');
+    cy.screenshot('../../ghost-4.5/E0020-11-BS');
 
   });
 });
