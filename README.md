@@ -41,7 +41,7 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 
   **1. version_rc:** Contiene 20 archivos identificados con el código `E000XXX`, cada uno representando un escenario de prueba específico diseñado para la versión 5.96 de Ghost.<br>
   
-  **2. version_base:** Contiene 10 archivos también identificados con el código `E000XXX`, que corresponden a escenarios de prueba para la versión 4.5 de Ghost.
+  **2. version_base:** Contiene 12 archivos también identificados con el código `E000XXX`, que corresponden a escenarios de prueba para la versión 4.5 de Ghost.
 
  - Para ejecutar las pruebas, seleccione cada archivo `E000XXX.cy.js` y haga clic para ejecutarlo. Se recomienda realizar la ejecución de los archivos uno por uno para garantizar la ejecución exitosa de cada escenario de prueba. Adicionalmente, para correr los escenarios de la carpeta `version_rc` debe estar desplegada la versión de Ghost `5.96` y para correr los escenarios de la carpeta `version_base` debe estar desplegada la versión de Ghost `4.5`.
   
@@ -54,6 +54,6 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 
   **1. version_rc:** Contiene 20 archivos identificados con el código `E000XXX`, cada uno representando un escenario de prueba específico diseñado para la versión 5.96 de Ghost.<br>
   
-  **2. version_base:** Contiene 10 archivos también identificados con el código `E000XXX`, que corresponden a escenarios de prueba para la versión 4.5 de Ghost.
+  **2. version_base:** Contiene 12 archivos también identificados con el código `E000XXX`, que corresponden a escenarios de prueba para la versión 4.5 de Ghost.
 
  - Para poder correr las pruebas es necesario ir copiando cada escenario, es decir, tomar cada `E000XXX.feature` y pegar su contenido en el archivo `features\ghost.feature` y luego ejecutar la prueba con el comando `npx kraken-node run`. Adicionalmente, para correr los escenarios de la carpeta `version_rc` debe estar desplegada la versión de Ghost `5.96` y para correr los escenarios de la carpeta `version_base` debe estar desplegada la versión de Ghost `4.5`.
