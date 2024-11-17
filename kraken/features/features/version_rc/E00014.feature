@@ -9,6 +9,7 @@ Scenario: E00014 - Actualizar el estado de la page previamente creada a unpublis
   And Página principal del administrador
   And Click en la sección de Pages
   And Página de listado de Pages
+  And Tomo pantallazo "E00014-1-RC.png"
   And Clic en el boton New Page
   And Titulo del Page
   And Clic en Contenido page
@@ -22,3 +23,4 @@ Scenario: E00014 - Actualizar el estado de la page previamente creada a unpublis
   And Click en el boton UnPublish Page
   And Click en el boton revert to draft Page
   And Clic para devolverse a las Pages
+  And Tomo pantallazo "E00014-2-RC.png"
