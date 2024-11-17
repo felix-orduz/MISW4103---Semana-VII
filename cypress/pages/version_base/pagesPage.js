@@ -10,7 +10,7 @@ export const CONTENT = {
     continueCreationPageButton: 'button[data-test-button="continue"]',
     confirmCreationPageButton: 'span[data-test-task-button-state="idle"]',
     editPageButton: 'span.gh-post-list-cta.edit',
-    updatePageButton: 'button.gh-btn-editor',
+    updatePageButton: 'div.gh-btn.gh-btn-editor',
     goToPagesButton: 'a[data-test-link="pages"]',
     unpublishPageButton: 'button[data-test-button="update-flow"]',
 }
@@ -33,11 +33,7 @@ export class PagesPage {
 
             cy.wait(100);
             cy.get(CONTENT.publishPageButtonDropd).first().click(); 
-
-            cy.wait(100);
             cy.get(CONTENT.publishPageButton).first().click(); 
-            
-
             cy.wait(100);
         });
 
@@ -101,6 +97,15 @@ export class PagesPage {
 
     static getListOfPages() {
         return cy.get('ol.gh-list');
+    }
+
+    static doClickOnUpdatePageButton() {
+         cy.get(CONTENT.updatePageButton).first().click();
+         cy.get('button.gh-publishmenu-button').first().click();
+    }
+
+    static getUpdatePageNotification() {
+        return cy.get('aside.gh-notifications');
     }
 
     static goToPages() {

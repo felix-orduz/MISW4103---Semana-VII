@@ -25,7 +25,7 @@ describe('Test feature pages', () => {
         cy.get(CONTENT.newPageButton).click(); //Click on New Page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
-        cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
+        cy.intercept("PUT", "/ghost/api/admin/pages/").as("createPage");
 
         //Then pone contenido
         let content = " To live is to risk it all.";

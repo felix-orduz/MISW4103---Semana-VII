@@ -3,7 +3,7 @@ import {
     PagesPage, 
 } from "../../pages/version_base/pagesPage";
 
-const PAGE_TITLE = "Page to be deleted"
+const PAGE_TITLE = "Page to be EDITED"
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -25,22 +25,20 @@ describe('Test feature pages', () => {
         cy.screenshot('../../ghost-4.5/E013 - Before Edit Page');
 
         //When Editar página
-        cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
+        PagesPage.getListOfPages().contains(PAGE_TITLE).click(); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
-
-        cy.intercept("PUT", "/ghost/api/admin/pages/").as("createPage");
 
         //Then pone contenido
         PagesPage.addContentToPage('Edited Page', 'Edited with cypress. by nf.ortiz 😊')
         cy.wait(1000)
 
         //Then update page
-        cy.get(CONTENT.updatePageButton).first().click(); // click en update
+        PagesPage.doClickOnUpdatePageButton(); // click en update
 
         cy.wait(500)
         cy.screenshot('../../ghost-4.5/E013 - Edited Content');
 
-        cy.get('aside.gh-notifications')
+        PagesPage.getUpdatePageNotification()
             .screenshot("../../ghost-4.5/E013 - edit page notification");
 
         cy.wait(500)
