@@ -98,4 +98,29 @@ module.exports = {
     await nameField.clearValue();
     await nameField.setValue(updatedName);
   },
+
+  confirmDeleteMemberBase: async function (driver) {
+    try {
+
+        const modalSection = await driver.$('section.modal-content');
+
+        const confirmButton = await modalSection.$('button.gh-btn.gh-btn-red.gh-btn-icon');
+
+        const buttonText = await confirmButton.getText();
+        if (buttonText.trim() === 'Delete member') {
+            await confirmButton.scrollIntoView();
+            const isVisible = await confirmButton.isDisplayed();
+            if (isVisible) {
+                return confirmButton.click();
+            } else {
+                throw new Error('El botón "Delete member" no está visible.');
+            }
+        } else {
+            throw new Error('El botón no tiene el texto esperado "Delete member".');
+        }
+    } catch (error) {
+        console.error('Error al intentar confirmar la eliminación del miembro:', error);
+        throw error;
+    }
+},
 };

@@ -5,20 +5,9 @@ require('./principal.js');
 require('./login.js');
 
 const {
-  clickNewMember,
   writeFormMember,
-  clickSaveMember,
-  goToListMembers,
-  validateMemberInList,
-  writeInvalidFormMember,
-  checkInvalidEmailError,
-  checkLongNoteCharacterCount,
   clickMemberByEmail,
-  updateMemberName,
-  validateUpdatedMemberName,
   openMemberActions,
-  clickDeleteMember,
-  confirmDeleteMember,
   verifyMemberDeleted
 } = require("../pages/version_rc/member");
 
@@ -48,81 +37,6 @@ Then('Tomo pantallazo {string}', async function (nombre) {
   await this.driver.saveScreenshot(`./screenshots/ghost-5.96/${nombre}`);
 });
 
-// Then("Clic en la sección de Members", async function () {
-//   await clickMembers(this.driver);
-// });
-
-// Then("Clic en el botón de New Member", async function () {
-//   await clickNewMember(this.driver);
-// });
-
-// Then("Contenido del member", async function () {
-//   let name = "Nombre";
-//   let email = "dasda1312@gmail121.com";
-//   let note = "Nota de prueba";
-//   await writeFormMember(this.driver, name, email, note);
-// });
-
-// Then("Clic en Save Member", async function () {
-//   await clickSaveMember(this.driver);
-// });
-
-// Then("clic en List Members", async function () {
-//   await goToListMembers(this.driver);
-// });
-
-// Then("Valida Member en lista", async function () {
-//   let email = "dasda1312@gmail121.com";
-//   await validateMemberInList(this.driver, email);
-// });
-
-// Then("Contenido de member con email inválido", async function () {
-//   const name = "Nombre";
-//   const email = "invalid-email-format";
-//   const note = "Nota de prueba";
-//   await writeInvalidFormMember(this.driver, name, email, note);
-// });
-
-// Then("Verifica mensaje de error de email inválido", async function () {
-//   await checkInvalidEmailError(this.driver);
-// });
-
-// Then("Contenido de member con email inválido y nota larga", async function () {
-//   const name = "Nombre Inválido";
-//   const email = "invalid-email-format"; // Email inválido
-//   const longNote = "a".repeat(501); // Genera una nota de más de 500 caracteres
-//   await writeFormMember(this.driver, name, email, longNote);
-// });
-
-// Then("Verifica contador de caracteres de nota", async function () {
-//   await checkLongNoteCharacterCount(this.driver);
-// });
-
-// Then("Selecciona miembro por email", async function () {
-//   await clickMemberByEmail(this.driver, this.initialMemberData.email);
-// });
-
-// Then("Editar nombre del miembro", async function () {
-//   const updatedName = "New Name";
-//   this.updatedName = updatedName;
-//   await updateMemberName(this.driver, updatedName);
-// });
-
-// Then("Valida nombre del miembro actualizado", async function () {
-//   await validateUpdatedMemberName(this.driver, this.initialMemberData.email, this.updatedName);
-// });
-
-// Then("Contenido de member inicial", async function () {
-//   const initialMemberData = {
-//     name: "Test Edit Name",
-//     email: "dasda1312@gmail1212.com",
-//     note: "note",
-//   };
-//   this.initialMemberData = initialMemberData;
-//   await writeFormMember(this.driver, initialMemberData.name, initialMemberData.email, initialMemberData.note);
-// });
-
-
 Then("Contenido de member para eliminar", async function () {
   const memberData = {
     name: "Nombre de Ejemplo",
@@ -140,13 +54,6 @@ Then("Abre menú de acciones del miembro", async function () {
   await openMemberActions(this.driver);
 });
 
-// Then("Clic en Eliminar Miembro", async function () {
-//   await clickDeleteMember(this.driver);
-// });
-
-Then("Confirma eliminación de Miembro", async function () {
-  await confirmDeleteMember(this.driver);
-});
 
 Then("Verifica Miembro eliminado en la lista", async function () {
   await verifyMemberDeleted(this.driver, "dasda1313@correo.com");

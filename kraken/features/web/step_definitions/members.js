@@ -10,21 +10,20 @@ const {
   clickNewMemberBase,
   clickSaveMemberBase,
   goToListMembersBase,
-  clickMemberByEmailBase,
-  updateMemberNameBase
+  updateMemberNameBase,
+  confirmDeleteMemberBase
 } = require("../pages/version_base/member");
 const {
   clickNewMember,
-  writeFormMember,
   checkInvalidEmailError,
   checkLongNoteCharacterCount,
   updateMemberName,
-  validateUpdatedMemberName,
   goToListMembers,
   clickMemberByEmail,
   clickDeleteMember,
   clickSaveMember,
-  validateMemberInList
+  validateMemberInList,
+  confirmDeleteMember
 } = require("../pages/version_rc/member");
 const { clickMembers } = require("../pages/version_rc/principal");
 const { clickMembersBase } = require("../pages/version_base/principal");
@@ -164,4 +163,13 @@ Then("Editar nombre del miembro base", async function () {
   this.initialMemberData.name = updatedName;
   this.updatedName = updatedName;
   await updateMemberNameBase(this.driver, updatedName);
+});
+
+Then("Confirma eliminación de Miembro", async function () {
+  await confirmDeleteMember(this.driver);
+});
+
+
+Then("Confirma eliminación de Miembro Base", async function () {
+  await confirmDeleteMemberBase(this.driver);
 });
