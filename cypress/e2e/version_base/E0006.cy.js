@@ -26,23 +26,23 @@ describe('Escenarios E2E para Ghost', function () {
   });
 
     it('E0006 - Crear un tag con nombre y descripción', function () {
-        //When le de click en la sección de Tags
+        //Given le de click en la sección de Tags
         PrincipalPage.clickTags();
         cy.screenshot('../../ghost-4.5/E0006-1-BS');
-        //Then el administrador debería ver la página de listado de Tags
+        //And el administrador debería ver la página de listado de Tags
         TagPage.getTitleSection().should('include.text', 'Tags');
 
-        //When le de click en el boton New Tag
+        //And le de click en el boton New Tag
         TagPage.clickNewTag();
         cy.screenshot('../../ghost-4.5/E0006-2-BS');
-        //Then escriba el nombre del tag
+        //And escriba el nombre del tag
         let name = "TAG E0006";
         TagPage.writeNameTag(name);
         cy.screenshot('../../ghost-4.5/E0006-3-BS');
-        //When le de click en la descripción del tag
+        //And le de click en la descripción del tag
         TagPage.clickDescriptionTag();
         
-        //Then escribimos descripción del tag
+        //And escribimos descripción del tag
         let description = "TAG DESCRIPCIÓN E0006";
         TagPage.writeDescriptionTag(description);
         cy.screenshot('../../ghost-4.5/E0006-4-BS');
