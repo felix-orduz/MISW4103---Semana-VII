@@ -152,7 +152,7 @@ Then("clic en List Members Base", async function () {
 });
 
 Then("Valida Member en lista", async function () {
-  let email = "dasda1312@gmail121.com";
+  let email = this.createEmail;
   await validateMemberInList(this.driver, email);
 });
 
