@@ -1,7 +1,7 @@
 import { LogIn } from "./logIn";
 
 export const CONTENT = {
-    newPageButton: 'a[data-test-new-page-button=""]',
+    newPageButton: 'a[href="#/editor/page/"]',
     pageTitleInput: 'textarea.gh-editor-title[placeholder="Page title"]',
     pageContentInput: 'p[data-koenig-dnd-droppable="true"]',
     publishPageButtonDropd: 'div.gh-publishmenu-trigger[role="button"]',

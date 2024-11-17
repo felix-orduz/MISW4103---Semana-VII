@@ -14,7 +14,7 @@ describe('Test feature pages', () => {
 
     afterEach(() => {
         PagesPage.deletePageByTitle('(Untitled)');
-    })
+    });
 
     it("Escenario 012: Create empty page", () => {
         //Given usuario logueado

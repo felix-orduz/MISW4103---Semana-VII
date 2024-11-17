@@ -17,7 +17,7 @@ describe('Test feature pages', () => {
 
     afterEach(() => {
         PagesPage.deletePageByTitle(PAGE_TITLE);
-    })
+    });
 
     it("Escenario 011: Create new page", () => {
         //Given usuario logueado
