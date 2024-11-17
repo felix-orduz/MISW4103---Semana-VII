@@ -32,4 +32,3 @@ Scenario: E0003 - Editar el titulo de un post previamente creado
   And I wait for 1 seconds
   When Clic para devolverse a los posts BS
   Then Valida titulo del Post editado en la lista de posts BS
-  And Tomo pantallazo BS "E0003-7-BS.png"
