@@ -17,7 +17,7 @@ Scenario: E0017 - Invalid Email Validation
   And Tomo pantallazo BS "E0017-3-BS.png"
   And Contenido de member con email inválido
   And Tomo pantallazo BS "E0017-4-BS.png"
-  And Clic en Save Member Base
+  When Clic en Save Member Base
   And I wait for 2 seconds
   And Tomo pantallazo BS "E0017-5-BS.png"
   Then Verifica mensaje de error de email inválido
