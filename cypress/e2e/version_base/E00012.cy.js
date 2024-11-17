@@ -3,6 +3,9 @@ import {
     CONTENT,  
 } from "../../pages/version_base/pagesPage";
 
+let PAGE_TITLE = "A New Page by Cypress";
+
+
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
         return false;
@@ -13,7 +16,7 @@ describe('Test feature pages', () => {
     });
 
     afterEach(() => {
-        PagesPage.deletePageByTitle(PAGE_TITLE);
+        PagesPage.deletePageByTitle('(Untitled)');
     });
 
     it("Escenario 012: Create empty page", () => {
