@@ -18,8 +18,8 @@ module.exports = {
         return clicButton.click({force: true});
     },
 
-    clickMembers: async function (driver) {
-        let clicButton = await driver.$('[data-test-nav="members"]');
+    clickMembersBase: async function (driver) {
+        let clicButton = await driver.$('[href="#/members/"]');
         return clicButton.click({force: true});
     },
 
