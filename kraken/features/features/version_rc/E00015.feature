@@ -5,7 +5,7 @@ Scenario: E015 - Eliminamos una Page previamente creada
   Given I navigate to page principal
   When I enter email y password
   And I wait for 1 seconds
-  Then I clic to Sign in
+  And I clic to Sign in
   Then Página principal del administrador
   Then Click en la sección de Pages
   Then Página de listado de Pages
