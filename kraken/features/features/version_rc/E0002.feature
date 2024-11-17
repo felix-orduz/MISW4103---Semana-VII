@@ -23,4 +23,5 @@ Scenario: E0002 - Crear un post contenido
   And Clic en el boton Publish Post
   And Cierre el modal de confirmación post
   When Entro al post creado
+  And I wait for 1 seconds
   Then Valido el contenido del post
