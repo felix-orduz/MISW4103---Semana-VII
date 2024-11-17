@@ -21,7 +21,7 @@ module.exports = {
         await textField.setValue(contenido);
     },
     clickNewPagePublishFlow: async function (driver) {
-        let clickButton = await driver.$('[data-test-button="publish-flow"]');
+        let clickButton = await driver.$('button[data-test-button="publish-flow"]');
         return clickButton.click({ force: true });
     },
     clickNewPageContinue: async function (driver) {

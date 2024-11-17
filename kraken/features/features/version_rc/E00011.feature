@@ -12,8 +12,8 @@ Scenario: E011 - Crear un page
   And Click en el boton New Page
   And Titulo del page
   And Clic en Contenido page
-  And I wait for 1 seconds
-  When Clic en el boton publish-flow page
+  When I wait for 1 seconds
+  And Clic en el boton publish-flow page
   Then Clic en el boton Continue page
   And Clic en el boton Publish Page
   And Cierre el modal de confirmación page
