@@ -1,9 +1,8 @@
 //Posts
 require('./post.js');
-const { logInBS, logInButtonBS } = require("../pages/version_base/login");
-
-const { getTitleTagSection, clickNewTag, writeNameTag, clickNombreTag,
-  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../pages/version_rc/tag');
+require('./tags.js');
+require('./principal.js');
+require('./login.js');
 
 const {
   clickNewMember,
@@ -23,15 +22,7 @@ const {
   verifyMemberDeleted
 } = require("../pages/version_rc/member");
 
-const { logIn, logInButton } = require("../pages/version_rc/login");
-const {
-  clickPosts,
-  clickMembers,
-  clickTags,
-  clickPages
-} = require("../pages/version_rc/principal");
-
-const fs = require('fs'); // Asegúrate de requerir 'fs' al principio del archivo
+const fs = require('fs');
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 
 let properties;
@@ -55,95 +46,6 @@ Then('Tomo pantallazo BS {string}', async function (nombre) {
 
 Then('Tomo pantallazo {string}', async function (nombre) {
   await this.driver.saveScreenshot(`./screenshots/ghost-5.96/${nombre}`);
-});
-
-//Seccion login rc
-When('I enter email y password', async function () {
-    await logIn(this.driver, properties.Email, properties.Password);
-});
-
-Then("I clic to Sign in", async function () {
-  await logInButton(this.driver);
-});
-
-//Seccion login base
-When('I enter email y password BS', async function () {
-  await logInBS(this.driver, properties.Email, properties.Password);
-});
-
-Then("I clic to Sign in BS", async function () {
-await logInButtonBS(this.driver);
-});
-
-//Principal base
-Then("Clic en la sección de Posts BS", async function () {
-  await this.driver.url(properties.postsURL);
-});
-
-//Principal rc
-Then("Página principal del administrador", async function () {
-  await getTitleAdmin(this.driver);
-});
-
-Then("Clic en la sección de Posts", async function () {
-  await clickPosts(this.driver);
-});
-
-Then('Click en la sección de Pages', async function () {
-  await clickPages(this.driver);
-});
-
-Then('Clic en la sección de Tags', async function () {
-  await clickTags(this.driver);
-});
-
-//Tags
-Then('Página de listado de tags', async function () {
- await getTitleTagSection(this.driver);
-});
-
-Then('Clic en el boton New tag', async function () {
- await clickNewTag(this.driver);
-});
-
-Then('Clic en el boton Eliminar', async function () {
- await clickDeleteTag(this.driver);
-});
-
-Then('Clic en el boton Confirmar Eliminar', async function () {
- await clickDeleteConfirmTag(this.driver);
-});
-
-When('Nombre del tag {string}', async function (name) {
- await writeNameTag(this.driver, name);
-});
-
-When('Nombre del tag con caracteres especiales {string}', async function (name) {
- await writeNameTag(this.driver, name);
-});
-
-Then('Clic en Descripción del tag', async function () {
- await clickDescriptionTag(this.driver);
-});
-
-When('Descripción del tag {string}', async function (description) {
- await writeDescriptionTag(this.driver, description);
-});
-
-Then('Clic en el boton guardar', async function () {
- await clickNewTagSave(this.driver);
-});
-
-When('Valida Tag publicado en la lista de tags {string}', async function (name) {
- await lastTagCreated(this.driver, name, "notClick");
-});
-
-When('Clic en el tag {string}', async function (name) {
- await clicTag(this.driver, name);
-});
-
-Then('Clic en el input nombre tag', async function () {
-  await clickNombreTag(this.driver);
 });
 
 Then("Clic en la sección de Members", async function () {

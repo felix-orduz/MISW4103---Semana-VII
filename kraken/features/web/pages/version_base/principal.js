@@ -8,8 +8,8 @@ module.exports = {
         return clicButton.click({force: true});
     },
 
-    clickTags: async function (driver) {
-        let clicButton = await driver.$('[data-test-nav="tags"]');
+    clickTagsBS: async function (driver) {
+        let clicButton = await driver.$('[href="#/tags/"]');
         return clicButton.click({force: true});
     },
 
