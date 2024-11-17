@@ -87,5 +87,15 @@ module.exports = {
   goToListMembersBase: async function (driver) {
     let listButton = await driver.$('[href="#/members/"]');
     return listButton.click();
-  }
+  },
+
+  clickMemberByEmailBase: async function (driver, email) {
+    console.log('clickMemberByEmailBase', email);
+  },
+
+  updateMemberNameBase: async function (driver, updatedName) {
+    let nameField = await driver.$("input#member-name");
+    await nameField.clearValue();
+    await nameField.setValue(updatedName);
+  },
 };

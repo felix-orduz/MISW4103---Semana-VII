@@ -10,6 +10,8 @@ const {
   clickNewMemberBase,
   clickSaveMemberBase,
   goToListMembersBase,
+  clickMemberByEmailBase,
+  updateMemberNameBase
 } = require("../pages/version_base/member");
 const {
   clickNewMember,
@@ -44,7 +46,14 @@ Then("Clic en el botón de New Member Base", async function () {
 });
 
 Then("Contenido del member base", async function () {
-  const createdEmail = faker.internet.email();
+  const initialMemberData = {
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    note: faker.lorem.sentence(),
+  };
+  this.initialMemberData = initialMemberData;
+
+  const createdEmail = initialMemberData.email;
   this.createEmail = createdEmail;
   let name = faker.person.fullName();
   let email = this.createEmail;
@@ -142,4 +151,17 @@ Then("Valida Member en lista", async function () {
 Then("Valida Member en lista Base", async function () {
   let email = this.createEmail;
   await validateMemberInList(this.driver, email);
+});
+
+Then("Selecciona miembro por email Base", async function () {
+  console.log("Selecciona miembro por email Base", this.initialMemberData);
+  await clickMemberByEmail(this.driver, this.initialMemberData.email);
+});
+
+
+Then("Editar nombre del miembro base", async function () {
+  const updatedName = faker.person.fullName();
+  this.initialMemberData.name = updatedName;
+  this.updatedName = updatedName;
+  await updateMemberNameBase(this.driver, updatedName);
 });
