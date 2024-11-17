@@ -10,7 +10,7 @@ module.exports = {
     },
 
     clickTags: async function (driver) {
-        let clicButton = await driver.$('[data-test-nav="tags"]');
+        let clicButton = await driver.$('[href="#/tags/"]');
         return clicButton.click({force: true});
     },
 

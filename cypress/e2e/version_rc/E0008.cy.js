@@ -14,64 +14,66 @@ describe("Escenarios E2E para Ghost", function () {
   beforeEach(() => {
     cy.fixture('properties.json').then((data) => {
         //Given que estoy en la pagina del login del Admin
-        cy.visit('http://localhost:2368/ghost/#/signin');
+        cy.visit(data.baseURL);
 
         //When inicio sesión con mis credenciales
         LogIn.logIn(data.email, data.password);
         LogIn.logInButton();
+        cy.screenshot('../../ghost-5.96/E0008-0-RC');
+        cy.wait(1000);
     });
   });
 
   it("E0008 - Editar un tag con titulo y descripción", function () {
-    //When le de click en la sección de Tags
+    //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
-
-    //Then el administrador debería ver la página de listado de Tags
+    cy.screenshot('../../ghost-5.96/E0008-1-RC');
+    //And el administrador debería ver la página de listado de Tags
     TagPage.getTitleSection().should("include.text", "Tags");
 
-    //When le de click en el boton New Tag
+    //And le de click en el boton New Tag
     TagPage.clickNewTag();
-
-    //Then escriba el nombre del tag
-    let name = faker.lorem.word();
+    cy.screenshot('../../ghost-5.96/E0008-2-RC');
+    //And escriba el nombre del tag
+    let name = "TAG E0008";
     TagPage.writeNameTag(name);
-
-    //When le de click en la descripción del tag
+    cy.screenshot('../../ghost-5.96/E0008-3-RC');
+    //And le de click en la descripción del tag
     TagPage.clickDescriptionTag();
 
-    //Then escribimos descripción del tag
-    let description = faker.lorem.words();
+    //And escribimos descripción del tag
+    let description = "TAG DESCRIPCIÓN E0008";
     TagPage.writeDescriptionTag(description);
-
+    cy.screenshot('../../ghost-5.96/E0008-4-RC');
     //And le de click en el boton guardar
     TagPage.clickNewTagSave();
     cy.wait(1000);
-
-    //When le de click en la sección de Tags
+    cy.screenshot('../../ghost-5.96/E0008-5-RC');
+    //And le de click en la sección de Tags
     PrincipalPage.clickTags();
 
-    //Then Valida Tag publicado en la lista de tags
+    //And Valida Tag publicado en la lista de tags
     TagPage.lastTagCreated(name, "click");
     cy.wait(1000);
-
-    //Then escriba el nuevo nombre del tag
-    let newName = faker.lorem.word();
+    cy.screenshot('../../ghost-5.96/E0008-6-RC');
+    //And escriba el nuevo nombre del tag
+    let newName = "NEWTAG E0008";
     TagPage.writeNameTag(newName);
-
-    //When le de click en la descripción del tag
+    cy.screenshot('../../ghost-5.96/E0008-7-RC');
+    //And le de click en la descripción del tag
     TagPage.clickDescriptionTag();
 
-    //Then escribimos la nueva descripción del tag
-    let newDescription = faker.lorem.words();
+    //And escribimos la nueva descripción del tag
+    let newDescription = "NEW TAG DESCRIPCIÓN E0008";
     TagPage.writeDescriptionTag(newDescription);
-
+    cy.screenshot('../../ghost-5.96/E0008-8-RC');
     //And le de click en el boton guardar
     TagPage.clickNewTagSave();
     cy.wait(1000);
-
+    cy.screenshot('../../ghost-5.96/E0008-9-RC');
     //When le de click en la sección de Tags
     PrincipalPage.clickTags();
-
+    cy.screenshot('../../ghost-5.96/E0008-10-RC');
     //Then Valida Tag publicado en la lista de tags
     TagPage.busqueda(newName, "notClick");
   });
