@@ -18,4 +18,4 @@ Scenario: E011 - Crear un page
   Then Clic en el boton Continue page
   And Clic en el boton Publish Page
   And Cierre el modal de confirmación page
-  And Tomo pantallazo "E00014-2-RC.png"
+  And Tomo pantallazo "E00011-2-RC.png"
