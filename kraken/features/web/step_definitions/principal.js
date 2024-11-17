@@ -1,6 +1,12 @@
 const { Given, When, Then, Before } = require("@cucumber/cucumber");
 const fs = require("fs");
 
+let properties;
+Before(() => {
+  const data = fs.readFileSync('./features/web/properties.json', 'utf8');
+  properties = JSON.parse(data);
+});
+
 //Version base
 const { clickTagsBS } = require("../pages/version_base/principal");
 
