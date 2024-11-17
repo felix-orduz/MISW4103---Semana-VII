@@ -6,7 +6,6 @@ Scenario: E015 - Eliminamos una Page previamente creada
   And I enter email y password
   And I wait for 1 seconds
   And I clic to Sign in
-  And Página principal del administrador
   And Click en la sección de Pages
   And Página de listado de Pages
   When Click en el boton New Page

@@ -6,7 +6,6 @@ Scenario: E012 - Crear una page vacia. sin contenido.
   And I enter email y password
   And I wait for 1 seconds
   And I clic to Sign in
-  And Página principal del administrador
   And Click en la sección de Pages
   And Página de listado de Pages
   And Tomo pantallazo "E00012-1-RC.png"
