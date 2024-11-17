@@ -16,7 +16,7 @@ describe('Test feature pages', () => {
     });
 
     afterEach(() => {
-        PagesPage.deletePageByTitle('(Untitled)');
+        PagesPage.deletePageByTitle(PAGE_TITLE);
     });
 
     it("Escenario 013: Edit Page", () => {
