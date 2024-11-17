@@ -86,8 +86,9 @@ export class PagesPage {
 
                     cy.wait(100);
 
-                    cy.get('button[data-test-button="delete"]').first().click({ force: true });
             });
+
+            cy.get('button[data-test-button="delete"]').first().click({ force: true });
         });
     }
 
