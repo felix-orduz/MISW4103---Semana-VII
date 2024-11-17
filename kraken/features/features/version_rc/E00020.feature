@@ -8,7 +8,6 @@ Scenario: E0020 - Delete Member
   And I wait for 1 seconds
   And Tomo pantallazo "E00020-2-RC.png"
   And I clic to Sign in
-  And Página principal del administrador
   And Clic en la sección de Members
   And Tomo pantallazo "E00020-3-RC.png"
   And Clic en el botón de New Member

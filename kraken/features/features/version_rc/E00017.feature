@@ -8,7 +8,6 @@ Scenario: E0017 - Invalid Email Validation
   And I wait for 1 seconds
   And Tomo pantallazo "E00017-1-RC.png"
   And I clic to Sign in
-  And Página principal del administrador
   And Clic en la sección de Members
   And Tomo pantallazo "E00017-2-RC.png"
   And Clic en el botón de New Member

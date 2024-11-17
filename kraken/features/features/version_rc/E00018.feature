@@ -8,7 +8,6 @@ Scenario: E0018 - Validación de Email Inválido y Longitud de Nota
   And I wait for 1 seconds
   And Tomo pantallazo "E00018-1-RC.png"
   And I clic to Sign in
-  And Página principal del administrador
   And Clic en la sección de Members
   And Tomo pantallazo "E00018-2-RC.png"
   And Clic en el botón de New Member
