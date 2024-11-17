@@ -1,6 +1,6 @@
 module.exports = {
-    clickPosts: async function (driver) {
-        let clicButton = await driver.$('[data-test-nav="posts"]');
+    clickPostsBS: async function (driver) {
+        let clicButton = await driver.$('[href="#/posts/"]');
         return clicButton.click({force: true});
     },
 

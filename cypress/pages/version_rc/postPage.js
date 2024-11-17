@@ -85,4 +85,8 @@ export class PostPage {
     static deletePost() {
         return cy.get('[data-test-button="delete"]').first().click({ force: true });
     }
+
+    static deletePostModal() {
+        return cy.get('[data-test-button="confirm"]').first().click({ force: true });
+    }
 }

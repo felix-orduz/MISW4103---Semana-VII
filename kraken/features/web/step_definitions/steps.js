@@ -1,3 +1,29 @@
+//Version base
+const {
+  getTitlePostSectionBS,
+  clickNewPostBS,
+  writeTitlePostBS,
+  clickContentPostBS,
+  writeContentPostBS,
+  clickNewPostPublishFinalBS,
+  clickNewPostContinueBS,
+  clickNewPostPublishBS,
+  clickNewPostCloseModalBS,
+  lastPostCreatedBS,
+  viewContentBS,
+  updatePostButtonBS,
+  updatePostButtonFinalBS,
+  clickBackToPostsBS,
+  deletePostBS,
+  deletePostModalBS,
+} = require("../pages/version_base/post");
+
+const { logInBS, logInButtonBS } = require("../pages/version_base/login");
+const {
+  clickPostsBS,
+} = require("../pages/version_base/principal");
+
+//Version rc
 const {
   getTitlePostSection,
   clickNewPost,
@@ -13,10 +39,11 @@ const {
   updatePostButton,
   clickBackToPosts,
   deletePost,
-} = require("../../pages/version_rc/post");
+  deletePostModal,
+} = require("../pages/version_rc/post");
 
 const { getTitleTagSection, clickNewTag, writeNameTag, clickNombreTag,
-  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../../pages/version_rc/tag');
+  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../pages/version_rc/tag');
 
 const {
   clickNewMember,
@@ -34,16 +61,15 @@ const {
   clickDeleteMember,
   confirmDeleteMember,
   verifyMemberDeleted
-} = require("../../pages/version_rc/member");
+} = require("../pages/version_rc/member");
 
-const { logIn, logInButton } = require("../../pages/version_rc/login");
+const { logIn, logInButton } = require("../pages/version_rc/login");
 const {
-  getTitleAdmin,
   clickPosts,
   clickMembers,
   clickTags,
   clickPages
-} = require("../../pages/version_rc/principal");
+} = require("../pages/version_rc/principal");
 
 const fs = require('fs'); // Asegúrate de requerir 'fs' al principio del archivo
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
@@ -58,7 +84,20 @@ Given('I navigate to page principal', async function () {
     await this.driver.url(properties.Url);
 });
 
-//Seccion login
+Given('I navigate to page principal BS', async function () {
+  await this.driver.url(properties.Url);
+});
+
+//Screenshots
+Then('Tomo pantallazo BS {string}', async function (nombre) {
+  await this.driver.saveScreenshot(`./screenshots/ghost-4.5/${nombre}`);
+});
+
+Then('Tomo pantallazo {string}', async function (nombre) {
+  await this.driver.saveScreenshot(`./screenshots/ghost-5.96/${nombre}`);
+});
+
+//Seccion login rc
 When('I enter email y password', async function () {
     await logIn(this.driver, properties.Email, properties.Password);
 });
@@ -67,7 +106,21 @@ Then("I clic to Sign in", async function () {
   await logInButton(this.driver);
 });
 
-//Principal
+//Seccion login base
+When('I enter email y password BS', async function () {
+  await logInBS(this.driver, properties.Email, properties.Password);
+});
+
+Then("I clic to Sign in BS", async function () {
+await logInButtonBS(this.driver);
+});
+
+//Principal base
+Then("Clic en la sección de Posts BS", async function () {
+  await clickPostsBS(this.driver);
+});
+
+//Principal rc
 Then("Página principal del administrador", async function () {
   await getTitleAdmin(this.driver);
 });
@@ -84,7 +137,111 @@ Then('Clic en la sección de Tags', async function () {
   await clickTags(this.driver);
 });
 
-//Posts
+//Posts version base
+Then("Página de listado de posts BS", async function () {
+  await getTitlePostSectionBS(this.driver);
+});
+
+Then("Clic en el boton New Post BS", async function () {
+  await clickNewPostBS(this.driver);
+});
+
+Then("Titulo del post BS", async function () {
+  let titulo = "Titulo de prueba";
+  await writeTitlePostBS(this.driver, titulo);
+});
+
+Then("Clic en Contenido post BS", async function () {
+  await clickContentPostBS(this.driver);
+});
+
+Then("Contenido del post BS", async function () {
+  let contenido = "Contenido de prueba";
+  await writeContentPostBS(this.driver, contenido);
+});
+
+Then("Clic en el boton publish final BS", async function () {
+  await clickNewPostPublishFinalBS(this.driver);
+});
+
+Then("Clic en el boton Continue post BS", async function () {
+  await clickNewPostContinueBS(this.driver);
+});
+
+Then("Clic en el boton Publish Post BS", async function () {
+  await clickNewPostPublishBS(this.driver);
+});
+
+Then("Cierre el modal de confirmación post BS", async function () {
+  await clickNewPostCloseModalBS(this.driver);
+});
+
+Then("Valida Post publicado en la lista de posts BS", async function () {
+  let titulo = "Titulo de prueba";
+  await lastPostCreatedBS(this.driver, titulo, "notClick");
+});
+
+Then("Entro al post creado BS", async function () {
+  let titulo = "Titulo de prueba";
+  await lastPostCreatedBS(this.driver, titulo, "click");
+});
+
+Then("Valido el contenido del post BS", async function () {
+  let contenido = "Contenido de prueba";
+  await viewContentBS(this.driver, contenido);
+});
+
+Then("Edito el titulo del post BS", async function () {
+  let tituloEditado = "Titulo de prueba editado";
+  await writeTitlePostBS(this.driver, tituloEditado);
+});
+
+Then("Edito contenido del post BS", async function () {
+  let contenidoEditado = "Contenido de prueba editado";
+  await writeContentPostBS(this.driver, contenidoEditado);
+});
+
+Then("Clic en boton de Update del post BS", async function () {
+  await updatePostButtonBS(this.driver);
+});
+
+Then('Clic en boton Update del post final BS', async function () {
+  await updatePostButtonFinalBS(this.driver);
+});
+
+Then("Clic para devolverse a los posts BS", async function () {
+  await clickBackToPostsBS(this.driver);
+});
+
+Then("Valida titulo del Post editado en la lista de posts BS", async function () {
+  let tituloEditado = "Titulo de prueba editado";
+  await lastPostCreatedBS(this.driver, tituloEditado, "notClick");
+});
+
+Then("Entro al post editado BS", async function () {
+  let tituloEditado = "Titulo de prueba editado";
+  await lastPostCreatedBS(this.driver, tituloEditado, "click");
+});
+
+Then("Valido el contenido del post editado BS", async function () {
+  let contenidoEditado = "Contenido de prueba editado";
+  await viewContentBS(this.driver, contenidoEditado);
+});
+
+Then("Clic derecho en el post creado BS", async function () {
+  let titulo = "Titulo de prueba";
+  await lastPostCreatedBS(this.driver, titulo, "rightClick");
+});
+
+Then("Clic en Elimino el post BS", async function () {
+  await deletePostBS(this.driver);
+});
+
+Then('Elimino post BS', async function () {
+  await deletePostModalBS(this.driver);
+});
+
+//Posts version rc
 Then("Página de listado de posts", async function () {
   await getTitlePostSection(this.driver);
 });
@@ -176,8 +333,12 @@ Then("Clic derecho en el post creado", async function () {
   await lastPostCreated(this.driver, titulo, "rightClick");
 });
 
-Then("Elimino el post", async function () {
+Then("Clic en Elimino el post", async function () {
   await deletePost(this.driver);
+});
+
+Then('Elimino post', async function () {
+  await deletePostModal(this.driver);
 });
 
 //Tags
@@ -353,7 +514,7 @@ const {
   deletePage,
   clickPageUnPublish,
   clickPageRevertToDraft
-} = require('../../pages/version_rc/page');
+} = require('../pages/version_rc/page');
 Then('Página de listado de Pages', async function () {
   await getTitlePageSection(this.driver);
 });
