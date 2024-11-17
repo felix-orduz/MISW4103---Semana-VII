@@ -9,7 +9,7 @@
 ### Prerequisitios
 - Node JS (versión superior a la 15.0)
 
-### Ejecución de scripts para pruebas de regresión visual
+### Instalación librerías para pruebas de regresión visual
 - Para realizar la comparación de imágenes, es necesario instalar las librerías `ResembleJS` y `PixelMatch`, que permiten implementar esta funcionalidad. La instalación de `ResembleJS` se realiza mediante el comando `npm install resemblejs`, recomendándose usar Node.js en la versión 16 para garantizar la compatibilidad. Por otro lado, `PixelMatch` se instala ejecutando `npm install --save-dev pixelmatch`. En este proyecto, se utilizaron las versiones `^5.0.0` de ResembleJS y `^6.0.0` de PixelMatch.
 
 ### Construcción de reporte para pruebas en Cypress
