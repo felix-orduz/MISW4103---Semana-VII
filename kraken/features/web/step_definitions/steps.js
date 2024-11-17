@@ -1,31 +1,10 @@
 //Posts
 require('./post.js');
+require('./tags.js');
 const { logInBS, logInButtonBS } = require("../pages/version_base/login");
 const {
-  clickPostsBS, clickTagsBS
+  clickTagsBS
 } = require("../pages/version_base/principal");
-
-//Version rc
-const {
-  getTitlePostSection,
-  clickNewPost,
-  writeTitlePost,
-  clickContentPost,
-  writeContentPost,
-  clickNewPostPublishFlow,
-  clickNewPostContinue,
-  clickNewPostPublish,
-  clickNewPostCloseModal,
-  lastPostCreated,
-  viewContent,
-  updatePostButton,
-  clickBackToPosts,
-  deletePost,
-  deletePostModal,
-} = require("../pages/version_rc/post");
-
-const { getTitleTagSection, clickNewTag, writeNameTag, clickNombreTag,
-  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../pages/version_rc/tag');
 
 const {
   clickNewMember,
