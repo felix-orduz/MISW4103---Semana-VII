@@ -16,22 +16,32 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 describe("Escenarios E2E para Ghost", function () {
   beforeEach(() => {
     cy.fixture('properties.json').then((data) => {
-      //Given que estoy en la pagina del login del Admin
       cy.visit('http://localhost:2368/ghost/#/signin');
-
-      //When inicio sesión con mis credenciales
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
+      cy.screenshot('../../ghost-5.96/E0017-0-BS');
+      cy.wait(1000);
     });
   });
 
   it("E00017 - Invalid Email Validation", function () {
-    // When Navegar a la sección de miembros y abrir el formulario para crear un nuevo miembro
     PrincipalPage.visitMembers(BASE_URL);
-    cy.wait(2000);
+
+    const memberData = {
+      name: faker.name.fullName(),
+      email: "invalid-email-format", // Email inválido
+      note: faker.lorem.sentence(),
+    };
+
+    cy.wait(3000);
+    cy.screenshot('../../ghost-5.96/E0017-1-BS');
+
     MembersPage.getScreenTitle().should("include.text", "Members");
+    cy.screenshot('../../ghost-5.96/E0017-2-BS');
+
     MembersPage.clickNewMemberButton();
     cy.wait(2000);
+    cy.screenshot('../../ghost-5.96/E0017-3-BS');
 
     MembersPage.getScreenTitle()
       .invoke("text")
@@ -39,21 +49,17 @@ describe("Escenarios E2E para Ghost", function () {
         const normalizedText = text.trim().replace(/\s+/g, " ");
         expect(normalizedText).to.include("New member");
       });
+    cy.screenshot('../../ghost-5.96/E0017-4-BS');
 
-    // Then Generar un nombre y nota válidos, pero un email inválido
-    const memberData = {
-      name: faker.name.fullName(),
-      email: "invalid-email-format", // Email inválido
-      note: faker.lorem.sentence(),
-    };
-
-    // Then Llenar el formulario con el email inválido
     MembersPage.fillMemberForm(memberData);
+    cy.screenshot('../../ghost-5.96/E0017-5-BS');
 
-    // Then Hacer clic en el botón para guardar el nuevo miembro
     MembersPage.clickSaveButton();
+    cy.wait(3000);
+    cy.screenshot('../../ghost-5.96/E0017-6-BS');
 
-    // Then Verificar que se muestre el mensaje de error "Invalid Email."
     MembersPage.getInvalidEmailMessageElement().should('contain.text', 'Invalid Email.');
+    cy.screenshot('../../ghost-5.96/E0017-7-BS');
+
   });
 });

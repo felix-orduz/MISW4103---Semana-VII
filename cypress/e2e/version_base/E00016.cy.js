@@ -1,7 +1,8 @@
+const fs = require("fs");
 const BASE_URL = "http://localhost:2368/";
-import { LogIn } from "../../pages/version_rc/logIn";
-import { MembersPage } from "../../pages/version_rc/membersPage";
-import { PrincipalPage } from "../../pages/version_rc/principalPage";
+import { LogIn } from "../../pages/version_base/logIn";
+import { MembersPage } from "../../pages/version_base/membersPage";
+import { PrincipalPage } from "../../pages/version_base/principalPage";
 import { faker } from "@faker-js/faker";
 const data = require('../../fixtures/properties.json');
 
@@ -16,18 +17,19 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 describe("Escenarios E2E para Ghost", function () {
   beforeEach(() => {
     cy.fixture('properties.json').then((data) => {
-      //Given que estoy en la pagina del login del Admin
-      cy.visit('http://localhost:2368/ghost/#/signin');
+        //Vistamos sitio de Ghost
+        cy.visit(data.baseURL);
 
-      //When inicio sesión con mis credenciales
-      LogIn.logIn(data.email, data.password);
-      LogIn.logInButton();
-      cy.screenshot('../../ghost-5.96/E0016-0-BS');
-      cy.wait(1000);
+        //Iniciamos sesion
+        LogIn.logIn(data.email, data.password);
+        LogIn.logInButton();
+        cy.screenshot('../../ghost-4.5/E0016-0-BS');
+        cy.wait(1000);
     });
-  });
+});
 
   it("E00016 - Crear Member", function () {
+    // When Navegar a la sección de miembros desde la página principal
     PrincipalPage.visitMembers(BASE_URL);
 
     const memberData = {
@@ -37,32 +39,32 @@ describe("Escenarios E2E para Ghost", function () {
     };
 
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E0016-1-BS');
+    cy.screenshot('../../ghost-4.5/E0016-1-BS');
 
     MembersPage.getScreenTitle().should("include.text", "Members");
-    cy.screenshot('../../ghost-5.96/E0016-2-BS');
+    cy.screenshot('../../ghost-4.5/E0016-2-BS');
     MembersPage.clickNewMemberButton();
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E0016-3-BS');
+    cy.screenshot('../../ghost-4.5/E0016-3-BS');
     MembersPage.getScreenTitle()
       .invoke("text")
       .then((text) => {
         const normalizedText = text.trim().replace(/\s+/g, " ");
         expect(normalizedText).to.include("New member");
       });
-    cy.screenshot('../../ghost-5.96/E0016-4-BS');
+    cy.screenshot('../../ghost-4.5/E0016-4-BS');
     MembersPage.fillMemberForm(memberData);
-    cy.screenshot('../../ghost-5.96/E0016-5-BS');
+    cy.screenshot('../../ghost-4.5/E0016-5-BS');
     MembersPage.clickSaveButton();
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E0016-6-BS');
+    cy.screenshot('../../ghost-4.5/E0016-6-BS');
     MembersPage.goToMembersList();
-    cy.screenshot('../../ghost-5.96/E0016-7-BS');
+    cy.screenshot('../../ghost-4.5/E0016-7-BS');
     let memberFound = false;
     MembersPage.getMembersList().then((membersList) => {
       const emails = membersList.map((member) => member.email);
       expect(emails).to.include(memberData.email);
     });
-    cy.screenshot('../../ghost-5.96/E0016-8-BS');
+    cy.screenshot('../../ghost-4.5/E0016-8-BS');
   });
 });

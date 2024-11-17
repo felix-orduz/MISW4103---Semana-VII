@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:2368/";
-import { LogIn } from "../../pages/version_rc/logIn";
-import { MembersPage } from "../../pages/version_rc/membersPage";
-import { PrincipalPage } from "../../pages/version_rc/principalPage";
+import { LogIn } from "../../pages/version_base/logIn";
+import { MembersPage } from "../../pages/version_base/membersPage";
+import { PrincipalPage } from "../../pages/version_base/principalPage";
 import { faker } from "@faker-js/faker";
 const data = require('../../fixtures/properties.json');
 
@@ -14,10 +14,10 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 describe("Escenarios E2E para Ghost", function () {
   beforeEach(() => {
     cy.fixture('properties.json').then((data) => {
-      cy.visit('http://localhost:2368/ghost/#/signin');
+      cy.visit(data.baseURL);
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('../../ghost-5.96/E0019-0-BS');
+      cy.screenshot('../../ghost-4.5/E0019-0-BS');
       cy.wait(1000);
     });
   });
@@ -32,42 +32,42 @@ describe("Escenarios E2E para Ghost", function () {
     };
 
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E0019-1-BS');
+    cy.screenshot('../../ghost-4.5/E0019-1-BS');
 
     MembersPage.getScreenTitle().should("include.text", "Members");
-    cy.screenshot('../../ghost-5.96/E0019-2-BS');
+    cy.screenshot('../../ghost-4.5/E0019-2-BS');
 
     MembersPage.clickNewMemberButton();
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E0019-3-BS');
+    cy.screenshot('../../ghost-4.5/E0019-3-BS');
 
     MembersPage.fillMemberForm(initialMemberData);
-    cy.screenshot('../../ghost-5.96/E0019-4-BS');
+    cy.screenshot('../../ghost-4.5/E0019-4-BS');
 
     MembersPage.clickSaveButton();
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E0019-5-BS');
+    cy.screenshot('../../ghost-4.5/E0019-5-BS');
 
     MembersPage.goToMembersList();
     cy.wait(2000);
-    cy.screenshot('../../ghost-5.96/E0019-6-BS');
+    cy.screenshot('../../ghost-4.5/E0019-6-BS');
 
     MembersPage.clickMemberByEmail(initialMemberData.email);
-    cy.screenshot('../../ghost-5.96/E0019-7-BS');
+    cy.screenshot('../../ghost-4.5/E0019-7-BS');
 
     const updatedName = faker.name.fullName();
     MembersPage.clearAndFillMemberName(updatedName);
-    cy.screenshot('../../ghost-5.96/E0019-8-BS');
+    cy.screenshot('../../ghost-4.5/E0019-8-BS');
 
     MembersPage.clickSaveButton();
     cy.wait(3000);
-    cy.screenshot('../../ghost-5.96/E0019-9-BS');
+    cy.screenshot('../../ghost-4.5/E0019-9-BS');
 
     MembersPage.goToMembersList();
-    cy.screenshot('../../ghost-5.96/E0019-10-BS');
+    cy.screenshot('../../ghost-4.5/E0019-10-BS');
 
     MembersPage.getMemberNameElement(initialMemberData.email).should("have.text", updatedName);
-    cy.screenshot('../../ghost-5.96/E0019-11-BS');
+    cy.screenshot('../../ghost-4.5/E0019-11-BS');
 
   });
 });
