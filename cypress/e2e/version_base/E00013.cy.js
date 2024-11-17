@@ -15,6 +15,10 @@ describe('Test feature pages', () => {
         PagesPage.createPage(PAGE_TITLE, "Random content");
     });
 
+    afterEach(() => {
+        PagesPage.deletePageByTitle(PAGE_TITLE);
+    });
+
     it("Escenario 013: Edit Page", () => {
         //Given usuario logueado con paginas creadas
         PagesPage.goToPages();

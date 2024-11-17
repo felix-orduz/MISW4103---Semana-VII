@@ -62,6 +62,8 @@ export class PagesPage {
             cy.get('div.modal-content').within(() => {
                 cy.get('button.gh-btn.gh-btn-red').first().click();
             });
+
+            cy.wait(100);
         });
     }
 

@@ -12,6 +12,10 @@ describe('Test feature pages', () => {
         PagesPage.doLogIn();
     });
 
+    afterEach(() => {
+        PagesPage.deletePageByTitle(PAGE_TITLE);
+    });
+
     it("Escenario 012: Create empty page", () => {
         //Given usuario logueado
         PagesPage.goToPages();
