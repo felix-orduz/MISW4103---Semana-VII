@@ -26,12 +26,14 @@ describe('Escenarios E2E para Ghost', function () {
     it('E0005 - Eliminamos un post previamente creado', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
+        cy.screenshot('E0005-1-RC');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
+        cy.screenshot('E0005-2-RC');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
@@ -43,6 +45,7 @@ describe('Escenarios E2E para Ghost', function () {
         //And escribe el contenido
         let contenido = faker.lorem.words();
         PostPage.writeContent(contenido);
+        cy.screenshot('E0005-3-RC');
 
         //And le de click en el boton de Publish
         PostPage.publishPostButton();
@@ -56,11 +59,19 @@ describe('Escenarios E2E para Ghost', function () {
 
         //And cierre el modal de confirmación de publicación
         PostPage.closePublishModal();
+        cy.wait(1000);
+        cy.screenshot('E0005-4-RC');
 
-        //When le de click derecho en el post creado
+        //And le de click derecho en el post creado
         PostPage.lastPostCreated(titulo, 'rightClick');
+        cy.screenshot('E0005-5-RC');
 
-        //Then le da click en el boton de delete y el post es eliminado
+        //When le da click en el boton de delete
         PostPage.deletePost();
+
+        //Then el post es eliminado
+        PostPage.deletePostModal();
+        cy.wait(1000);
+        cy.screenshot('E0005-6-RC');
     });
 });

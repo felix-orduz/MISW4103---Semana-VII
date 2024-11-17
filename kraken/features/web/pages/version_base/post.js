@@ -1,5 +1,5 @@
 module.exports = {
-    getTitlePostSection: async function (driver) {
+    getTitlePostSectionBS: async function (driver) {
       let titleField = await driver.$("h2.gh-canvas-title");
       // Verificar que el texto del elemento contenga 'Posts'
       let text = await titleField.getText();
@@ -11,39 +11,39 @@ module.exports = {
       return titleField.getText();
     },
 
-    clickNewPost: async function (driver) {
-      let clicButton = await driver.$('[data-test-new-post-button=""]');
+    clickNewPostBS: async function (driver) {
+      let clicButton = await driver.$('[href="#/editor/post/"]');
       return clicButton.click({ force: true });
     },
-    writeTitlePost: async function (driver, title) {
-      let textField = await driver.$('[data-test-editor-title-input=""]');
+    writeTitlePostBS: async function (driver, title) {
+      let textField = await driver.$('.gh-editor-title.ember-text-area.gh-input.ember-view');
       await textField.setValue(title);
     },
-    clickContentPost: async function (driver) {
+    clickContentPostBS: async function (driver) {
       let contentField = await driver.$('[data-kg="editor"]');
       return contentField.click({ force: true });
     },
-    writeContentPost: async function (driver, contenido) {
+    writeContentPostBS: async function (driver, contenido) {
       let textField = await driver.$('[data-kg="editor"]');
       await textField.setValue(contenido);
     },
-    clickNewPostPublishFlow: async function (driver) {
-      let clicButton = await driver.$('[data-test-button="publish-flow"]');
+    clickNewPostPublishFinalBS: async function (driver) {
+      let clicButton = await driver.$('.gh-btn.gh-btn-black.gh-publishmenu-button.gh-btn-icon.ember-view');
       return clicButton.click({ force: true });
     },
-    clickNewPostContinue: async function (driver) {
+    clickNewPostContinueBS: async function (driver) {
       let clicButton = await driver.$('[data-test-button="continue"]');
       return clicButton.click({ force: true });
     },
-    clickNewPostPublish: async function (driver) {
-      let clicButton = await driver.$('[data-test-button="confirm-publish"]');
+    clickNewPostPublishBS: async function (driver) {
+      let clicButton = await driver.$('.ember-view.ember-basic-dropdown-trigger.gh-btn.gh-btn-editor.gh-publishmenu-trigger');
       return clicButton.click({ force: true });
     },
-    clickNewPostCloseModal: async function (driver) {
+    clickNewPostCloseModalBS: async function (driver) {
       let clicButton = await driver.$('[data-test-button="close-publish-flow"]');
       return clicButton.click({ force: true });
     },
-    lastPostCreated: async function (driver, title, flag) {
+    lastPostCreatedBS: async function (driver, title, flag) {
       const { expect } = await import('chai');
       let postTitleElement = await driver.$("h3.gh-content-entry-title");
       let postTitle = await postTitleElement.getText();
@@ -57,29 +57,34 @@ module.exports = {
       }
     },
 
-    viewContent: async function(driver, content) {
+    viewContentBS: async function(driver, content) {
       const { expect } = await import('chai');
       let contentFieldElement = await driver.$('[data-kg="editor"]');
       let contentField = await contentFieldElement.getText();
       expect(contentField.trim()).to.include(content);
   },
 
-    updatePostButton: async function (driver) {
-      let clic = await driver.$('[data-test-button="publish-save"]');
+    updatePostButtonBS: async function (driver) {
+      let clic = await driver.$('.gh-publishmenu.ember-view');
       return clic.click({ force: true });
     },
 
-    clickBackToPosts: async function (driver) {
-      let clic = await driver.$('[data-test-link="posts"]');
+    updatePostButtonFinalBS: async function(driver) {
+      let clic = await driver.$('.gh-btn.gh-btn-black.gh-publishmenu-button.gh-btn-icon.ember-view');
       return clic.click({ force: true });
     },
 
-    deletePost: async function (driver) {
+    clickBackToPostsBS: async function (driver) {
+      let clic = await driver.$('.gh-editor-back-button.ember-view');
+      return clic.click({ force: true });
+    },
+
+    deletePostBS: async function (driver) {
       let clic = await driver.$('[data-test-button="delete"]');
       return clic.click({ force: true });
   },
 
-    deletePostModal: async function (driver) {
+    deletePostModalBS: async function (driver) {
       let clic = await driver.$('[data-test-button="confirm"]');
       return clic.click({ force: true });
   }
