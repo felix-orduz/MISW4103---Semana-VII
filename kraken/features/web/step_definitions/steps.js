@@ -1,10 +1,8 @@
 //Posts
 require('./post.js');
 require('./tags.js');
-const { logInBS, logInButtonBS } = require("../pages/version_base/login");
-const {
-  clickTagsBS
-} = require("../pages/version_base/principal");
+require('./principal.js');
+require('./login.js');
 
 const {
   clickNewMember,
@@ -24,15 +22,7 @@ const {
   verifyMemberDeleted
 } = require("../pages/version_rc/member");
 
-const { logIn, logInButton } = require("../pages/version_rc/login");
-const {
-  clickPosts,
-  clickMembers,
-  clickTags,
-  clickPages
-} = require("../pages/version_rc/principal");
-
-const fs = require('fs'); // Asegúrate de requerir 'fs' al principio del archivo
+const fs = require('fs');
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 
 let properties;
@@ -57,52 +47,6 @@ Then('Tomo pantallazo BS {string}', async function (nombre) {
 Then('Tomo pantallazo {string}', async function (nombre) {
   await this.driver.saveScreenshot(`./screenshots/ghost-5.96/${nombre}`);
 });
-
-//Seccion login rc
-When('I enter email y password', async function () {
-    await logIn(this.driver, properties.Email, properties.Password);
-});
-
-Then("I clic to Sign in", async function () {
-  await logInButton(this.driver);
-});
-
-//Seccion login base
-When('I enter email y password BS', async function () {
-  await logInBS(this.driver, properties.Email, properties.Password);
-});
-
-Then("I clic to Sign in BS", async function () {
-await logInButtonBS(this.driver);
-});
-
-//Principal base
-Then("Clic en la sección de Posts BS", async function () {
-  await this.driver.url(properties.postsURL);
-});
-
-Then("Clic en la sección de Tags BS", async function () {
-  await clickTagsBS(this.driver);
-});
-
-//Principal rc
-Then("Página principal del administrador", async function () {
-  await getTitleAdmin(this.driver);
-});
-
-Then("Clic en la sección de Posts", async function () {
-  await clickPosts(this.driver);
-});
-
-Then('Click en la sección de Pages', async function () {
-  await clickPages(this.driver);
-});
-
-Then('Clic en la sección de Tags', async function () {
-  await clickTags(this.driver);
-});
-
-
 
 Then("Clic en la sección de Members", async function () {
   await clickMembers(this.driver);
