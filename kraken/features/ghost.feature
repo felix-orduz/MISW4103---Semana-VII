@@ -32,4 +32,3 @@ Scenario: E0004 - Editar el contenido de un post previamente creado
   And Clic para devolverse a los posts
   When Entro al post creado
   Then Valido el contenido del post editado
-  And Tomo pantallazo "E0004-7-RC.png"

@@ -1,271 +1,607 @@
 
-    <html>
-      <head>
-        <title>Comparación de Imágenes</title>
-        <link rel="stylesheet" href="index.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-      </head>
-      <body>
-        <div class='container'>
-          <div class='row'>
-            <div class='col'>
-              <h1><strong>Pruebas de Regresión Visual con ResembleJS</strong></h1>
-            </div>
+  <html>
+    <head>
+      <title>Comparación de Imágenes</title>
+      <link rel="stylesheet" href="index.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <body>
+      <div class='container'>
+        <div class='row'>
+          <div class='col'>
+            <h1><strong>Pruebas de Regresión Visual con ResembleJS</strong></h1>
           </div>
+        </div>
   
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 1</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790830.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790927.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790927.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0001</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0001-0-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0001-0-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 4.39%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0001-0-BS-4.39.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 2</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790831.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790928.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790928.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0001</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0001-1-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0001-1-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 5.31%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0001-1-BS-5.31.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 3</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790832.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790929.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790929.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0001</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0001-2-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0001-2-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 6.28%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0001-2-BS-6.28.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 4</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790833.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790930.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790930.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0001</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0001-3-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0001-3-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 6.20%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0001-3-BS-36.20.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 5</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790834.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790931.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790931.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0001</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0001-4-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0001-4-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 8.70%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0001-4-BS-38.70.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 6</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790835.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790932.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790932.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0001</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0001-5-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0001-5-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 5.34%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0001-5-BS-15.34.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 7</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790836.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790933.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790933.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0002</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0002-0-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0002-0-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 4.39%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0002-0-BS-4.39.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 8</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790837.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790934.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790934.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0002</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0002-1-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0002-1-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 5.31%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0002-1-BS-5.31.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 9</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790838.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790935.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790935.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0002</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0002-2-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0002-2-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 0.07%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0002-2-BS-10.07.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 10</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790839.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790936.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790936.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0002</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0002-3-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0002-3-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 6.20%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0002-3-BS-36.20.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 11</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790841.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790937.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790937.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0002</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0002-4-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0002-4-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 8.72%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0002-4-BS-38.72.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
-          <div class="row">
-            <div class="col-12">
-              <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario 12</strong></h2>
-              <div class="row">
-                  <div class="col-4 text-center">
-                      <h3>Imagen 1 (Ghost 4.5)</h3>
-                      <img src="./kraken/reports/9fce5af52d429a8cd9f8/screenshots/1731790842.png" alt="Imagen 1" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Imagen 2 (Ghost 5.96)</h3>
-                      <img src="./kraken/reports/de8044d39f28baad6de3/screenshots/1731790938.png" alt="Imagen 2" class="img-fluid">
-                  </div>
-                  <div class="col-4 text-center">
-                      <h3>Diferencia porcentual: 0%</h3>
-                      <img src="kraken/comparisons/1731790938.png" alt="Diferencia" class="img-fluid">
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0002</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0002-5-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0002-5-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 7.42%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0002-5-BS-37.42.png" alt="Diferencia" class="img-fluid">
+                </div>
             </div>
           </div>
-          <hr/>
+        </div>
+        <hr/>
         
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0003</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0003-0-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0003-0-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 4.39%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0003-0-BS-4.39.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
           </div>
-        </body>
-      </html>
-    
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0003</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0003-1-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0003-1-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 5.31%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0003-1-BS-5.31.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0003</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0003-2-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0003-2-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 0.12%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0003-2-BS-10.12.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0003</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0003-3-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0003-3-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 6.16%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0003-3-BS-36.16.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0003</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0003-4-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0003-4-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 8.65%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0003-4-BS-38.65.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0003</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0003-5-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0003-5-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 7.96%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0003-5-BS-37.96.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0003</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0003-6-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0003-6-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 8.85%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0003-6-BS-38.85.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0003</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0003-7-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0003-7-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 7.76%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0003-7-BS-7.76.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0004</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0004-0-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0004-0-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 4.60%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0004-0-BS-4.60.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0004</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0004-1-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0004-1-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 5.31%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0004-1-BS-5.31.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0004</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0004-2-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0004-2-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 0.15%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0004-2-BS-10.15.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0004</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0004-3-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0004-3-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 6.16%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0004-3-BS-36.16.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0004</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0004-4-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0004-4-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 8.70%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0004-4-BS-38.70.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0004</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0004-5-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0004-5-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 7.73%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0004-5-BS-37.73.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0004</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0004-6-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0004-6-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 8.38%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0004-6-BS-38.38.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class="row">
+          <div class="col-12">
+            <h2 class="bg-primary text-white text-center p-3 rounded"><strong>Escenario E0004</strong></h2>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h3>Imagen 1 (Ghost 4.5)</h3>
+                    <img src="./kraken/screenshots/ghost-4.5/E0004-7-BS.png" alt="Imagen 1" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Imagen 2 (Ghost 5.96)</h3>
+                    <img src="./kraken/screenshots/ghost-5.96/E0004-7-RC.png" alt="Imagen 2" class="img-fluid">
+                </div>
+                <div class="col-4 text-center">
+                    <h3>Diferencia porcentual: 6.82%</h3>
+                    <img src="./kraken/screenshots/comparisons/E0004-7-BS-36.82.png" alt="Diferencia" class="img-fluid">
+                </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+      </div>
+    </body>
+  </html>
+  

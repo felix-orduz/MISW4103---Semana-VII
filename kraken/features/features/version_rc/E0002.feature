@@ -24,4 +24,3 @@ Scenario: E0002 - Crear un post contenido
   And Cierre el modal de confirmación post
   When Entro al post creado
   Then Valido el contenido del post
-  And Tomo pantallazo "E0002-5-RC.png"

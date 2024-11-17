@@ -134,5 +134,4 @@ function createReport(fs) {
   // Generar el reporte y guardarlo en un archivo
   let report = createReport(fs);
   fs.writeFileSync(`./report_cypress.html`, report);
-  console.log("Reporte generado exitosamente.");
 })();
