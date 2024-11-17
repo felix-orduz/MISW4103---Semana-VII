@@ -29,7 +29,7 @@ describe('Test feature pages', () => {
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         //Then pone contenido
-        let content = " To live is to risk it all.";
+        let content = "To live is to risk it all.";
         PagesPage.addContentToPage(PAGE_TITLE, content);
 
         cy.wait(500)
@@ -42,7 +42,8 @@ describe('Test feature pages', () => {
         cy.screenshot('../../ghost-4.5/E011 - Creando la Page');
 
         // Then verifica que existe una Page creada
-
+        PagesPage.goToPages();
+        PagesPage.getListOfPages().contains(PAGE_TITLE);
 
         // Toma Screenshot
         cy.screenshot('../../ghost-4.5/E011 - Page Creada')

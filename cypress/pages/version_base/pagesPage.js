@@ -97,6 +97,10 @@ export class PagesPage {
         return cy.get('div[data-test-publish-flow="complete"]');
     }
 
+    static getListOfPages() {
+        return cy.get('ol.gh-list');
+    }
+
     static goToPages() {
         cy.fixture('properties.json').then((data) => {
             cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages
