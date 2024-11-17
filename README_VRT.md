@@ -13,7 +13,7 @@
 - Para realizar la comparación de imágenes, es necesario instalar las librerías `ResembleJS` y `PixelMatch`, que permiten implementar esta funcionalidad. La instalación de `ResembleJS` se realiza mediante el comando `npm install resemblejs`, recomendándose usar Node.js en la versión 16 para garantizar la compatibilidad. Por otro lado, `PixelMatch` se instala ejecutando `npm install --save-dev pixelmatch`. En este proyecto, se utilizaron las versiones `^5.0.0` de ResembleJS y `^6.0.0` de PixelMatch.
 
 ### Construcción de reporte para pruebas en Cypress
-- Para comenzar, el script encargado de construir el reporte para las pruebas de Cypress se encuentra en la ruta `.\cypress\vrt`. En esta ubicación hay dos archivos: `vrt_pixelmatch.js`, que genera el reporte, y `vrt.config.js`, que define los parámetros utilizados para la comparación de imágenes.
+- Para empezar, el script encargado de construir el reporte para las pruebas de Cypress se encuentra en la ruta `.\cypress\vrt`. En esta ubicación hay dos archivos: `vrt_pixelmatch.js`, que genera el reporte, y `vrt.config.js`, que define los parámetros utilizados para la comparación de imágenes.
   
 - Para generar el reporte de las pruebas de Cypress, se recomienda seguir los siguientes pasos:
     1. En la ruta `.\cypress\e2e\version_base` se encuentran los escenarios correspondientes a **Ghost 4.5**, mientras que en `.\cypress\e2e\version_rc` están los escenarios de **Ghost 5.96**. Primero, se debe ejecutar un escenario en la versión 4.5 y luego repetir la ejecución del mismo escenario en la versión 5.96. Esto es sencillo, ya que las pruebas están identificadas con un código en el formato `E000XXX.cy.js`.
