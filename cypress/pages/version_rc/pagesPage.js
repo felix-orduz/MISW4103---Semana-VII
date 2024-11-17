@@ -51,7 +51,7 @@ export class PagesPage {
 
     static deletePageByTitle(title) {
         cy.fixture('properties.json').then((data) => { 
-            cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages
+            cy.visit(data.adminBaseURL + "/#/pages"); cy.wait(500);
 
             cy.get('div.posts-list').within(() => {
                 cy.get('h3.gh-content-entry-title')
@@ -59,10 +59,10 @@ export class PagesPage {
                     .should('contain', title)
                     .rightclick({ force: true });
 
-                    cy.wait(100);
-
+                    
             });
-
+                
+            cy.wait(100);
             cy.get('button[data-test-button="delete"]').first().click({ force: true });
         });
     }
