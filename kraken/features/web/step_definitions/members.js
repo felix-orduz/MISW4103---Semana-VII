@@ -23,7 +23,8 @@ const {
   clickDeleteMember,
   clickSaveMember,
   validateMemberInList,
-  confirmDeleteMember
+  confirmDeleteMember,
+  validateUpdatedMemberName
 } = require("../pages/version_rc/member");
 const { clickMembers } = require("../pages/version_rc/principal");
 const { clickMembersBase } = require("../pages/version_base/principal");
@@ -104,6 +105,14 @@ Then("Editar nombre del miembro", async function () {
   const updatedName = faker.person.fullName();
   this.updatedName = updatedName;
   await updateMemberName(this.driver, updatedName);
+});
+
+Then("Valida nombre del miembro actualizado", async function () {
+  await validateUpdatedMemberName(
+    this.driver,
+    this.initialMemberData.email,
+    this.updatedName
+  );
 });
 
 Then("Valida nombre del miembro actualizado Base", async function () {

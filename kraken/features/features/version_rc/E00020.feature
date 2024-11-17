@@ -21,6 +21,7 @@ Scenario: E0020 - Delete Member
   And Abre menú de acciones del miembro
   And Tomo pantallazo "E00020-6-RC.png"
   And Clic en Eliminar Miembro
+  And I wait for 2 seconds
   When Confirma eliminación de Miembro
   And Tomo pantallazo "E00020-7-RC.png"
   Then Verifica Miembro eliminado en la lista
