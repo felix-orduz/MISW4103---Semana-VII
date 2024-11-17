@@ -48,20 +48,20 @@ Then('Tomo pantallazo {string}', async function (nombre) {
   await this.driver.saveScreenshot(`./screenshots/ghost-5.96/${nombre}`);
 });
 
-Then("Clic en la sección de Members", async function () {
-  await clickMembers(this.driver);
-});
+// Then("Clic en la sección de Members", async function () {
+//   await clickMembers(this.driver);
+// });
 
-Then("Clic en el botón de New Member", async function () {
-  await clickNewMember(this.driver);
-});
+// Then("Clic en el botón de New Member", async function () {
+//   await clickNewMember(this.driver);
+// });
 
-Then("Contenido del member", async function () {
-  let name = "Nombre";
-  let email = "dasda1312@gmail121.com";
-  let note = "Nota de prueba";
-  await writeFormMember(this.driver, name, email, note);
-});
+// Then("Contenido del member", async function () {
+//   let name = "Nombre";
+//   let email = "dasda1312@gmail121.com";
+//   let note = "Nota de prueba";
+//   await writeFormMember(this.driver, name, email, note);
+// });
 
 Then("Clic en Save Member", async function () {
   await clickSaveMember(this.driver);
