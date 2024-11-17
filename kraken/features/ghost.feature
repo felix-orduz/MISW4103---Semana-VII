@@ -1,25 +1,25 @@
 Feature: Ghost
 
-@user1 @web
-Scenario: E0001 - Crear un post con titulo
-  Given I navigate to page principal BS
-  And Tomo pantallazo BS "E0001-0-BS.png"
-  And I enter email y password BS
+@user10 @web
+Scenario: E00010 - Crear tag con caracteres especiales.
+  Given I navigate to page principal
+    And Tomo pantallazo "E00010-0-RC.png"
+  And I enter email y password
   And I wait for 1 seconds
-  And Tomo pantallazo BS "E0001-1-BS.png"
-  And I clic to Sign in BS
-  And Clic en la sección de Posts BS
-  And Página de listado de posts BS
-  And I wait for 1 seconds
-  And Tomo pantallazo BS "E0001-2-BS.png"
-  And Clic en el boton New Post BS
-  And Titulo del post BS
-  And Clic en Contenido post BS
-  And I wait for 1 seconds
-  And Tomo pantallazo BS "E0001-3-BS.png"
-  And Clic en el boton Publish Post BS
-  And Tomo pantallazo BS "E0001-4-BS.png"
-  And Clic en el boton publish final BS
-  When Clic para devolverse a los posts BS
-  Then Valida Post publicado en la lista de posts BS
-  And Tomo pantallazo BS "E0001-5-BS.png"
+    And Tomo pantallazo "E00010-1-RC.png"
+  And I clic to Sign in
+  And Clic en la sección de Tags
+  And Página de listado de tags
+    And Tomo pantallazo "E00010-2-RC.png"
+  And Clic en el boton New tag
+    And Tomo pantallazo "E00010-3-RC.png"
+  And Nombre del tag con caracteres especiales "$%&$%&$%"
+    And Tomo pantallazo "E00010-4-RC.png"
+  And Clic en Descripción del tag
+  And Descripción del tag "dsfghjklhjfgchgjkjlñl34567890345678"
+    And Tomo pantallazo "E00010-5-RC.png"
+  And Clic en el boton guardar
+    And Tomo pantallazo "E00010-6-RC.png"
+  Then Clic en la sección de Tags
+    And Tomo pantallazo "E00010-7-RC.png"
+  When Valida Tag publicado en la lista de tags "$%&$%&$%"
