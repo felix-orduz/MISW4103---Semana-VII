@@ -9,10 +9,10 @@ Scenario: E011 - Crear un page
   And Click en la sección de Pages
   And Página de listado de Pages
   And Tomo pantallazo "E00011-1-RC.png"
-  And Click en el boton New Page
+  When Click en el boton New Page
   And Titulo del page
   And Clic en Contenido page
-  When I wait for 1 seconds
+  And I wait for 1 seconds
   And Clic en el boton publish-flow page
   Then Clic en el boton Continue page
   And Clic en el boton Publish Page
