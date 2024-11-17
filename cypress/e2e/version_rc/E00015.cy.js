@@ -22,7 +22,7 @@ describe('Test feature pages', () => {
         cy.screenshot('../../ghost-5.96/E015 - Before Delete');
 
         //When editar página
-        cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
+        PagesPage.getEditFirstPageButton().click(); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         //Then borra la página

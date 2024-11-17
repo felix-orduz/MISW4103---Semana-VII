@@ -121,6 +121,10 @@ export class PagesPage {
         return cy.get('button[data-test-button="revert-to-draft"]').first();
     }
 
+    static getEditFirstPageButton() {
+        return  cy.get(CONTENT.editPageButton).first();
+    }
+
     static goToPages() {
         cy.fixture('properties.json').then((data) => {
             cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages

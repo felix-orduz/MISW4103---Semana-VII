@@ -3,7 +3,7 @@ import {
     PagesPage, 
 } from "../../pages/version_rc/pagesPage";
 
-const PAGE_TITLE = "Page to be Edited"
+const PAGE_TITLE = 'Edited Page'
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -12,7 +12,7 @@ describe('Test feature pages', () => {
 
     beforeEach(()=>{
         PagesPage.doLogIn();
-        PagesPage.createPage(PAGE_TITLE, "Random content");
+        PagesPage.createPage("Page to be Edited", "Random content");
     });
 
     afterEach(() => {
@@ -24,28 +24,29 @@ describe('Test feature pages', () => {
         PagesPage.goToPages();
         cy.screenshot('../../ghost-5.96/E013 - Before Edit Page');
 
-        //When Editar página
+        //When Edita página
         cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         cy.intercept("PUT", "/ghost/api/admin/pages/").as("createPage");
 
-        //Then pone contenido
-        PagesPage.addContentToPage('Edited Page', 'Edited with cypress. by nf.ortiz 😊')
-        cy.wait(1000)
+        //And pone contenido
+        PagesPage.addContentToPage(PAGE_TITLE, 'Edited with cypress. by nf.ortiz 😊')
+        cy.wait(500)
 
-        //Then update page
+        //And update page
         cy.get(CONTENT.updatePageButton).first().click(); // click en update
 
         cy.wait(500)
         cy.screenshot('../../ghost-5.96/E013 - Edited Content');
 
         PagesPage.getUpdatePageNotification().screenshot("../../ghost-5.96/E013 - edit page notification");
-
         cy.wait(500)
 
-        //Then se devuelve a la lista de páginas
+        //Then se confirma que la pagina ha sido editada
         PagesPage.goToPages();
+        PagesPage.getListOfPages().contains(PAGE_TITLE);
+
         cy.screenshot('../../ghost-5.96/E013 - After Edit Page');
  
     });
