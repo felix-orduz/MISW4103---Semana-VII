@@ -8,12 +8,11 @@
 
 ### Prerequisitios
 - Node JS (versión superior a la 15.0)
-- Ghost ejecutandose (versión 5.96.0)
-- Ghost ejecutandose (versión 4.5)
-- Git (versión 2.46.0)
 
-### Clone del repositorio
-A través del comando git clone, se debe clonar el repositorio a un directorio local. 
+### Ejecución de scripts para pruebas de regresión visual
+- Para realizar la comparación de imágenes, es necesario instalar las librerías `ResembleJS` y `PixelMatch`, que permiten implementar esta funcionalidad. La instalación de `ResembleJS` se realiza mediante el comando `npm install resemblejs`, recomendándose usar Node.js en la versión 16 para garantizar la compatibilidad. Por otro lado, `PixelMatch` se instala ejecutando `npm install --save-dev pixelmatch`. En este proyecto, se utilizaron las versiones `^5.0.0` de ResembleJS y `^6.0.0` de PixelMatch.
+
+### Construcción de reporte para pruebas en Cypress
 
 ### Recomendaciones para la ejecución de las pruebas:**
 - **Condiciones iniciales para ejecutar pruebas en Ghost:** Las pruebas deben ejecutarse en la versión de Ghost especificada y se enfocan en las funcionalidades principales de la ABP (Posts, Pages, Tags, Members). Para evitar interferencias en los resultados, se recomienda que estas secciones estén vacías y sin contenido en drafts, ya que elementos existentes pueden afectar la ejecución correcta de las pruebas. Aplica para Cypress como a Kraken.
