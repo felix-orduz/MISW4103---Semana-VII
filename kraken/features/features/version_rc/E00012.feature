@@ -3,23 +3,24 @@ Feature: Ghost
 @user2 @web
 Scenario: E012 - Crear una page vacia. sin contenido.
   Given I navigate to page principal
-  When I enter email y password
+  And I enter email y password
   And I wait for 1 seconds
-  Then I clic to Sign in
-  Then Página principal del administrador
-  Then Click en la sección de Pages
-  Then Página de listado de Pages
+  And I clic to Sign in
+  And Click en la sección de Pages
+  And Página de listado de Pages
+  And Tomo pantallazo "E00012-1-RC.png"
   When Click en el boton New Page
-  Then Titulo del page
-  Then Clic en Contenido page
-  Then Contenido del Page
+  And Titulo del page
+  And Clic en Contenido page
+  And Contenido del Page
   And I wait for 1 seconds
-  Then Titulo vacio de la Page
-  Then Clic en Contenido page
-  Then Contenido vacio de la Page
+  And Titulo vacio de la Page
+  And Clic en Contenido page
+  And Contenido vacio de la Page
   And I wait for 1 seconds
   Then Clic en el boton publish-flow page
-  Then Clic en el boton Continue page
-  Then Clic en el boton Publish Page
-  Then Cierre el modal de confirmación page
+  And Clic en el boton Continue page
+  And Clic en el boton Publish Page
+  And Cierre el modal de confirmación page
   And I wait for 1 seconds
+  And Tomo pantallazo "E00012-2-RC.png"

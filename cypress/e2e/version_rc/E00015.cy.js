@@ -1,8 +1,9 @@
-import {    
-    CONTENT, 
-    doLogIn
-} from "../../utils/pages";
-const BASE_URL = "http://localhost:2368";
+import {   
+    PagesPage, 
+    CONTENT
+} from "../../pages/version_rc/pagesPage";
+
+const PAGE_TITLE = "Page to be deleted"
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -10,31 +11,33 @@ describe('Test feature pages', () => {
     });
 
     beforeEach(()=>{
-        doLogIn();
+        PagesPage.doLogIn();
+        PagesPage.createPage(PAGE_TITLE, "Random content");
     });
 
    
     it("Escenario: Delete page", () => {
         //Given usuario logueado
-        cy.visit(BASE_URL + '/ghost/#/pages/')
-        cy.screenshot('Before Delete');
+        PagesPage.goToPages();
+        cy.screenshot('../../ghost-5.96/E015 - Before Delete');
 
         //When editar página
-        cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
+        PagesPage.getEditFirstPageButton().click(); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         //Then borra la página
-        cy.get('button.settings-menu-toggle').first().click(); // click en menu lateral
-        cy.get('button[data-test-button="delete-post"]').first().click(); // click on delete button
+        PagesPage.getLateralMenuInPage().click(); // click en menu lateral
+        PagesPage.getDeletePageButton().click(); // click on delete button
 
         cy.wait(500)
 
-        //Then confirma el borrado
-        cy.get(CONTENT.newPageModal).within(() => {
-            cy.get('button[data-test-button="delete-post-confirm"]').contains('Delete').click() // click en delete
+        //And confirma el borrado
+        PagesPage.getConfirmDeleteModal().within(() => {
+            PagesPage.clickOnDeletePage(); // click en delete
         })
 
         cy.wait(500)
-        cy.screenshot('DELETE PAGE')
+        // Then confimar que no exista una pagina.
+        cy.screenshot('../../ghost-5.96/E015 - Page deleted')
     });
 });

@@ -1,9 +1,9 @@
 import {    
     CONTENT, 
-    doLogIn,
-    addContentToPage
-} from "../../utils/pages";
-const BASE_URL = "http://localhost:2368";
+    PagesPage, 
+} from "../../pages/version_rc/pagesPage";
+
+const PAGE_TITLE = 'Edited Page'
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -11,33 +11,43 @@ describe('Test feature pages', () => {
     });
 
     beforeEach(()=>{
-        doLogIn();
+        PagesPage.doLogIn();
+        PagesPage.createPage("Page to be Edited", "Random content");
     });
 
-    it("Escenario 013: Edit page", () => {
-        //Given usuario logueado
-        cy.visit(BASE_URL + '/ghost/#/pages/')
-        cy.screenshot('Before Edit');
+    afterEach(() => {
+        PagesPage.deletePageByTitle(PAGE_TITLE);
+    });
 
-        //When Editar página
+    it("Escenario 013: Edit Page", () => {
+        //Given usuario logueado con paginas creadas
+        PagesPage.goToPages();
+        cy.screenshot('../../ghost-5.96/E013 - Before Edit Page');
+
+        //When Edita página
         cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
-        cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
+        cy.intercept("PUT", "/ghost/api/admin/pages/").as("createPage");
 
-        //Then pone contenido
-        addContentToPage('Edited Page', 'Edited with cypress. by nf.ortiz 😊')
-        cy.wait(1000)
+        //And pone contenido
+        PagesPage.addContentToPage(PAGE_TITLE, 'Edited with cypress. by nf.ortiz 😊')
+        cy.wait(500)
 
-        //Then update page
+        //And update page
         cy.get(CONTENT.updatePageButton).first().click(); // click en update
 
         cy.wait(500)
-        cy.get('aside.gh-notifications').screenshot("edit notification");
+        cy.screenshot('../../ghost-5.96/E013 - Edited Content');
 
+        PagesPage.getUpdatePageNotification().screenshot("../../ghost-5.96/E013 - edit page notification");
         cy.wait(500)
 
-        //Then se devuelve a la lista de páginas
-        cy.get(CONTENT.goToPagesButton).first().click();    
+        //Then se confirma que la pagina ha sido editada
+        PagesPage.goToPages();
+        PagesPage.getListOfPages().contains(PAGE_TITLE);
+
+        cy.screenshot('../../ghost-5.96/E013 - After Edit Page');
+ 
     });
 });
