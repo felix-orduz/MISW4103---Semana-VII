@@ -21,6 +21,7 @@ describe("Escenarios E2E para Ghost", function () {
         LogIn.logInButton();
         cy.screenshot('../../ghost-5.96/E0008-0-RC');
         cy.wait(1000);
+        cy.viewport(1536, 960);
     });
   });
 
