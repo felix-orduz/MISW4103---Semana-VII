@@ -32,7 +32,8 @@ describe('Test feature pages', () => {
 
         //And pone contenido
         PagesPage.addContentToPage(PAGE_TITLE, 'Edited with cypress. by nf.ortiz 😊')
-        cy.wait(500)
+        // cy.wait(500)
+        cy.wait("@createPage")
 
         //And update page
         cy.get(CONTENT.updatePageButton).first().click(); // click en update

@@ -134,6 +134,10 @@ export class PagesPage {
     return cy.get("div.gh-alert-content");
   }
 
+  static getListOfPages() {
+    return cy.get('ol.gh-list');
+}
+
   static goToPages() {
     cy.fixture("properties.json").then((data) => {
       cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages
