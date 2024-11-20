@@ -80,6 +80,10 @@ export class PagesPage {
     cy.get(CONTENT.pageContentInput).first().type(content);
   }
 
+  static clearPageTitle() {
+    cy.get(CONTENT.pageTitleInput).first().clear();
+  }
+
   static clickConfirmCreatePage() {
     cy.get(CONTENT.newPageModal).within(() => {
       cy.get(CONTENT.continueCreationPageButton).first().click(); // click en continuar

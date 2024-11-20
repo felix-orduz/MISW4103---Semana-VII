@@ -28,12 +28,10 @@ describe('Test feature pages', () => {
         cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
-        cy.intercept("PUT", "/ghost/api/admin/pages/").as("createPage");
-
         //And pone contenido
+        PagesPage.clearPageTitle();
         PagesPage.addContentToPage(PAGE_TITLE, 'Edited with cypress. by nf.ortiz 😊')
-        // cy.wait(500)
-        cy.wait("@createPage")
+        cy.wait(500)
 
         //And update page
         cy.get(CONTENT.updatePageButton).first().click(); // click en update
