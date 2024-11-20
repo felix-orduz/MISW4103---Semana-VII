@@ -64,6 +64,8 @@ export class PagesPage {
       cy.get('button[data-test-button="delete"]')
         .first()
         .click({ force: true });
+
+      cy.get('button[data-test-button="confirm"]').first().click();
     });
   }
 
