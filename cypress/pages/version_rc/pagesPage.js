@@ -142,6 +142,17 @@ export class PagesPage {
     return cy.get('ol.gh-list');
 }
 
+static getListPages() {
+    return cy.get("div.posts-list");
+  }
+  
+  static doRightClickPageItem(pageTitle) {
+    return cy
+    .contains(pageTitle)
+    .first()
+    .rightclick({ force: true });
+  }
+
   static goToPages() {
     cy.fixture("properties.json").then((data) => {
       cy.visit(data.adminBaseURL + "/#/pages"); // Go to Pages

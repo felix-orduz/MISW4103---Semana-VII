@@ -12,7 +12,7 @@ describe("Feature Pages", () => {
     PagesPage.doLogIn();
   });
 
-  it("Escenario 024: Duplicar una Pagina.", () => {
+  it("Escenario 024: Duplicar una Pagina con contenido aleatorio generado online.", () => {
     //Given usuario logueado
     PagesPage.goToPages();
 
