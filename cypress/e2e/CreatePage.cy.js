@@ -92,7 +92,6 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-
     it("Escenario 34: Crear Page vacia. [BUG]", () => {
         //Given usuario logueado
         PagesPage.goToPages();
@@ -156,9 +155,9 @@ describe('Feature: El usuario admin puede crear Pages', () => {
             "Validation failed: Title cannot be longer than 255 characters."
         );
     
-      });
+    });
 
-      it("Escenario 36: Crear Page con contenido html generedo aleatorio online", () => {
+    it("Escenario 36: Crear Page con contenido html generedo aleatorio online", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -218,5 +217,5 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         });
 
         PagesPage.deletePageByTitle(PAGE_TITLE);    
-      });
+    });
 });
