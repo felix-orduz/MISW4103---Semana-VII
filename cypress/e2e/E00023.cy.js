@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { PagesPage, CONTENT } from "../pages/pagesPage";
+import { PagesPage, CONTENT } from "../pages/version_rc/pagesPage";
 
 const PAGE_TITLE = faker.string.alpha(255);
 
