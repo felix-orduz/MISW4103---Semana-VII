@@ -1,0 +1,7 @@
+[
+    {"tituloPost": "Título de prueba 1", "contenidoPost": "contenido para un post 1", "tituloEditado": "Título editado 1", "contenidoEditado": "Contenido de prueba 1 editado"},
+    {"tituloPost": "Título de prueba 2", "contenidoPost": "contenido para un post 2", "tituloEditado": "Título editado 2", "contenidoEditado": "Contenido de prueba 2 editado"},
+    {"tituloPost": "Título de prueba 3", "contenidoPost": "contenido para un post 3", "tituloEditado": "Título editado 3", "contenidoEditado": "Contenido de prueba 3 editado"},
+    {"tituloPost": "Título de prueba 4", "contenidoPost": "contenido para un post 4", "tituloEditado": "Título editado 4", "contenidoEditado": "Contenido de prueba 4 editado"},
+    {"tituloPost": "Título de prueba 5", "contenidoPost": "contenido para un post 5", "tituloEditado": "Título editado 5", "contenidoEditado": "Contenido de prueba 5 editado"}
+]
