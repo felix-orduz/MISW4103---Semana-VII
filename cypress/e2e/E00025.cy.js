@@ -12,7 +12,7 @@ describe("Feature Pages", () => {
     PagesPage.doLogIn();
   });
 
-  it("Escenario 024: Duplicar una Pagina con contenido aleatorio generado online.", () => {
+  it("Escenario 024: Agregar Tag una Pagina con contenido aleatorio generado online.", () => {
     //Given usuario logueado
     // And a Page created
     let title = faker.lorem.sentence(4);

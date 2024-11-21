@@ -143,6 +143,10 @@ export class PagesPage {
 static getListPages() {
     return cy.get("div.posts-list");
   }
+
+  static getPageTitleInConfirmationModal() {
+    return cy.get('h2');
+  }
   
   static doRightClickPageItem(pageTitle) {
     return cy
