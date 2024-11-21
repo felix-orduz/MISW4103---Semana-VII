@@ -52,7 +52,14 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         });
     });
 
-    it("Escenario 32: Crear nueva Page con datos online generados aleatorios.", () => {
+    it("Escenario 32: [TODO]Crear nueva Page con datos online generados pseudo aleatorios.", () => {
+        //Given usuario logueado
+        PagesPage.goToPages();
+
+        // TODO
+    });
+
+    it("Escenario 33: Crear nueva Page con datos online generados aleatorios.", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -86,7 +93,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
     });
 
 
-    it("Escenario 33: Crear Page vacia. [BUG]", () => {
+    it("Escenario 34: Crear Page vacia. [BUG]", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -120,7 +127,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         PagesPage.deletePageByTitle("(Untitled)");
     });
 
-    it("Escenario 34: Crear Page con un titulo mayor a 255 characteres generado on line aleatorio.", () => {
+    it("Escenario 35: Crear Page con un titulo mayor a 255 characteres generado on line aleatorio.", () => {
         //Given usuario logueado
         PagesPage.goToPages();
     
@@ -151,7 +158,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
     
       });
 
-      it("Escenario 35: Crear Page con contenido html generedo aleatorio online", () => {
+      it("Escenario 36: Crear Page con contenido html generedo aleatorio online", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -182,7 +189,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         PagesPage.deletePageByTitle(PAGE_TITLE);
     });
 
-    it("Escenario 36: Crear Page con contenido corrupto html generedo aleatorio online", () => {
+    it("Escenario 37: Crear Page con contenido corrupto html generedo aleatorio online", () => {
         //Given usuario logueado
         PagesPage.goToPages();
     
