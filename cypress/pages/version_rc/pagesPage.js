@@ -54,9 +54,7 @@ export class PagesPage {
       cy.wait(500);
 
       cy.get("div.posts-list").within(() => {
-        cy.get("h3.gh-content-entry-title")
-          .first()
-          .should("contain", title)
+        cy.contains(title)
           .rightclick({ force: true });
       });
 

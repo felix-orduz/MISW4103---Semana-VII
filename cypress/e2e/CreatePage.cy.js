@@ -2,11 +2,11 @@
 import { 
     PagesPage, 
     CONTENT, 
-} from "../../pages/version_rc/pagesPage";
+} from "../pages/version_rc/pagesPage";
 const PAGE_TITLE = "A New Page by Cypress";
 
 
-describe('Test feature pages', () => {
+describe('Feature: El usuario admin puede crear Pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
         return false;
     });
@@ -19,7 +19,7 @@ describe('Test feature pages', () => {
         PagesPage.deletePageByTitle(PAGE_TITLE);
     })
 
-    it("Escenario 011: Create new page", () => {
+    it("Escenario 31: Create new page", () => {
         //Given usuario logueado
         PagesPage.goToPages();
         cy.screenshot('../../ghost-5.96/E00011-0-RC');
@@ -58,7 +58,7 @@ describe('Test feature pages', () => {
     });
 
 
-    it("Escenario 012: Create empty page", () => {
+    it("Escenario 32: Create empty page", () => {
         //Given usuario logueado
         PagesPage.goToPages();
         cy.screenshot('../../ghost-5.96/E00012-0-RC');
