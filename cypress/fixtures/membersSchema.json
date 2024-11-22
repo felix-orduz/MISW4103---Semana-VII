@@ -1,0 +1,14 @@
+[
+  {
+    "name": "name",
+    "type": "Full Name"
+  },
+  {
+    "name": "email",
+    "type": "Email Address"
+  },
+  {
+    "name": "note",
+    "type": "Sentences"
+  }
+]
