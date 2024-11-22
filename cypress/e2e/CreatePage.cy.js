@@ -53,10 +53,37 @@ describe('Feature: El usuario admin puede crear Pages', () => {
     });
 
     it("Escenario 32: [TODO]Crear nueva Page con datos online generados pseudo aleatorios.", () => {
+
         //Given usuario logueado
         PagesPage.goToPages();
 
-        // TODO
+        //When Crear nueva página
+        cy.get(CONTENT.newPageButton).click(); //Click on New Page
+        cy.location("hash").should("contain", "#/editor/page"); // check location
+
+        //Then pone contenido
+        let title = faker1.lorem.sentence();
+        let content = faker1.lorem.paragraph();
+        PagesPage.addContentToPage(title, content);
+        cy.wait(500);
+
+        //Then publica la página
+        cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
+
+        //And confirma creacion de la página 
+        PagesPage.clickConfirmCreatePage();
+        cy.wait(500);
+
+        // Then verifica que existe una Page creada
+        PagesPage.getPublishPageModal().within(() => {
+            PagesPage.getPageTitleInConfirmationModal()
+                .should('contain', title);
+        });
+
+        cy.wait(500);
+        PagesPage.closeModal();
+
+        PagesPage.deletePageByTitle(title);
     });
 
     it("Escenario 33: Crear nueva Page con datos online generados aleatorios.", () => {
