@@ -3,15 +3,12 @@ import mockarooUtil from "../utils/MockarooUtil";
 import { LogIn } from "../pages/logIn";
 import { MembersPage } from "../pages/membersPage";
 import { PrincipalPage } from "../pages/principalPage";
-const membersData = require("../fixtures/membersData.json");
+// const membersData = require("../fixtures/membersData.json");
 import { faker } from "@faker-js/faker";
-var data = require("../fixtures/properties.json");
 const fakerSeed = 1234;
-import Chance from "chance";
-const chance = new Chance();
-
+let membersDataAPriori = [];
 let mockarooData = [];
-
+let mockarooData2 = [];
 Cypress.on("uncaught:exception", (err, runnable) => {
   if (err.message.includes("The play() request was interrupted")) {
     return false;
@@ -20,7 +17,11 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 describe("Escenarios E2E para Ghost", function () {
   beforeEach(() => {
-    cy.fixture("membersSchema.json").then((fields) => {
+    cy.fixture("dataPoolMembers.json").then((data) => {
+      membersDataAPriori = data;
+    });
+
+    cy.fixture("schemaMembers.json").then((fields) => {
       mockarooUtil.fetchMemberData(6, fields).then((data) => {
         mockarooData = data;
       });
@@ -30,15 +31,18 @@ describe("Escenarios E2E para Ghost", function () {
       cy.visit(data.baseURL);
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      // cy.screenshot('../../ghost-5.96/E00016-0-RC');
       cy.wait(3000);
+    });
+
+    mockarooUtil.fetchMemberData(6, [], 'MISW4103-MEMBERS').then((data) => {
+      mockarooData2 = data;
     });
   });
 
   it("E00061 - Crear Member - datos a-priori", function () {
     PrincipalPage.visitMembers(BASE_URL);
 
-    const memberData = membersData[0];
+    const memberData = membersDataAPriori[0];
 
     cy.wait(5000);
     // cy.screenshot('../../ghost-5.96/E00016-1-RC');
@@ -81,16 +85,10 @@ describe("Escenarios E2E para Ghost", function () {
     cy.screenshot("../../ghost-5.96/E00016-8-RC");
   });
 
-  it("E00062 - Crear Member - datos seudo aleatorios con semilla", function () {
+  it("E00062 - Crear Member - datos seudo aleatorios Mookaroo", function () {
     PrincipalPage.visitMembers(BASE_URL);
 
-    faker.seed(fakerSeed);
-
-    const memberData = {
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-      note: faker.lorem.sentence(),
-    };
+    const memberData = mockarooData[0];
 
     cy.wait(5000);
 
@@ -117,12 +115,10 @@ describe("Escenarios E2E para Ghost", function () {
     });
   });
 
-  it("E00063 - Crear Member - datos aleatorios con Mookaroo", function () {
+  it("E00063 - Crear Member - datos aleatorios con Mookaroo with schema", function () {
     PrincipalPage.visitMembers(BASE_URL);
 
-    // faker.seed(fakerSeed);
-
-    const memberData = mockarooData[0];
+    const memberData = mockarooData2[0];
 
     cy.wait(5000);
 
@@ -184,38 +180,5 @@ describe("Escenarios E2E para Ghost", function () {
     });
   });
 
-  it("E00065 - Crear Member - datos aleatorios con Chance", function () {
-    PrincipalPage.visitMembers(BASE_URL);
-    faker.seed(new Date().getTime() / 1000);
 
-    const memberData = {
-      name: chance.name(),
-      email: chance.email(),
-      note: chance.sentence(),
-    };
-
-    cy.wait(5000);
-
-    MembersPage.getScreenTitle().should("include.text", "Members");
-    MembersPage.clickNewMemberButton();
-    cy.wait(2000);
-
-    MembersPage.getScreenTitle()
-      .invoke("text")
-      .then((text) => {
-        const normalizedText = text.trim().replace(/\s+/g, " ");
-        expect(normalizedText).to.include("New member");
-      });
-
-    MembersPage.fillMemberForm(memberData);
-    MembersPage.clickSaveButton();
-    cy.wait(3000);
-
-    MembersPage.goToMembersList();
-
-    MembersPage.getMembersList().then((membersList) => {
-      const emails = membersList.map((member) => member.email);
-      expect(emails).to.include(memberData.email);
-    });
-  });
 });

@@ -1,5 +1,5 @@
 
-async function fetchMemberData(count = 6, fields = []) {
+async function fetchMemberData(count = 6, fields = [], schema = null) {
   const apiKey = Cypress.env("MOCKAROO_API_KEY"); // Reemplaza con tu clave de API de Mockaroo
 
   try {
@@ -13,6 +13,7 @@ async function fetchMemberData(count = 6, fields = []) {
         body: JSON.stringify({
           count: count,
           fields: JSON.stringify(fields),
+          schema: schema,
         }),
       }
     );
