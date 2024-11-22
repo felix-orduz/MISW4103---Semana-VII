@@ -13,6 +13,27 @@ export class FakerGenerador {
     lorem: ["word", "sentence", "paragraph"],
   };
 
+    // Lista de códigos de idiomas ISO 639-1
+  static languageCodes = [
+    "en", // English
+    "es", // Spanish
+    "fr", // French
+    "de", // German
+    "zh", // Chinese
+    "ja", // Japanese
+    "ko", // Korean
+    "ru", // Russian
+    "ar", // Arabic
+    "hi", // Hindi
+    "pt", // Portuguese
+    "it", // Italian
+  ];
+
+  //Metodo para generar un código de idioma aleatorio
+  static getRandomLanguage() {
+    return faker.helpers.arrayElement(languageCodes);
+  }
+
   //Metodo para generar datos aleatorios
   static generateRandomData() {
     //Reseteamos la semilla
