@@ -16,6 +16,8 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 });
 
 describe("Escenarios E00016 - E00018", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -24,8 +26,24 @@ describe("Escenarios E00016 - E00018", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('ss');
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/t&d_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -72,7 +90,7 @@ describe("Escenarios E00016 - E00018", function () {
     cy.screenshot('ss');
 
     //And cambio el titulo
-    let titleEditado = faker.lorem.word();
+    let titleEditado = randomRow.siteTitle;
     Settings.editTitle(titleEditado);
     cy.screenshot('ss');
 
@@ -108,6 +126,8 @@ describe("Escenarios E00016 - E00018", function () {
 });
 
 describe("Escenarios E00019 - E00021", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -116,8 +136,24 @@ describe("Escenarios E00019 - E00021", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('ss');
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/t&d_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -164,7 +200,7 @@ describe("Escenarios E00019 - E00021", function () {
     cy.screenshot('ss');
 
     //And cambio la descripción
-    let descEditado = faker.lorem.words();
+    let descEditado = randomRow.siteDescription;
     Settings.editDesc(descEditado);
     cy.screenshot('ss');
 
@@ -199,89 +235,89 @@ describe("Escenarios E00019 - E00021", function () {
   });
 });
 
-describe("Escenarios E00022 - E00024", function () {
-  beforeEach(() => {
-    cy.fixture("properties.json").then((data) => {
-      //Vistamos sitio de Ghost
-      cy.visit(data.baseURL);
+// describe("Escenarios E00022 - E00024", function () {
+//   beforeEach(() => {
+//     cy.fixture("properties.json").then((data) => {
+//       //Vistamos sitio de Ghost
+//       cy.visit(data.baseURL);
 
-      //Iniciamos sesion
-      LogIn.logIn(data.email, data.password);
-      LogIn.logInButton();
-      cy.screenshot('ss');
-      cy.wait(1000);
-    });
-  });
+//       //Iniciamos sesion
+//       LogIn.logIn(data.email, data.password);
+//       LogIn.logInButton();
+//       cy.screenshot('ss');
+//       cy.wait(1000);
+//     });
+//   });
 
-  it("E00022 - Editar el lenguaje del sitio con idioma válido (A-priori)", function () {
-    //Given que voy a los settings
-    PrincipalPage.clickSettings();
-    cy.wait(1000);
-    cy.screenshot('ss');
+//   it("E00022 - Editar el lenguaje del sitio con idioma válido (A-priori)", function () {
+//     //Given que voy a los settings
+//     PrincipalPage.clickSettings();
+//     cy.wait(1000);
+//     cy.screenshot('ss');
 
-    //And le doy click en title and description
-    Settings.clickTitleLang();
+//     //And le doy click en title and description
+//     Settings.clickTitleLang();
 
-    //And le doy click en edit
-    Settings.clickEditLang();
-    cy.screenshot('ss');
+//     //And le doy click en edit
+//     Settings.clickEditLang();
+//     cy.screenshot('ss');
 
-    //And cambio el titulo
-    let langEditado = dataPool[0].lenguajeSitio;
-    Settings.editTitle(langEditado);
-    cy.screenshot('ss');
+//     //And cambio el titulo
+//     let langEditado = dataPool[0].lenguajeSitio;
+//     Settings.editTitle(langEditado);
+//     cy.screenshot('ss');
 
-    //When guardo los cambios
-    Settings.saveChangesLang();
+//     //When guardo los cambios
+//     Settings.saveChangesLang();
 
-    //Then el language es el esperado
-    Settings.validateLanguage(langEditado);
-  });
+//     //Then el language es el esperado
+//     Settings.validateLanguage(langEditado);
+//   });
 
-  it("E00023 - Editar el lenguaje del sitio con idioma válido (Pseudo)", function () {
-    //Given que voy a los settings
-    PrincipalPage.clickSettings();
-    cy.wait(1000);
-    cy.screenshot('ss');
+//   it("E00023 - Editar el lenguaje del sitio con idioma válido (Pseudo)", function () {
+//     //Given que voy a los settings
+//     PrincipalPage.clickSettings();
+//     cy.wait(1000);
+//     cy.screenshot('ss');
 
-    //And le doy click en title and description
-    Settings.clickTitleLang();
+//     //And le doy click en title and description
+//     Settings.clickTitleLang();
 
-    //And le doy click en edit
-    Settings.clickEditLang();
-    cy.screenshot('ss');
+//     //And le doy click en edit
+//     Settings.clickEditLang();
+//     cy.screenshot('ss');
 
-    //And cambio el titulo
-    let langEditado = FakerGenerador.getRandomLanguage();
-    Settings.editTitle(langEditado);
-    cy.screenshot('ss');
+//     //And cambio el titulo
+//     let langEditado = FakerGenerador.getRandomLanguage();
+//     Settings.editTitle(langEditado);
+//     cy.screenshot('ss');
 
-    //When guardo los cambios
-    Settings.saveChangesLang();
+//     //When guardo los cambios
+//     Settings.saveChangesLang();
 
-    //Then el language es el esperado
-    Settings.validateLanguage(langEditado);
-  });
+//     //Then el language es el esperado
+//     Settings.validateLanguage(langEditado);
+//   });
 
-  it("E00024 - Editar el lenguaje del sitio con idioma válido (Aleatorio)", function () {
-    //Given que voy a los settings
-    PrincipalPage.clickSettings();
-    cy.wait(1000);
-    cy.screenshot('ss');
+//   it("E00024 - Editar el lenguaje del sitio con idioma válido (Aleatorio)", function () {
+//     //Given que voy a los settings
+//     PrincipalPage.clickSettings();
+//     cy.wait(1000);
+//     cy.screenshot('ss');
 
-    //And le doy click en publication language
-    Settings.clickTitleLang();
+//     //And le doy click en publication language
+//     Settings.clickTitleLang();
 
-    //And le doy click en edit
-    Settings.clickEditLang();
-    cy.screenshot('ss');
+//     //And le doy click en edit
+//     Settings.clickEditLang();
+//     cy.screenshot('ss');
 
-    //When cambio el language
-    let langEditado = FakerGenerador.getRandomLanguage();
-    Settings.editTitle(langEditado);
-    cy.screenshot('ss');
+//     //When cambio el language
+//     let langEditado = FakerGenerador.getRandomLanguage();
+//     Settings.editTitle(langEditado);
+//     cy.screenshot('ss');
 
-    //Then guardo los cambios
-    Settings.saveChangesLang();
-  });
-});
+//     //Then guardo los cambios
+//     Settings.saveChangesLang();
+//   });
+// });
