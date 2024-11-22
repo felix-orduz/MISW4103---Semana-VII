@@ -2,22 +2,11 @@ import { faker } from "@faker-js/faker";
 import { LogIn } from "../pages/logIn";
 import { PostPage } from "../pages/postPage";
 import { PrincipalPage } from "../pages/principalPage";
+import { FakerGenerador } from "../fixtures/generateRandom";
 
 //JSONs de información
 let data = require("../fixtures/properties.json");
 let dataPool = require("../fixtures/dataPoolPosts.json");
-
-//Categorias faker
-let categoryMethods = {
-    name: ['fullName', 'firstName', 'lastName', 'jobTitle'],
-    address: ['streetAddress', 'city', 'state', 'country', 'zipCode'],
-    internet: ['email', 'userName', 'url', 'domainName', 'password'],
-    commerce: ['productName', 'price', 'department', 'productDescription'],
-    company: ['companyName', 'catchPhrase', 'industry'],
-    finance: ['account', 'amount', 'currencyCode'],
-    phone: ['phoneNumber'],
-    lorem: ['word', 'sentence', 'paragraph'],
-};
 
 //Manejo de excepciones
 Cypress.on("uncaught:exception", (err, runnable) => {
@@ -132,12 +121,6 @@ describe("Escenarios E0001 - E0003", function () {
   });
 
   it("E0003 - Crear un post con titulo (Aletorio)", function () {
-    //Generamos datos aleatorios con faker
-    faker.seed();
-    let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-    let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-    let randomData = faker[randomCategory][randomMethod]();
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -154,7 +137,7 @@ describe("Escenarios E0001 - E0003", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = randomData;
+    let titulo = FakerGenerador.generateRandomData();
     PostPage.writeTitle(titulo);
     cy.screenshot('ss');
 
@@ -299,12 +282,6 @@ describe("Escenarios E0004 - E0006", function () {
   });
 
   it("E0006 - Crear un post con contenido (Aleatorio)", function () {
-    //Creamos semilla de faker
-    faker.seed();
-    let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-    let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-    let randomData = faker[randomCategory][randomMethod]();
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -321,12 +298,12 @@ describe("Escenarios E0004 - E0006", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = randomData;
+    let titulo = FakerGenerador.generateRandomData();
     PostPage.writeTitle(titulo);
     cy.screenshot('ss');
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph();
+    let contenido = FakerGenerador.generateRandomData();
     PostPage.writeContent(contenido);
     cy.screenshot('ss');
 
@@ -494,12 +471,6 @@ describe("Escenarios E0007 - E0009", function () {
   });
 
   it("E0009 - Editar el titulo de un post previamente creado (Aleatorio)", function () {
-    //Creamos semilla de faker
-    faker.seed();
-    let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-    let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-    let randomData = faker[randomCategory][randomMethod]();
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -516,11 +487,11 @@ describe("Escenarios E0007 - E0009", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = randomData;
+    let titulo = FakerGenerador.generateRandomData();
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph();
+    let contenido = FakerGenerador.generateRandomData();
     PostPage.writeContent(contenido);
     cy.screenshot('ss');
 
@@ -545,7 +516,7 @@ describe("Escenarios E0007 - E0009", function () {
     cy.screenshot('ss');
 
     //And edito el titulo del post
-    let tituloEditado = faker.lorem.word();
+    let tituloEditado = FakerGenerador.generateRandomData();
     PostPage.writeTitle(tituloEditado);
     cy.screenshot('ss');
 
@@ -707,12 +678,6 @@ describe("Escenarios E00010 - E00012", function () {
   });
 
   it("E00012 - Editar el contenido de un post previamente creado (Aleatorio)", function () {
-    //Creamos semilla de faker
-    faker.seed();
-    let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-    let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-    let randomData = faker[randomCategory][randomMethod]();
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -729,11 +694,11 @@ describe("Escenarios E00010 - E00012", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = randomData;
+    let titulo = FakerGenerador.generateRandomData();
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph(); 
+    let contenido = FakerGenerador.generateRandomData(); 
     PostPage.writeContent(contenido);
     cy.screenshot('ss');
 
@@ -758,7 +723,7 @@ describe("Escenarios E00010 - E00012", function () {
     cy.screenshot('ss');
 
     //And edita el contenido del post
-    let contenidoEditado = faker.lorem.paragraph();
+    let contenidoEditado = FakerGenerador.generateRandomData();
     PostPage.writeContent(contenidoEditado);
     cy.screenshot('ss');
 
@@ -896,12 +861,6 @@ describe("Escenarios E00013 - E00015", function () {
     });
 
     it('E00015 - Eliminamos un post previamente creado (Aleatorio)', function () {
-        //Creamos semilla de faker
-        faker.seed();
-        let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-        let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-        let randomData = faker[randomCategory][randomMethod]();
-
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
         cy.screenshot('ss');
@@ -917,11 +876,11 @@ describe("Escenarios E00013 - E00015", function () {
         PostPage.creationPostPage().should('have.value', '');
 
         //And escribe el titulo del post
-        let titulo = randomData;
+        let titulo = FakerGenerador.generateRandomData();
         PostPage.writeTitle(titulo);
 
         //And escribe el contenido
-        let contenido = faker.lorem.paragraph();
+        let contenido = FakerGenerador.generateRandomData();
         PostPage.writeContent(contenido);
         cy.screenshot('ss');
 
