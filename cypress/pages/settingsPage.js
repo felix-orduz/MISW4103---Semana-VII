@@ -71,9 +71,32 @@ export class Settings {
       .should("have.text", langEditado);
   }
 
-  static generateSpecialCara() {
-    let specialChars = ["@", "#", "$", "%", "&", "*", "!"];
-    let randomChar = faker.helpers.arrayElement(specialChars);
-    return randomChar;
+  static clickSocial() {
+    return cy.get("#social-accounts").first().click({ force: true });
+  }
+
+  static clickEditSocial() {
+    cy.get('[data-testid="social-accounts"]')
+      .find("span")
+      .contains("Edit")
+      .click({ force: true });
+  }
+
+  static editSocial(socialEditado) {
+    return cy.get('[placeholder="https://x.com/ghost"]').clear().type(socialEditado);
+  }
+
+  static cancelChangesSocial() {
+    cy.get('[data-testid="social-accounts"]')
+      .find("span")
+      .contains("Cancel")
+      .click({ force: true });
+  }
+
+  static validateSocial(socialEditado) {
+    cy.get('[data-testid="social-accounts"]')
+      .find(".flex.items-center.mt-1")
+      .eq(1)
+      .should("have.text", socialEditado);
   }
 }

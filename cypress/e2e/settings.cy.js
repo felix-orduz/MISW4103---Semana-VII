@@ -6,7 +6,9 @@ import { FakerGenerador } from "../fixtures/generateRandom";
 
 //JSONs de información
 let data = require("../fixtures/properties.json");
-let dataPool = require("../fixtures/dataPoolSettings.json");
+let dataPoolTD = require("../fixtures/dataPoolT&D.json");
+let dataPoolLang = require("../fixtures/dataPoolLang.json");
+let dataPoolSocial = require("../fixtures/dataPoolSocial.json");
 
 //Manejo de excepciones
 Cypress.on("uncaught:exception", (err, runnable) => {
@@ -61,7 +63,7 @@ describe("Escenarios E00016 - E00018", function () {
     cy.screenshot('ss');
 
     //And cambio el titulo
-    let titleEditado = dataPool[0].tituloSitio;
+    let titleEditado = dataPoolTD[0].tituloSitio;
     Settings.editTitle(titleEditado);
     cy.screenshot('ss');
 
@@ -74,9 +76,6 @@ describe("Escenarios E00016 - E00018", function () {
   });
 
   it("E00017 - Editar título del sitio (Pseudo)", function () {
-    //Creamos semilla para faker
-    faker.seed(456);
-
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -171,7 +170,7 @@ describe("Escenarios E00019 - E00021", function () {
     cy.screenshot('ss');
 
     //And cambio la descripción
-    let descEditado = dataPool[1].descripcionSitio;
+    let descEditado = dataPoolTD[1].descripcionSitio;
     Settings.editDesc(descEditado);
     cy.screenshot('ss');
 
@@ -184,9 +183,6 @@ describe("Escenarios E00019 - E00021", function () {
   });
 
   it("E00020 - Editar la descripción del sitio (Pseudo)", function () {
-    //Creamos semilla para faker
-    faker.seed(456);
-
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -235,89 +231,215 @@ describe("Escenarios E00019 - E00021", function () {
   });
 });
 
-// describe("Escenarios E00022 - E00024", function () {
-//   beforeEach(() => {
-//     cy.fixture("properties.json").then((data) => {
-//       //Vistamos sitio de Ghost
-//       cy.visit(data.baseURL);
+describe("Escenarios E00022 - E00024", function () {
+  let randomRow;
 
-//       //Iniciamos sesion
-//       LogIn.logIn(data.email, data.password);
-//       LogIn.logInButton();
-//       cy.screenshot('ss');
-//       cy.wait(1000);
-//     });
-//   });
+  beforeEach(() => {
+    cy.fixture("properties.json").then((data) => {
+      //Vistamos sitio de Ghost
+      cy.visit(data.baseURL);
 
-//   it("E00022 - Editar el lenguaje del sitio con idioma válido (A-priori)", function () {
-//     //Given que voy a los settings
-//     PrincipalPage.clickSettings();
-//     cy.wait(1000);
-//     cy.screenshot('ss');
+      //Iniciamos sesion
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+      cy.screenshot("ss");
+      cy.wait(1000);
 
-//     //And le doy click en title and description
-//     Settings.clickTitleLang();
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
 
-//     //And le doy click en edit
-//     Settings.clickEditLang();
-//     cy.screenshot('ss');
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/lang_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
 
-//     //And cambio el titulo
-//     let langEditado = dataPool[0].lenguajeSitio;
-//     Settings.editTitle(langEditado);
-//     cy.screenshot('ss');
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
+    });
+  });
 
-//     //When guardo los cambios
-//     Settings.saveChangesLang();
+  it("E00022 - Editar el lenguaje del sitio con números (A-priori)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
 
-//     //Then el language es el esperado
-//     Settings.validateLanguage(langEditado);
-//   });
+    //And le doy click en publication language
+    Settings.clickTitleLang();
 
-//   it("E00023 - Editar el lenguaje del sitio con idioma válido (Pseudo)", function () {
-//     //Given que voy a los settings
-//     PrincipalPage.clickSettings();
-//     cy.wait(1000);
-//     cy.screenshot('ss');
+    //And le doy click en edit
+    Settings.clickEditLang();
+    cy.screenshot('ss');
 
-//     //And le doy click en title and description
-//     Settings.clickTitleLang();
+    //And cambio el language
+    let langEditado = dataPoolLang[0].siteLanguage;
+    Settings.editLang(langEditado);
+    cy.screenshot('ss');
 
-//     //And le doy click en edit
-//     Settings.clickEditLang();
-//     cy.screenshot('ss');
+    //When guardo los cambios
+    Settings.saveChangesLang();
 
-//     //And cambio el titulo
-//     let langEditado = FakerGenerador.getRandomLanguage();
-//     Settings.editTitle(langEditado);
-//     cy.screenshot('ss');
+    //Then el language es el esperado
+    Settings.validateLanguage(langEditado);
+  });
 
-//     //When guardo los cambios
-//     Settings.saveChangesLang();
+  it("E00023 - Editar el lenguaje del sitio con números (Pseudo)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
 
-//     //Then el language es el esperado
-//     Settings.validateLanguage(langEditado);
-//   });
+    //And le doy click en publication language
+    Settings.clickTitleLang();
 
-//   it("E00024 - Editar el lenguaje del sitio con idioma válido (Aleatorio)", function () {
-//     //Given que voy a los settings
-//     PrincipalPage.clickSettings();
-//     cy.wait(1000);
-//     cy.screenshot('ss');
+    //And le doy click en edit
+    Settings.clickEditLang();
+    cy.screenshot('ss');
 
-//     //And le doy click en publication language
-//     Settings.clickTitleLang();
+    //And cambio el language
+    let langEditado = randomRow.language;
+    Settings.editLang(langEditado);
+    cy.screenshot('ss');
 
-//     //And le doy click en edit
-//     Settings.clickEditLang();
-//     cy.screenshot('ss');
+    //When guardo los cambios
+    Settings.saveChangesLang();
 
-//     //When cambio el language
-//     let langEditado = FakerGenerador.getRandomLanguage();
-//     Settings.editTitle(langEditado);
-//     cy.screenshot('ss');
+    //Then el language es el esperado
+    Settings.validateLanguage(langEditado);
+  });
 
-//     //Then guardo los cambios
-//     Settings.saveChangesLang();
-//   });
-// });
+  it("E00024 - Editar el lenguaje del sitio con números (Aleatorio)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
+
+    //And le doy click en publication language
+    Settings.clickTitleLang();
+
+    //And le doy click en edit
+    Settings.clickEditLang();
+    cy.screenshot('ss');
+
+    //When cambio el language
+    let langEditado = faker.number.int();
+    Settings.editLang(langEditado);
+    cy.screenshot('ss');
+
+    //Then guardo los cambios
+    Settings.saveChangesLang();
+  });
+});
+
+describe("Escenarios E00025 - E00027", function () {
+  let randomRow;
+
+  beforeEach(() => {
+    cy.fixture("properties.json").then((data) => {
+      //Vistamos sitio de Ghost
+      cy.visit(data.baseURL);
+
+      //Iniciamos sesion
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+      cy.screenshot("ss");
+      cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/social_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
+    });
+  });
+
+  it("E00025 - Editar red social del sitio X(Twitter) número caracteres inválido  (A-priori)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
+
+    //And le doy click en social accounts
+    Settings.clickSocial();
+
+    //And le doy click en edit
+    Settings.clickEditSocial();
+    cy.screenshot('ss');
+
+    //And cambio el titulo
+    let socialEditado = 'https://x.com/ghost' + dataPoolSocial[0].xSocialPage;
+    Settings.editSocial(socialEditado);
+    cy.screenshot('ss');
+
+    //When guardo los cambios
+    Settings.cancelChangesSocial();
+
+    //Then el language es el esperado
+    Settings.validateSocial(socialEditado);
+  });
+
+  it("E00026 - Editar red social del sitio X(Twitter) número caracteres inválido  (Pseudo)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
+
+    //And le doy click en social accounts
+    Settings.clickSocial();
+
+    //And le doy click en edit
+    Settings.clickEditSocial();
+    cy.screenshot('ss');
+
+    //And cambio el titulo
+    let socialEditado = 'https://x.com/' + randomRow.xSocialPage;
+    Settings.editSocial(socialEditado);
+    cy.screenshot('ss');
+
+    //When guardo los cambios
+    Settings.cancelChangesSocial();
+
+    //Then el language es el esperado
+    Settings.validateSocial(socialEditado);
+  });
+
+  it("E00027 - Editar red social del sitio X(Twitter) número caracteres inválido  (Aleatorio)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
+
+    //And le doy click en social accounts
+    Settings.clickSocial();
+
+    //And le doy click en edit
+    Settings.clickEditSocial();
+    cy.screenshot('ss');
+
+    //And cambio el titulo
+    let socialEditado = 'https://x.com/ghost' + faker.string.alpha(20);
+    Settings.editSocial(socialEditado);
+    cy.screenshot('ss');
+
+    //When guardo los cambios
+    Settings.cancelChangesSocial();
+
+    //Then el language es el esperado
+    Settings.validateSocial(socialEditado);
+  });
+});
