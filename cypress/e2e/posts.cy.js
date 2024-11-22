@@ -35,7 +35,7 @@ describe("Escenarios E0001 - E0003", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot('ss');
       cy.wait(1000);
     });
   });
@@ -44,14 +44,14 @@ describe("Escenarios E0001 - E0003", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0001-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0001-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -59,7 +59,7 @@ describe("Escenarios E0001 - E0003", function () {
     //And escribe el titulo del post
     let titulo = dataPool[0].tituloPost;
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0001-3-RC");
+    cy.screenshot('ss');
 
     //And da click en contenido
     PostPage.clickInContent();
@@ -81,7 +81,7 @@ describe("Escenarios E0001 - E0003", function () {
     //Then debería ver el post publicado en la lista de posts
     PostPage.lastPostCreated(titulo, "notClick");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0001-4-RC");
+    cy.screenshot('ss');
   });
 
   it("E0002 - Crear un post con titulo (Pseudo)", function () {
@@ -91,14 +91,14 @@ describe("Escenarios E0001 - E0003", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0002-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0002-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -106,7 +106,7 @@ describe("Escenarios E0001 - E0003", function () {
     //And escribe el titulo del post
     let titulo = faker.lorem.word();
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0002-3-RC");
+    cy.screenshot('ss');
 
     //And da click en contenido
     PostPage.clickInContent();
@@ -128,7 +128,7 @@ describe("Escenarios E0001 - E0003", function () {
     //Then debería ver el post publicado en la lista de posts
     PostPage.lastPostCreated(titulo, "notClick");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0002-4-RC");
+    cy.screenshot('ss');
   });
 
   it("E0003 - Crear un post con titulo (Aletorio)", function () {
@@ -141,14 +141,14 @@ describe("Escenarios E0001 - E0003", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0003-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0003-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -156,7 +156,7 @@ describe("Escenarios E0001 - E0003", function () {
     //And escribe el titulo del post
     let titulo = randomData;
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0003-3-RC");
+    cy.screenshot('ss');
 
     //And da click en contenido
     PostPage.clickInContent();
@@ -186,7 +186,7 @@ describe("Escenarios E0004 - E0006", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot('ss');
       cy.wait(1000);
     });
   });
@@ -195,14 +195,14 @@ describe("Escenarios E0004 - E0006", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0004-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0004-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -210,12 +210,12 @@ describe("Escenarios E0004 - E0006", function () {
     //And escribe el titulo del post
     let titulo = dataPool[1].tituloPost;
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0004-3-RC");
+    cy.screenshot('ss');
 
     //And escribe el contenido
     let contenido = dataPool[1].contenidoPost;
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0004-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -235,12 +235,12 @@ describe("Escenarios E0004 - E0006", function () {
     //When le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0004-5-RC");
+    cy.screenshot('ss');
 
     //Then el contenido del post debería ser el que se escribió
     PostPage.viewContent(contenido);
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0004-6-RC");
+    cy.screenshot('ss');
   });
 
   it("E0005 - Crear un post con contenido (Pseudo)", function () {
@@ -250,14 +250,14 @@ describe("Escenarios E0004 - E0006", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0005-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0005-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -265,12 +265,12 @@ describe("Escenarios E0004 - E0006", function () {
     //And escribe el titulo del post
     let titulo = faker.lorem.word();
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0005-3-RC");
+    cy.screenshot('ss');
 
     //And escribe el contenido
     let contenido = faker.lorem.paragraph();
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0005-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -290,12 +290,12 @@ describe("Escenarios E0004 - E0006", function () {
     //When le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0005-5-RC");
+    cy.screenshot('ss');
 
     //Then el contenido del post debería ser el que se escribió
     PostPage.viewContent(contenido);
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0005-6-RC");
+    cy.screenshot('ss');
   });
 
   it("E0006 - Crear un post con contenido (Aleatorio)", function () {
@@ -308,14 +308,14 @@ describe("Escenarios E0004 - E0006", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0006-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0006-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -323,12 +323,12 @@ describe("Escenarios E0004 - E0006", function () {
     //And escribe el titulo del post
     let titulo = randomData;
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0006-3-RC");
+    cy.screenshot('ss');
 
     //And escribe el contenido
     let contenido = faker.lorem.paragraph();
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0006-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -348,7 +348,7 @@ describe("Escenarios E0004 - E0006", function () {
     //When le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0006-5-RC");
+    cy.screenshot('ss');
   });
 });
 
@@ -361,7 +361,7 @@ describe("Escenarios E0007 - E0009", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot('ss');
       cy.wait(1000);
     });
   });
@@ -370,7 +370,7 @@ describe("Escenarios E0007 - E0009", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0007-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
@@ -404,17 +404,17 @@ describe("Escenarios E0007 - E0009", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0007-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0007-5-RC");
+    cy.screenshot('ss');
 
     //And edito el titulo del post
     let tituloEditado = dataPool[2].tituloEditado;
     PostPage.writeTitle(tituloEditado);
-    cy.screenshot("../../ghost-5.96/E0007-6-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -425,7 +425,7 @@ describe("Escenarios E0007 - E0009", function () {
     //Then debería ver el post publicado en la lista de posts con titulo editado
     PostPage.lastPostCreated(tituloEditado, "notClick");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0007-7-RC");
+    cy.screenshot('ss');
   });
 
   it("E0008 - Editar el titulo de un post previamente creado (Pseudo)", function () {
@@ -435,14 +435,14 @@ describe("Escenarios E0007 - E0009", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0008-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0008-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -454,7 +454,7 @@ describe("Escenarios E0007 - E0009", function () {
     //And escribe el contenido
     let contenido = faker.lorem.paragraph();
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0008-3-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -469,17 +469,17 @@ describe("Escenarios E0007 - E0009", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0008-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0008-5-RC");
+    cy.screenshot('ss');
 
     //And edito el titulo del post
     let tituloEditado = faker.lorem.word(5);
     PostPage.writeTitle(tituloEditado);
-    cy.screenshot("../../ghost-5.96/E0008-6-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -490,7 +490,7 @@ describe("Escenarios E0007 - E0009", function () {
     //Then debería ver el post publicado en la lista de posts con titulo editado
     PostPage.lastPostCreated(tituloEditado, "notClick");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0008-7-RC");
+    cy.screenshot('ss');
   });
 
   it("E0009 - Editar el titulo de un post previamente creado (Aleatorio)", function () {
@@ -503,14 +503,14 @@ describe("Escenarios E0007 - E0009", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0009-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0009-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -522,7 +522,7 @@ describe("Escenarios E0007 - E0009", function () {
     //And escribe el contenido
     let contenido = faker.lorem.paragraph();
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0009-3-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -537,17 +537,17 @@ describe("Escenarios E0007 - E0009", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0009-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0009-5-RC");
+    cy.screenshot('ss');
 
     //And edito el titulo del post
     let tituloEditado = faker.lorem.word();
     PostPage.writeTitle(tituloEditado);
-    cy.screenshot("../../ghost-5.96/E0009-6-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -566,7 +566,7 @@ describe("Escenarios E00010 - E00012", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot('ss');
       cy.wait(1000);
     });
   });
@@ -575,14 +575,14 @@ describe("Escenarios E00010 - E00012", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00010-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E00010-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -594,7 +594,7 @@ describe("Escenarios E00010 - E00012", function () {
     //And escribe el contenido
     let contenido = dataPool[3].contenidoPost; 
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E00010-3-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -609,17 +609,17 @@ describe("Escenarios E00010 - E00012", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00010-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0004-5-RC");
+    cy.screenshot('ss');
 
     //And edita el contenido del post
     let contenidoEditado = dataPool[3].contenidoEditado;
     PostPage.writeContent(contenidoEditado);
-    cy.screenshot("../../ghost-5.96/E00010-6-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -634,7 +634,7 @@ describe("Escenarios E00010 - E00012", function () {
     //Then el contenido del post debería ser el editado
     PostPage.viewContent(contenidoEditado);
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00010-7-RC");
+    cy.screenshot('ss');
   });
 
   it("E00011 - Editar el contenido de un post previamente creado (Pseudo)", function () {
@@ -644,14 +644,14 @@ describe("Escenarios E00010 - E00012", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00011-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E00011-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -663,7 +663,7 @@ describe("Escenarios E00010 - E00012", function () {
     //And escribe el contenido
     let contenido = faker.lorem.paragraph(); 
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E00011-3-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -678,17 +678,17 @@ describe("Escenarios E00010 - E00012", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00011-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00011-5-RC");
+    cy.screenshot('ss');
 
     //And edita el contenido del post
     let contenidoEditado = faker.lorem.paragraph(5);
     PostPage.writeContent(contenidoEditado);
-    cy.screenshot("../../ghost-5.96/E00011-6-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -703,7 +703,7 @@ describe("Escenarios E00010 - E00012", function () {
     //Then el contenido del post debería ser el editado
     PostPage.viewContent(contenidoEditado);
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00011-7-RC");
+    cy.screenshot('ss');
   });
 
   it("E00012 - Editar el contenido de un post previamente creado (Aleatorio)", function () {
@@ -716,14 +716,14 @@ describe("Escenarios E00010 - E00012", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00012-1-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E00012-2-RC");
+    cy.screenshot('ss');
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -735,7 +735,7 @@ describe("Escenarios E00010 - E00012", function () {
     //And escribe el contenido
     let contenido = faker.lorem.paragraph(); 
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E00012-3-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -750,17 +750,17 @@ describe("Escenarios E00010 - E00012", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00012-4-RC");
+    cy.screenshot('ss');
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00012-5-RC");
+    cy.screenshot('ss');
 
     //And edita el contenido del post
     let contenidoEditado = faker.lorem.paragraph();
     PostPage.writeContent(contenidoEditado);
-    cy.screenshot("../../ghost-5.96/E00012-6-RC");
+    cy.screenshot('ss');
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -783,7 +783,7 @@ describe("Escenarios E00013 - E00015", function () {
         //Iniciamos sesion
         LogIn.logIn(data.email, data.password);
         LogIn.logInButton();
-        cy.screenshot("../../ghost-5.96/E0000-0-RC");
+        cy.screenshot('ss');
         cy.wait(1000);
       });
     });
@@ -791,14 +791,14 @@ describe("Escenarios E00013 - E00015", function () {
     it('E00013 - Eliminamos un post previamente creado (A-priori)', function () {
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
-        cy.screenshot('../../ghost-5.96/E00013-1-RC');
+        cy.screenshot('ss');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
-        cy.screenshot('../../ghost-5.96/E00013-2-RC');
+        cy.screenshot('ss');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
@@ -810,7 +810,7 @@ describe("Escenarios E00013 - E00015", function () {
         //And escribe el contenido
         let contenido = dataPool[4].contenidoPost;
         PostPage.writeContent(contenido);
-        cy.screenshot('../../ghost-5.96/E00013-3-RC');
+        cy.screenshot('ss');
 
         //And le de click en el boton de Publish
         PostPage.publishPostButton();
@@ -825,11 +825,11 @@ describe("Escenarios E00013 - E00015", function () {
         //And cierre el modal de confirmación de publicación
         PostPage.closePublishModal();
         cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00013-4-RC');
+        cy.screenshot('ss');
 
         //And le de click derecho en el post creado
         PostPage.lastPostCreated(titulo, 'rightClick');
-        cy.screenshot('../../ghost-5.96/E00013-5-RC');
+        cy.screenshot('ss');
 
         //When le da click en el boton de delete
         PostPage.deletePost();
@@ -837,7 +837,7 @@ describe("Escenarios E00013 - E00015", function () {
         //Then el post es eliminado
         PostPage.deletePostModal();
         cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00013-6-RC');
+        cy.screenshot('ss');
     });
 
     it('E00014 - Eliminamos un post previamente creado (Pseudo)', function () {
@@ -846,14 +846,14 @@ describe("Escenarios E00013 - E00015", function () {
 
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
-        cy.screenshot('../../ghost-5.96/E00014-1-RC');
+        cy.screenshot('ss');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
-        cy.screenshot('../../ghost-5.96/E00014-2-RC');
+        cy.screenshot('ss');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
@@ -865,7 +865,7 @@ describe("Escenarios E00013 - E00015", function () {
         //And escribe el contenido
         let contenido = faker.lorem.paragraph();
         PostPage.writeContent(contenido);
-        cy.screenshot('../../ghost-5.96/E00014-3-RC');
+        cy.screenshot('ss');
 
         //And le de click en el boton de Publish
         PostPage.publishPostButton();
@@ -880,11 +880,11 @@ describe("Escenarios E00013 - E00015", function () {
         //And cierre el modal de confirmación de publicación
         PostPage.closePublishModal();
         cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00014-4-RC');
+        cy.screenshot('ss');
 
         //And le de click derecho en el post creado
         PostPage.lastPostCreated(titulo, 'rightClick');
-        cy.screenshot('../../ghost-5.96/E00014-5-RC');
+        cy.screenshot('ss');
 
         //When le da click en el boton de delete
         PostPage.deletePost();
@@ -892,7 +892,7 @@ describe("Escenarios E00013 - E00015", function () {
         //Then el post es eliminado
         PostPage.deletePostModal();
         cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00014-6-RC');
+        cy.screenshot('ss');
     });
 
     it('E00015 - Eliminamos un post previamente creado (Aleatorio)', function () {
@@ -904,14 +904,14 @@ describe("Escenarios E00013 - E00015", function () {
 
         //Given que voy a la sección de posts
         PrincipalPage.clickPosts();
-        cy.screenshot('../../ghost-5.96/E00015-1-RC');
+        cy.screenshot('ss');
 
         //And el administrador ve la página de listado de posts
         PostPage.getTitleSection().should('include.text', 'Posts');
 
         //And le da click en el boton New Post
         PostPage.clickNewPost();
-        cy.screenshot('../../ghost-5.96/E00015-2-RC');
+        cy.screenshot('ss');
 
         //And el administrador ve la página de creación de post
         PostPage.creationPostPage().should('have.value', '');
@@ -923,7 +923,7 @@ describe("Escenarios E00013 - E00015", function () {
         //And escribe el contenido
         let contenido = faker.lorem.paragraph();
         PostPage.writeContent(contenido);
-        cy.screenshot('../../ghost-5.96/E00015-3-RC');
+        cy.screenshot('ss');
 
         //And le de click en el boton de Publish
         PostPage.publishPostButton();
@@ -938,11 +938,11 @@ describe("Escenarios E00013 - E00015", function () {
         //And cierre el modal de confirmación de publicación
         PostPage.closePublishModal();
         cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00015-4-RC');
+        cy.screenshot('ss');
 
         //And le de click derecho en el post creado
         PostPage.lastPostCreated(titulo, 'rightClick');
-        cy.screenshot('../../ghost-5.96/E00015-5-RC');
+        cy.screenshot('ss');
 
         //When le da click en el boton de delete
         PostPage.deletePost();

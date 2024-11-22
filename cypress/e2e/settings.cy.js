@@ -35,7 +35,7 @@ describe("Escenarios E00016 - E00018", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot('ss');
       cy.wait(1000);
     });
   });
@@ -44,16 +44,19 @@ describe("Escenarios E00016 - E00018", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
+    cy.screenshot('ss');
 
     //And le doy click en title and description
     Settings.clickTitleDescr();
 
     //And le doy click en edit
     Settings.clickEditTitle();
+    cy.screenshot('ss');
 
     //When cambio el titulo
     let titleEditado = dataPool[0].tituloSitio;
     Settings.editTitle(titleEditado);
+    cy.screenshot('ss');
 
     //Then guardo los cambios
     Settings.saveChangesTitle();
@@ -66,16 +69,19 @@ describe("Escenarios E00016 - E00018", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
+    cy.screenshot('ss');
 
     //And le doy click en title and description
     Settings.clickTitleDescr();
 
     //And le doy click en edit
     Settings.clickEditTitle();
+    cy.screenshot('ss');
 
     //When cambio el titulo
     let titleEditado = faker.lorem.word();
     Settings.editTitle(titleEditado);
+    cy.screenshot('ss');
 
     //Then guardo los cambios
     Settings.saveChangesTitle();
@@ -91,16 +97,19 @@ describe("Escenarios E00016 - E00018", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
+    cy.screenshot('ss');
 
     //And le doy click en title and description
     Settings.clickTitleDescr();
 
     //And le doy click en edit
     Settings.clickEditTitle();
+    cy.screenshot('ss');
 
     //When cambio el titulo
     let titleEditado = randomData;
     Settings.editTitle(titleEditado);
+    cy.screenshot('ss');
 
     //Then guardo los cambios
     Settings.saveChangesTitle();
