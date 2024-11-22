@@ -17,6 +17,7 @@
     "resemblejs": "^5.0.0"
   },
   "devDependencies": {
+    "chance": "^1.1.12",
     "pixelmatch": "^6.0.0"
   }
 }
