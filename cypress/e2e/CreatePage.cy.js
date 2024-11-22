@@ -52,8 +52,8 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         });
     });
 
-    it("Escenario 32: [TODO]Crear nueva Page con datos online generados pseudo aleatorios.", () => {
-
+    it("Escenario 32: Crear nueva Page con datos online generados pseudo aleatorios.", () => {
+        faker.seed(Date.now())
         //Given usuario logueado
         PagesPage.goToPages();
 

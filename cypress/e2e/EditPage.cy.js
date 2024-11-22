@@ -82,9 +82,35 @@ describe('Feature: El usuario admin puede Editar Pages', () => {
     });
 
     it("Escenario 40: [TODO]Edita Page con datos online generados pseudo aleatorios.", () => {
-        //Given usuario logueado
-        PagesPage.goToPages();
+        faker.seed(Date.now())
 
-        // TODO
+       //Given usuario logueado con paginas creadas
+       PagesPage.goToPages();
+
+       //When Edita página
+       let title = faker.lorem.sentence();
+       let content = faker.lorem.paragraph();
+       
+       cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
+       cy.location("hash").should("contain", "#/editor/page"); // check location
+
+       //And pone contenido
+       PagesPage.clearPageTitle();
+       PagesPage.addContentToPage(title, content)
+       cy.wait(500)
+
+       //And update page
+       cy.get(CONTENT.updatePageButton).first().click(); // click en update
+       cy.wait(500)
+
+       PagesPage.getUpdatePageNotification();
+       cy.wait(500)
+
+       //Then se confirma que la pagina ha sido editada
+       PagesPage.goToPages();
+       PagesPage.getListPages().contains(title);
+
+
+       PagesPage.deletePageByTitle(title);
     });
 });
