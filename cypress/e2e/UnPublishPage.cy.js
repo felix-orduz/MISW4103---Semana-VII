@@ -1,25 +1,28 @@
+import { faker } from "@faker-js/faker";
+
 import {    
     CONTENT, 
     PagesPage
-} from "../../pages/version_rc/pagesPage";
+} from "../pages/version_rc/pagesPage";
 
 
 const PAGE_TITLE = "Page to be Unpublished"
 
-describe('Test feature pages', () => {
+describe('Feature: Unpublish Page', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
         return false;
     });
 
     beforeEach(()=>{
         PagesPage.doLogIn();
-        PagesPage.createPage(PAGE_TITLE, "Random content");
     });
 
-    it("Escenario 014: Unpublish page", () => {
+    it("Escenario 41: Unpublish page creada con contenido aleatorio", () => {
         //Given usuario logueado
-        PagesPage.goToPages();        
-        cy.screenshot('../../ghost-5.96/E00014-0-RC');
+        PagesPage.goToPages();  
+        let title = faker.lorem.sentence();
+        let content = faker.lorem.paragraph();
+        PagesPage.createPage(title, content);      
 
         //When editar página
         PagesPage.getEditFirstPageButton().click(); //Click on Edit first page
@@ -44,7 +47,6 @@ describe('Test feature pages', () => {
         // Then Verifica que el estado sea Draft
         PagesPage.getPageStatus().contains('Draft');
 
-        cy.screenshot('../../ghost-5.96/E00014-1-RC');
     });
    
 });

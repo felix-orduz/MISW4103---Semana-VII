@@ -1,25 +1,28 @@
+import { faker } from "@faker-js/faker";
+
 import {   
     PagesPage, 
-    CONTENT
 } from "../../pages/version_rc/pagesPage";
 
 const PAGE_TITLE = "Page to be deleted"
 
-describe('Test feature pages', () => {
+describe('Feature: Eliminar Page', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
         return false;
     });
 
     beforeEach(()=>{
         PagesPage.doLogIn();
-        PagesPage.createPage(PAGE_TITLE, "Random content");
     });
 
    
-    it("Escenario: Delete page", () => {
-        //Given usuario logueado
+    it("Escenario 041: Delete Page con data generada aleatoria", () => {
+        //Given usuario logueado y pagina
+        let title = faker.lorem.sentence();
+        let content = faker.lorem.paragraph();
+        PagesPage.createPage(title, content);
+
         PagesPage.goToPages();
-        cy.screenshot('../../ghost-5.96/E00015-0-RC');
 
         //When editar página
         PagesPage.getEditFirstPageButton().click(); //Click on Edit first page
@@ -38,6 +41,6 @@ describe('Test feature pages', () => {
 
         cy.wait(500)
         // Then confimar que no exista una pagina.
-        cy.screenshot('../../ghost-5.96/E00015-1-RC');
+        
     });
 });

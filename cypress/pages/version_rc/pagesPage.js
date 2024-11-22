@@ -148,6 +148,26 @@ static getListPages() {
     return cy.get('h2');
   }
   
+  static getModal() {
+    return cy.get("div.modal-content");
+  }
+
+  static getSearchTagInput() {
+    return cy.get('input[type="search"]')
+  }
+
+  static getButtonOnRigthClickMenu(role) {
+    return cy.get('button[data-test-button="'+role+'"')
+  }
+
+  static buttonAddTagToPage() {
+    return cy.get('button[data-test-button="confirm"]')
+  }
+  
+  static getListOfTagsAvailableForPage() {
+    return cy.get('ul[role="listbox"]')
+  }
+
   static doRightClickPageItem(pageTitle) {
     return cy
     .contains(pageTitle)

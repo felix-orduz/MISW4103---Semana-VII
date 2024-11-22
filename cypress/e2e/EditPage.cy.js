@@ -38,19 +38,19 @@ describe('Feature: El usuario admin puede Editar Pages', () => {
             cy.get(CONTENT.updatePageButton).first().click(); // click en update
             cy.wait(500)
 
-            PagesPage.getUpdatePageNotification().screenshot("../../ghost-5.96/E013 - edit page notification");
+            PagesPage.getUpdatePageNotification();
             cy.wait(500)
 
             //Then se confirma que la pagina ha sido editada
             PagesPage.goToPages();
-            PagesPage.getListOfPages().contains(title);
+            PagesPage.getListPages().contains(title);
 
 
             PagesPage.deletePageByTitle(title);
         });
     });
 
-    it("Escenario 38: Editar Page con datos generados aleatorimente con FakeJS", () => {
+    it("Escenario 39: Editar Page con datos generados aleatorimente con FakeJS", () => {
         //Given usuario logueado con paginas creadas
         PagesPage.goToPages();
 
@@ -75,13 +75,13 @@ describe('Feature: El usuario admin puede Editar Pages', () => {
 
         //Then se confirma que la pagina ha sido editada
         PagesPage.goToPages();
-        PagesPage.getListOfPages().contains(title);
+        PagesPage.getListPages().contains(title);
 
 
         PagesPage.deletePageByTitle(title);
     });
 
-    it("Escenario 39: [TODO]Edita Page con datos online generados pseudo aleatorios.", () => {
+    it("Escenario 40: [TODO]Edita Page con datos online generados pseudo aleatorios.", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
