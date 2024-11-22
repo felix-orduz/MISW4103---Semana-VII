@@ -16,6 +16,8 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 });
 
 describe("Escenarios E0001 - E0003", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -24,8 +26,24 @@ describe("Escenarios E0001 - E0003", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('ss');
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -74,9 +92,6 @@ describe("Escenarios E0001 - E0003", function () {
   });
 
   it("E0002 - Crear un post con titulo (Pseudo)", function () {
-    //Creamos semilla de faker
-    faker.seed(123);
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -93,7 +108,7 @@ describe("Escenarios E0001 - E0003", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = faker.lorem.word();
+    let titulo = randomRow.tituloPost;
     PostPage.writeTitle(titulo);
     cy.screenshot('ss');
 
@@ -152,15 +167,17 @@ describe("Escenarios E0001 - E0003", function () {
     //And le da click en el boton Continue, final review
     PostPage.continueButton();
 
-    //And le da click en el boton Publish post, right now
+    //When le da click en el boton Publish post, right now
     PostPage.publishPostButtonFinal();
 
-    //When cierre el modal de confirmación de publicación
+    //Then cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
   });
 });
 
 describe("Escenarios E0004 - E0006", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -169,8 +186,24 @@ describe("Escenarios E0004 - E0006", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('ss');
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -227,9 +260,6 @@ describe("Escenarios E0004 - E0006", function () {
   });
 
   it("E0005 - Crear un post con contenido (Pseudo)", function () {
-    //Creamos semilla de faker
-    faker.seed(123);
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -246,12 +276,12 @@ describe("Escenarios E0004 - E0006", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = faker.lorem.word();
+    let titulo = randomRow.tituloPost;
     PostPage.writeTitle(titulo);
     cy.screenshot('ss');
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph();
+    let contenido = randomRow.contenidoPost;
     PostPage.writeContent(contenido);
     cy.screenshot('ss');
 
@@ -318,11 +348,11 @@ describe("Escenarios E0004 - E0006", function () {
     PostPage.publishPostButtonFinal();
     cy.wait(1000);
 
-    //And cierre el modal de confirmación de publicación
+    //When cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
 
-    //When le de click en el post creado
+    //Then le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
     cy.screenshot('ss');
@@ -330,6 +360,8 @@ describe("Escenarios E0004 - E0006", function () {
 });
 
 describe("Escenarios E0007 - E0009", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -338,8 +370,24 @@ describe("Escenarios E0007 - E0009", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('ss');
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -406,9 +454,6 @@ describe("Escenarios E0007 - E0009", function () {
   });
 
   it("E0008 - Editar el titulo de un post previamente creado (Pseudo)", function () {
-    //Creamos semilla de faker
-    faker.seed(123);
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -425,11 +470,11 @@ describe("Escenarios E0007 - E0009", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = faker.lorem.word();
+    let titulo = randomRow.tituloPost;
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph();
+    let contenido = randomRow.contenidoPost;
     PostPage.writeContent(contenido);
     cy.screenshot('ss');
 
@@ -454,7 +499,7 @@ describe("Escenarios E0007 - E0009", function () {
     cy.screenshot('ss');
 
     //And edito el titulo del post
-    let tituloEditado = faker.lorem.word(5);
+    let tituloEditado = randomRow.tituloEditadoPost;
     PostPage.writeTitle(tituloEditado);
     cy.screenshot('ss');
 
@@ -520,15 +565,17 @@ describe("Escenarios E0007 - E0009", function () {
     PostPage.writeTitle(tituloEditado);
     cy.screenshot('ss');
 
-    //And le de click en el boton de update
+    //When le de click en el boton de update
     PostPage.updatePostButton();
 
-    //When le de click en el boton de devolverse a la lista de posts
+    //Then le de click en el boton de devolverse a la lista de posts
     PostPage.clickBackToPosts();
   });
 });
 
 describe("Escenarios E00010 - E00012", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -537,8 +584,24 @@ describe("Escenarios E00010 - E00012", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot('ss');
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -609,9 +672,6 @@ describe("Escenarios E00010 - E00012", function () {
   });
 
   it("E00011 - Editar el contenido de un post previamente creado (Pseudo)", function () {
-    //Creamos semilla de faker
-    faker.seed(123);
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -628,11 +688,11 @@ describe("Escenarios E00010 - E00012", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = faker.lorem.word();
+    let titulo = randomRow.tituloPost;
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph(); 
+    let contenido = randomRow.contenidoPost;
     PostPage.writeContent(contenido);
     cy.screenshot('ss');
 
@@ -657,7 +717,7 @@ describe("Escenarios E00010 - E00012", function () {
     cy.screenshot('ss');
 
     //And edita el contenido del post
-    let contenidoEditado = faker.lorem.paragraph(5);
+    let contenidoEditado = randomRow.contenidoEditadoPost;
     PostPage.writeContent(contenidoEditado);
     cy.screenshot('ss');
 
@@ -730,28 +790,46 @@ describe("Escenarios E00010 - E00012", function () {
     //And le de click en el boton de update
     PostPage.updatePostButton();
 
-    //And le de click en el boton de devolverse a la lista de posts
+    //When le de click en el boton de devolverse a la lista de posts
     PostPage.clickBackToPosts();
     cy.wait(1000);
 
-    //When le de click en el post editado
+    //Then le de click en el post editado
     PostPage.lastPostCreated(titulo, "click");
   });
 });
 
 describe("Escenarios E00013 - E00015", function () {
-    beforeEach(() => {
-      cy.fixture("properties.json").then((data) => {
-        //Vistamos sitio de Ghost
-        cy.visit(data.baseURL);
-  
-        //Iniciamos sesion
-        LogIn.logIn(data.email, data.password);
-        LogIn.logInButton();
-        cy.screenshot('ss');
-        cy.wait(1000);
+  let randomRow;
+
+  beforeEach(() => {
+    cy.fixture("properties.json").then((data) => {
+      //Vistamos sitio de Ghost
+      cy.visit(data.baseURL);
+
+      //Iniciamos sesion
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+      cy.screenshot("ss");
+      cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
       });
     });
+  });
   
     it('E00013 - Eliminamos un post previamente creado (A-priori)', function () {
         //Given que voy a la sección de posts
@@ -824,11 +902,11 @@ describe("Escenarios E00013 - E00015", function () {
         PostPage.creationPostPage().should('have.value', '');
 
         //And escribe el titulo del post
-        let titulo = faker.lorem.word();
+        let titulo = randomRow.tituloPost;
         PostPage.writeTitle(titulo);
 
         //And escribe el contenido
-        let contenido = faker.lorem.paragraph();
+        let contenido = randomRow.contenidoPost;
         PostPage.writeContent(contenido);
         cy.screenshot('ss');
 
@@ -899,11 +977,11 @@ describe("Escenarios E00013 - E00015", function () {
         cy.wait(1000);
         cy.screenshot('ss');
 
-        //And le de click derecho en el post creado
+        //When le de click derecho en el post creado
         PostPage.lastPostCreated(titulo, 'rightClick');
         cy.screenshot('ss');
 
-        //When le da click en el boton de delete
+        //Then le da click en el boton de delete
         PostPage.deletePost();
     });
   });

@@ -8,18 +8,6 @@ import { FakerGenerador } from "../fixtures/generateRandom";
 let data = require("../fixtures/properties.json");
 let dataPool = require("../fixtures/dataPoolSettings.json");
 
-//Categorias faker
-let categoryMethods = {
-    name: ['fullName', 'firstName', 'lastName', 'jobTitle'],
-    address: ['streetAddress', 'city', 'state', 'country', 'zipCode'],
-    internet: ['email', 'userName', 'url', 'domainName', 'password'],
-    commerce: ['productName', 'price', 'department', 'productDescription'],
-    company: ['companyName', 'catchPhrase', 'industry'],
-    finance: ['account', 'amount', 'currencyCode'],
-    phone: ['phoneNumber'],
-    lorem: ['word', 'sentence', 'paragraph'],
-};
-
 //Manejo de excepciones
 Cypress.on("uncaught:exception", (err, runnable) => {
   if (err.message.includes("The play() request was interrupted")) {
