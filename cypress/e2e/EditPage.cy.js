@@ -24,7 +24,7 @@ describe('Feature: El usuario admin puede Editar Pages', () => {
         //When Edita página
         let title;
         cy.fixture("pages.data.apriori.json").then((data) => {
-            title = data[0].title
+            title = data[1].title
         
             cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
             cy.location("hash").should("contain", "#/editor/page"); // check location

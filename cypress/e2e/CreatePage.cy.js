@@ -27,8 +27,8 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         let content;
         let title;
         cy.fixture("pages.data.apriori.json").then((data) => {
-            content = data[0].content
-            title = data[0].title
+            content = data[2].content
+            title = data[2].title
             PagesPage.addContentToPage(title, content);
             cy.wait(500);
 
