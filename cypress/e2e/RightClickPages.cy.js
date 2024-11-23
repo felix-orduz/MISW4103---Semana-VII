@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { PagesPage, CONTENT } from "../pages/version_rc/pagesPage";
+import { PagesPage, CONTENT } from "../pages/pagesPage";
 
 
 describe("Feature: El usuario puede acceder a funcionalidades al hacer click derecho a la Page", () => {

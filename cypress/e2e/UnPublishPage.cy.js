@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import {    
     CONTENT, 
     PagesPage
-} from "../pages/version_rc/pagesPage";
+} from "../pages/pagesPage";
 
 
 const PAGE_TITLE = "Page to be Unpublished"

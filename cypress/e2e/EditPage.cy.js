@@ -4,7 +4,7 @@ import pseudo from '../utils/pseudo';
 import {    
     CONTENT, 
     PagesPage, 
-} from "../pages/version_rc/pagesPage";
+} from "../pages/pagesPage";
 
 const PAGE_TITLE = 'Edited Page'
 

@@ -5,7 +5,7 @@ import pseudo from '../utils/pseudo'
 import { 
     PagesPage, 
     CONTENT, 
-} from "../pages/version_rc/pagesPage";
+} from "../pages/pagesPage";
 
 describe('Feature: El usuario admin puede crear Pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
