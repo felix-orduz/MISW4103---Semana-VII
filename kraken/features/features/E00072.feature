@@ -1,7 +1,7 @@
 Feature: Ghost - Validación de Email Inválido
 
 @user1 @web
-Scenario: E0017 - Invalid Email Validation
+Scenario: E00072 - Invalid Email Validation A priori
   Given I navigate to page principal
   And Tomo pantallazo "E00017-0-RC.png"
   And I enter email y password

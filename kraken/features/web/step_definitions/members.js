@@ -144,11 +144,33 @@ Then("Contenido de member inicial", async function () {
   );
 });
 
+Then("Contenido de member inicial A Priori {int}", async function (index) {
+  initialMemberData = membersDataAPriori[index];
+
+  this.initialMemberData = initialMemberData;
+
+  await writeFormMemberBase(
+    this.driver,
+    initialMemberData.name,
+    initialMemberData.email,
+    initialMemberData.note
+  );
+});
+
 Then("Editar nombre del miembro", async function () {
   const updatedName = faker.person.fullName();
   this.updatedName = updatedName;
   await updateMemberName(this.driver, updatedName);
 });
+
+Then("Editar nombre del miembro A Priori {int}", async function (index) {
+  initialMemberData = membersDataAPriori[index];
+
+  const updatedName = initialMemberData.name;
+  this.updatedName = updatedName;
+  await updateMemberName(this.driver, updatedName);
+});
+
 
 Then("Valida nombre del miembro actualizado", async function () {
   await validateUpdatedMemberName(

@@ -1,7 +1,7 @@
 Feature: Ghost - Validación de Email Inválido y Longitud de Nota
 
 @user1 @web
-Scenario: E0018 - Validación de Email Inválido y Longitud de Nota
+Scenario: E00073 - Validación de Email Inválido y Longitud de Nota A priori
   Given I navigate to page principal
   And Tomo pantallazo "E00018-0-RC.png"
   And I enter email y password
