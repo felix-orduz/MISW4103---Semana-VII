@@ -16,6 +16,26 @@ export class MembersPage {
     cy.get('textarea[data-test-input="member-note"]').clear().type(note); // Ingresa una nota
   }
 
+  static fillMemberFormInvalidEmail({ name, email, note }) {
+    cy.get('input[data-test-input="member-name"]').clear().type(name);
+    cy.get('input[data-test-input="member-email"]').clear().type(name);
+    cy.get('textarea[data-test-input="member-note"]').clear().type(note); // Ingresa una nota
+  }
+
+  static fillMemberFormInvalidEmailAndNote({ name, email, note }) {
+    cy.get('input[data-test-input="member-name"]').clear().type(name);
+    cy.get('input[data-test-input="member-email"]').clear().type(name);
+    // cy.get('textarea[data-test-input="member-note"]').clear().type(note.repeat(2)); // Ingresa una nota
+    cy.get('textarea[data-test-input="member-note"]').clear().then(() => {
+      const baseText = note;
+      const targetLength = 501;
+      let resultText = baseText.repeat(Math.floor(targetLength / baseText.length));
+      resultText += baseText.slice(0, targetLength - resultText.length);
+
+      cy.get('textarea[data-test-input="member-note"]').type(resultText);
+    });
+  }
+
   // Hace clic en el botón para guardar el miembro nuevo
   static clickSaveButton() {
     return cy.get('button[data-test-button="save"]').click();
@@ -75,6 +95,14 @@ export class MembersPage {
     return cy.contains("p.gh-members-list-email", email)
       .parent()
       .find("h3.gh-members-list-name");
+  }
+
+  static getColorInputEmail(email) {
+    return cy.get('input[data-test-input="member-email"]').invoke('css', 'border-color');
+  }
+
+  static inputSearch(text) {
+    cy.get('input[data-test-input="members-search"]').clear().type(text);
   }
 
 }
