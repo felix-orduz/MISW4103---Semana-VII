@@ -16,7 +16,7 @@ describe('Feature: Eliminar Page', () => {
     });
 
    
-    it("Escenario 041: Delete Page con data generada aleatoria", () => {
+    it("Escenario 042: Delete Page con data generada aleatoria", () => {
         //Given usuario logueado y pagina
         let title = faker.lorem.sentence();
         let content = faker.lorem.paragraph();

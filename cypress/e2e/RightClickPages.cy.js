@@ -156,7 +156,7 @@ describe("Feature: El usuario puede acceder a funcionalidades al hacer click der
             cy.get('svg')
             .should('have.class', 'gh-featured-post')
         });
-});
+  });
 
 
 });
