@@ -89,4 +89,9 @@ export class PostPage {
     static deletePostModal() {
         return cy.get('[data-test-button="confirm"]').first().click({ force: true });
     }
+
+    static clearContent() {
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().clear();
+        cy.get('[data-test-editor-title-input=""]').first().clear();
+    }
 }

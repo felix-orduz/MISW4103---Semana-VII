@@ -17,113 +17,6 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   }
 });
 
-describe("Escenarios E00019 - E00021", function () {
-  let randomRow;
-
-  beforeEach(() => {
-    cy.fixture("properties.json").then((data) => {
-      //Vistamos sitio de Ghost
-      cy.visit(data.baseURL);
-
-      //Iniciamos sesion
-      LogIn.logIn(data.email, data.password);
-      LogIn.logInButton();
-      cy.screenshot("ss");
-      cy.wait(1000);
-
-      //Guardamos la apiKey de posts
-      let apiKey = data.apiKey;
-
-      //Realizamos la solicitud a la API de Mockaroo
-      cy.request({
-        method: "GET",
-        url: `https://my.api.mockaroo.com/t&d_schema.json?key=${apiKey}`,
-      }).then((response) => {
-        // Verificamos que la respuesta sea exitosa
-        expect(response.status).to.eq(200);
-
-        //Seleccionamos data para la prueba
-        randomRow =
-          response.body[Math.floor(Math.random() * response.body.length)];
-      });
-    });
-  });
-
-  it("E00019 - Editar título del sitio (A-priori)", function () {
-    //Given que voy a los settings
-    PrincipalPage.clickSettings();
-    cy.wait(1000);
-    cy.screenshot('ss');
-
-    //And le doy click en title and description
-    Settings.clickTitleDescr();
-
-    //And le doy click en edit
-    Settings.clickEditTitle();
-    cy.screenshot('ss');
-
-    //And cambio el titulo
-    let titleEditado = dataPoolTD[0].tituloSitio;
-    Settings.editTitle(titleEditado);
-    cy.screenshot('ss');
-
-    //When guardo los cambios
-    Settings.saveChangesTitle();
-    cy.wait(1000);
-
-    //Then el titulo es el esperado
-    Settings.validateTitle(titleEditado);
-  });
-
-  it("E00020 - Editar título del sitio (Pseudo)", function () {
-    //Given que voy a los settings
-    PrincipalPage.clickSettings();
-    cy.wait(1000);
-    cy.screenshot('ss');
-
-    //And le doy click en title and description
-    Settings.clickTitleDescr();
-
-    //And le doy click en edit
-    Settings.clickEditTitle();
-    cy.screenshot('ss');
-
-    //And cambio el titulo
-    let titleEditado = randomRow.siteTitle;
-    Settings.editTitle(titleEditado);
-    cy.screenshot('ss');
-
-    //When guardo los cambios
-    Settings.saveChangesTitle();
-    cy.wait(1000);
-
-    //Then el titulo es el esperado
-    Settings.validateTitle(titleEditado);
-  });
-
-  it("E00021 - Editar título del sitio (Aleatorio)", function () {
-    //Given que voy a los settings
-    PrincipalPage.clickSettings();
-    cy.wait(1000);
-    cy.screenshot('ss');
-
-    //And le doy click en title and description
-    Settings.clickTitleDescr();
-
-    //And le doy click en edit
-    Settings.clickEditTitle();
-    cy.screenshot('ss');
-
-    //When cambio el titulo
-    let titleEditado = FakerGenerador.generateRandomData();
-    Settings.editTitle(titleEditado);
-    cy.screenshot('ss');
-
-    //Then guardo los cambios
-    Settings.saveChangesTitle();
-  });
-});
-
 describe("Escenarios E00022 - E00024", function () {
   let randomRow;
 
@@ -156,7 +49,114 @@ describe("Escenarios E00022 - E00024", function () {
     });
   });
 
-  it("E00022 - Editar la descripción del sitio (A-priori)", function () {
+  it("E00022 - Editar título del sitio (A-priori)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
+
+    //And le doy click en title and description
+    Settings.clickTitleDescr();
+
+    //And le doy click en edit
+    Settings.clickEditTitle();
+    cy.screenshot('ss');
+
+    //And cambio el titulo
+    let titleEditado = dataPoolTD[0].tituloSitio;
+    Settings.editTitle(titleEditado);
+    cy.screenshot('ss');
+
+    //When guardo los cambios
+    Settings.saveChangesTitle();
+    cy.wait(1000);
+
+    //Then el titulo es el esperado
+    Settings.validateTitle(titleEditado);
+  });
+
+  it("E00023 - Editar título del sitio (Pseudo)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
+
+    //And le doy click en title and description
+    Settings.clickTitleDescr();
+
+    //And le doy click en edit
+    Settings.clickEditTitle();
+    cy.screenshot('ss');
+
+    //And cambio el titulo
+    let titleEditado = randomRow.siteTitle;
+    Settings.editTitle(titleEditado);
+    cy.screenshot('ss');
+
+    //When guardo los cambios
+    Settings.saveChangesTitle();
+    cy.wait(1000);
+
+    //Then el titulo es el esperado
+    Settings.validateTitle(titleEditado);
+  });
+
+  it("E00024 - Editar título del sitio (Aleatorio)", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
+
+    //And le doy click en title and description
+    Settings.clickTitleDescr();
+
+    //And le doy click en edit
+    Settings.clickEditTitle();
+    cy.screenshot('ss');
+
+    //When cambio el titulo
+    let titleEditado = FakerGenerador.generateRandomData();
+    Settings.editTitle(titleEditado);
+    cy.screenshot('ss');
+
+    //Then guardo los cambios
+    Settings.saveChangesTitle();
+  });
+});
+
+describe("Escenarios E00025 - E00027", function () {
+  let randomRow;
+
+  beforeEach(() => {
+    cy.fixture("properties.json").then((data) => {
+      //Vistamos sitio de Ghost
+      cy.visit(data.baseURL);
+
+      //Iniciamos sesion
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+      cy.screenshot("ss");
+      cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/t&d_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
+    });
+  });
+
+  it("E00025 - Editar la descripción del sitio (A-priori)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -182,7 +182,7 @@ describe("Escenarios E00022 - E00024", function () {
     Settings.validateDesc(descEditado);
   });
 
-  it("E00023 - Editar la descripción del sitio (Pseudo)", function () {
+  it("E00026 - Editar la descripción del sitio (Pseudo)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -208,7 +208,7 @@ describe("Escenarios E00022 - E00024", function () {
     Settings.validateDesc(descEditado);
   });
 
-  it("E00024 - Editar la descripción del sitio (Aleatorio)", function () {
+  it("E00027 - Editar la descripción del sitio (Aleatorio)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -231,7 +231,7 @@ describe("Escenarios E00022 - E00024", function () {
   });
 });
 
-describe("Escenarios E00025 - E00027", function () {
+describe("Escenarios E00028 - E00030", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -263,7 +263,7 @@ describe("Escenarios E00025 - E00027", function () {
     });
   });
 
-  it("E00025 - Editar el lenguaje del sitio con números (A-priori)", function () {
+  it("E00028 - Editar el lenguaje del sitio con números (A-priori)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -288,7 +288,7 @@ describe("Escenarios E00025 - E00027", function () {
     Settings.validateLanguage(langEditado);
   });
 
-  it("E00026 - Editar el lenguaje del sitio con números (Pseudo)", function () {
+  it("E00029 - Editar el lenguaje del sitio con números (Pseudo)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -313,7 +313,7 @@ describe("Escenarios E00025 - E00027", function () {
     Settings.validateLanguage(langEditado);
   });
 
-  it("E00027 - Editar el lenguaje del sitio con números (Aleatorio)", function () {
+  it("E00030 - Editar el lenguaje del sitio con números (Aleatorio)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -336,7 +336,7 @@ describe("Escenarios E00025 - E00027", function () {
   });
 });
 
-describe("Escenarios E00028 - E00030", function () {
+describe("Escenarios E00031 - E00033", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -368,7 +368,7 @@ describe("Escenarios E00028 - E00030", function () {
     });
   });
 
-  it("E00028 - Editar red social del sitio X(Twitter) número caracteres inválido  (A-priori)", function () {
+  it("E00031 - Editar red social del sitio X(Twitter) número caracteres inválido  (A-priori)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -393,7 +393,7 @@ describe("Escenarios E00028 - E00030", function () {
     Settings.validateSocial(socialEditado);
   });
 
-  it("E00029 - Editar red social del sitio X(Twitter) número caracteres inválido  (Pseudo)", function () {
+  it("E00032 - Editar red social del sitio X(Twitter) número caracteres inválido  (Pseudo)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -418,7 +418,7 @@ describe("Escenarios E00028 - E00030", function () {
     Settings.validateSocial(socialEditado);
   });
 
-  it("E00030 - Editar red social del sitio X(Twitter) número caracteres inválido  (Aleatorio)", function () {
+  it("E00033 - Editar red social del sitio X(Twitter) número caracteres inválido  (Aleatorio)", function () {
     //Given que voy a los settings
     PrincipalPage.clickSettings();
     cy.wait(1000);
