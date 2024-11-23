@@ -39,4 +39,12 @@ export class DesingPage {
     static getSaveDesignButton() {
         return cy.contains('Save').get('button.cursor-pointer.bg-black.text-white');
     }
+
+    static getSiteFooter() {
+      return cy.get('footer.gh-footer.gh-outer');
+    }
+
+    static getSubheaderInFooter() {
+      return cy.get('p.gh-footer-signup-subhead.is-body');
+    }
 }
