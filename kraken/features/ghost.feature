@@ -1,32 +1,24 @@
-Feature: Ghost - Eliminar Miembro
+Feature: Ghost
 
 @user1 @web
-Scenario: E00020 - Delete Member
-  Given I navigate to page principal BS
-  And Tomo pantallazo BS "E00020-0-BS.png"
-  And I enter email y password BS
+Scenario: E00016 - Crear Member - Datos A Priori
+  Given I navigate to page principal
+  And Tomo pantallazo "E00016-0-RC.png"
+  And I enter email y password
   And I wait for 1 seconds
-  And Tomo pantallazo BS "E00020-1-BS.png"
-  And I clic to Sign in BS
-  And I wait for 4 seconds
-  And Clic en la sección de Members Base
+  And Tomo pantallazo "E00016-1-RC.png"
+  And I clic to Sign in
+  And Clic en la sección de Members
   And I wait for 3 seconds
-  And Tomo pantallazo BS "E00020-2-BS.png"
-  And Clic en el botón de New Member Base
+  And Tomo pantallazo "E00016-2-RC.png"
+  And Clic en el botón de New Member
   And I wait for 3 seconds
-  And Tomo pantallazo BS "E00020-3-BS.png"
-  And Contenido del member base
-  And Clic en Save Member Base
+  And Tomo pantallazo "E00016-3-RC.png"
+  And Contenido del member base A Priori 0
+  And Clic en Save Member
   And I wait for 3 seconds
-  And Tomo pantallazo BS "E00020-4-BS.png"
-  When clic en List Members Base
+  And Tomo pantallazo "E00016-4-RC.png"
+  When clic en List Members
   And I wait for 1 seconds
-  And Tomo pantallazo BS "E00020-5-BS.png"
-  And Selecciona miembro por email Base
-  And I wait for 3 seconds
-  And Tomo pantallazo BS "E00020-6-BS.png"
-  When Clic en Eliminar Miembro Base
-  And I wait for 3 seconds
-  And Confirma eliminación de Miembro Base
-  And I wait for 3 seconds
-  Then Verifica Miembro eliminado en la lista
+  And Tomo pantallazo "E00016-5-RC.png"
+  Then Valida Member en lista

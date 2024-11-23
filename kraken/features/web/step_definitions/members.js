@@ -1,7 +1,7 @@
 const { faker } = require("@faker-js/faker");
 const fs = require("fs"); // Asegúrate de requerir 'fs' al principio del archivo
 const { Given, When, Then, Before } = require("@cucumber/cucumber");
-
+let membersDataAPriori = []
 //Version base
 const {
   writeFormMemberBase,
@@ -29,6 +29,11 @@ const {
 const { clickMembers } = require("../pages/version_rc/principal");
 const { clickMembersBase } = require("../pages/version_base/principal");
 
+Before(() => {
+  const data = fs.readFileSync('./features/web/dataPoolMembers.json', 'utf8');
+  membersDataAPriori = JSON.parse(data);
+});
+
 Then("Clic en la sección de Members", async function () {
   await clickMembers(this.driver);
 });
@@ -43,6 +48,20 @@ Then("Clic en el botón de New Member", async function () {
 
 Then("Clic en el botón de New Member Base", async function () {
   await clickNewMemberBase(this.driver);
+});
+
+Then("Contenido del member base A Priori {int}", async function (index) {
+  initialMemberData = membersDataAPriori[index];
+
+  this.initialMemberData = initialMemberData;
+
+  const createdEmail = initialMemberData.email;
+  this.createEmail = createdEmail;
+  let name = faker.person.fullName();
+  let email = this.createEmail;
+  let note = faker.lorem.sentence();
+
+  await writeFormMemberBase(this.driver, name, email, note);
 });
 
 Then("Contenido del member base", async function () {
