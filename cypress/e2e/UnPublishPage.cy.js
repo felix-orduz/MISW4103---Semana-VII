@@ -25,7 +25,8 @@ describe('Feature: Unpublish Page', () => {
         PagesPage.createPage(title, content);      
 
         //When editar página
-        PagesPage.getEditFirstPageButton().click(); //Click on Edit first page
+        PagesPage.goToPages();  
+        PagesPage.getEditPageButtonByTitle(title); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
 
@@ -41,7 +42,6 @@ describe('Feature: Unpublish Page', () => {
         cy.get(CONTENT.newPageModal).within(() => {
             PagesPage.getRevertToDraftPageButton().click() // click en continuar
         })
-        
 
         cy.wait(500)
         // Then Verifica que el estado sea Draft

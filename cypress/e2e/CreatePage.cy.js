@@ -1,5 +1,6 @@
 
 import { faker } from "@faker-js/faker";
+import pseudo from '../utils/pseudo'
 
 import { 
     PagesPage, 
@@ -53,7 +54,8 @@ describe('Feature: El usuario admin puede crear Pages', () => {
     });
 
     it("Escenario 32: Crear nueva Page con datos online generados pseudo aleatorios.", () => {
-        faker.seed(Date.now())
+        pseudo.getDataFromMockaroo();
+
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -62,28 +64,30 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         //Then pone contenido
-        let title = faker1.lorem.sentence();
-        let content = faker1.lorem.paragraph();
-        PagesPage.addContentToPage(title, content);
-        cy.wait(500);
+        cy.get('@data').then(response => {
+            let title = response.body[0].page_title;
+            let content = response.body[0].page_content;
+            PagesPage.addContentToPage(title, content);
+            cy.wait(500);
 
-        //Then publica la página
-        cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
+            //Then publica la página
+            cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
 
-        //And confirma creacion de la página 
-        PagesPage.clickConfirmCreatePage();
-        cy.wait(500);
+            //And confirma creacion de la página 
+            PagesPage.clickConfirmCreatePage();
+            cy.wait(500);
 
-        // Then verifica que existe una Page creada
-        PagesPage.getPublishPageModal().within(() => {
-            PagesPage.getPageTitleInConfirmationModal()
-                .should('contain', title);
+            // Then verifica que existe una Page creada
+            PagesPage.getPublishPageModal().within(() => {
+                PagesPage.getPageTitleInConfirmationModal()
+                    .should('contain', title);
+            });
+
+            cy.wait(500);
+            PagesPage.closeModal();
+
+            PagesPage.deletePageByTitle(title);
         });
-
-        cy.wait(500);
-        PagesPage.closeModal();
-
-        PagesPage.deletePageByTitle(title);
     });
 
     it("Escenario 33: Crear nueva Page con datos online generados aleatorios.", () => {

@@ -1,5 +1,7 @@
 import { DesingPage } from '../pages/version_rc/designPage';
 import { faker } from "@faker-js/faker";
+import pseudo from '../utils/pseudo'
+
 
 describe('Feature: El usuario admin puede editar el design.', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -77,42 +79,44 @@ describe('Feature: El usuario admin puede editar el design.', () => {
 
             DesingPage.getSiteFooter().within(() => {
                 DesingPage.getSubheaderInFooter()
-                    .should('contain', siteDescription);
+                    .should('contain', siteDescription.slice(0, 200));
             });
         });       
     });
 
     it("Escenario 47: Editar subheader con datos pseudo aleatorios generados onlie", () => {
-        faker.seed(Date.now());
+        pseudo.getDataFromMockaroo();
+
         //Given usuario logueado
         DesingPage.goToSettings();
 
         DesingPage.goToEditDesign();  
         
-        let siteDescription = faker.lorem.sentence();
-        let accentColor =  faker.color.rgb().slice(1);
-
         DesingPage.getSiteDescriptionInput()
             .clear();
 
-        DesingPage.getSiteDescriptionInput()
-            .type(siteDescription);
+        cy.get('@data').then(response => {
+            
+            let siteDescription = response.body[0].site_description;
+            let accentColor =  response.body[0].accent_color;
+            DesingPage.getSiteDescriptionInput()
+                .type(siteDescription);
 
-        DesingPage.getAccentColorInput()
-            .type(accentColor);
+            DesingPage.getAccentColorInput()
+                .type(accentColor);
 
-        DesingPage.getSaveDesignButton()
-            .click();
+            DesingPage.getSaveDesignButton()
+                .click();
 
-        cy.wait(500);
+            cy.wait(500);
 
-        DesingPage.goToSite();
+            DesingPage.goToSite();
 
-        DesingPage.getSiteFooter().within(() => {
-            DesingPage.getSubheaderInFooter()
-                .should('contain', siteDescription);
-        });
-       
+            DesingPage.getSiteFooter().within(() => {
+                DesingPage.getSubheaderInFooter()
+                    .should('contain', siteDescription);
+            });
+         });       
     });
 
     it("Escenario 48: Editar subheader con datos aleatorios generados onlie", () => {

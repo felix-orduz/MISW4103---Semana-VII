@@ -1,5 +1,6 @@
 function getDataFromMockaroo() {
-    return  cy.request('GET', `https://my.api.mockaroo.com/announce.json?key=`).as('data')
+    const apiKey = Cypress.env("MOCKAROO_API_KEY");
+    return  cy.request('GET', `https://my.api.mockaroo.com/announce.json?key=${apiKey}`).as('data')
 }
 
 export default { getDataFromMockaroo };

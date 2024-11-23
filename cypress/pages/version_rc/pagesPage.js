@@ -132,6 +132,13 @@ export class PagesPage {
     return cy.get(CONTENT.editPageButton).first();
   }
 
+  static getEditPageButtonByTitle(title) {
+    return cy.contains(title).parent().within(() => {
+      cy.get(CONTENT.editPageButton).first().click();
+      
+    })
+  }
+
   static getPageVerificationFailedComponent() {
     return cy.get("div.gh-alert-content");
   }
