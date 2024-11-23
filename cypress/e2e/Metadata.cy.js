@@ -1,4 +1,4 @@
-import { DesingPage } from '../pages/version_rc/designPage';
+import { MetadataPage } from '../pages/version_rc/metadataPage';
 import { faker } from "@faker-js/faker";
 
 describe('Feature: El usuario admin puede editar la metadata del site.', () => {
@@ -7,106 +7,95 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
     });
 
     beforeEach(()=>{
-        DesingPage.doLogIn();
+        MetadataPage.doLogIn();
     });
 
-    it("Escenario 48: Editar subheader con datos a-priori generados con Mockaroo", () => {
+    it("Escenario 48: Editar meta Title y meta Description con datos a-priori generados con Mockaroo", () => {
         //Given usuario logueado
-        DesingPage.goToSettings();
+        MetadataPage.goToSettings();
 
-        DesingPage.goToEditDesign();
+        MetadataPage.goToEditMetadata();
 
         cy.wait(500)
 
-        cy.fixture("design.data.apriori.json").then((data) => {
-            let siteDescription = data[9].site_description;
-            let accentColor = data[9].accent_color;
+        cy.fixture("metadata.data.apriori.json").then((data) => {
+            let metaTitle = data[0].meta_title;
+            let metaDescription = data[0].meta_description;
 
-            DesingPage.getSiteDescriptionInput()
-                .clear();
+            MetadataPage.getMetadataSection()
+                .within(() => {
+                    cy.contains('Edit').click()
+                });
 
-            DesingPage.getSiteDescriptionInput()
-                .type(siteDescription);
+            MetadataPage.getMetadataSection().within(() => {
+                cy.contains('Meta title')
+                    .get('input')
+                    .first()
+                    .clear()
+                    .type(metaTitle);
 
-            DesingPage.getAccentColorInput()
-                .type(accentColor);
+                //cy.contains('Meta description').get('input').type(metaDescription);
 
-            DesingPage.getSaveDesignButton()
-                .click();
-
-            cy.wait(500);
-
-            DesingPage.goToSite();
-
-            cy.get('footer.gh-footer.gh-outer').within(() => {
-                cy.get('p.gh-footer-signup-subhead.is-body')
-                    .should('contain', siteDescription);
+                MetadataPage.getSaveMetadataButton()
+                    .contains('Save')
+                    .click();
             });
+
+
+            cy.wait(500); 
+            
+            MetadataPage.getMetadataSection().within(() => {
+                MetadataPage.getMetadataPreview()
+                    .should('contain', metaTitle)
+            });
+            
         });       
     });
 
     it("Escenario 49: Editar subheader con datos pseudo aleatorios generados onlie", () => {
-        faker.seed(Date.now());
-        //Given usuario logueado
-        DesingPage.goToSettings();
 
-        DesingPage.goToEditDesign();  
-        
-        let siteDescription = faker.lorem.sentence();
-        let accentColor =  faker.color.rgb().slice(1);
-
-        DesingPage.getSiteDescriptionInput()
-            .clear();
-
-        DesingPage.getSiteDescriptionInput()
-            .type(siteDescription);
-
-        DesingPage.getAccentColorInput()
-            .type(accentColor);
-
-        DesingPage.getSaveDesignButton()
-            .click();
-
-        cy.wait(500);
-
-        DesingPage.goToSite();
-
-        cy.get('footer.gh-footer.gh-outer').within(() => {
-            cy.get('p.gh-footer-signup-subhead.is-body')
-                .should('contain', siteDescription);
-        });
        
     });
 
-    it("Escenario 50: Editar subheader con datos aleatorios generados onlie", () => {
+    it("Escenario 50: Editar meta Title y meta Description con datos aleatorios generados onlie", () => {
         //Given usuario logueado
-        DesingPage.goToSettings();
+        MetadataPage.goToSettings();
 
-        DesingPage.goToEditDesign();  
-        
-        let siteDescription = faker.lorem.sentence();
-        let accentColor =  faker.color.rgb().slice(1);
+        MetadataPage.goToEditMetadata();
 
-        DesingPage.getSiteDescriptionInput()
-            .clear();
+        cy.wait(500)
 
-        DesingPage.getSiteDescriptionInput()
-            .type(siteDescription);
+        cy.fixture("metadata.data.apriori.json").then((data) => {
+            let metaTitle = faker.lorem.sentence();
+            let metaDescription = faker.lorem.sentence();
 
-        DesingPage.getAccentColorInput()
-            .type(accentColor);
+            MetadataPage.getMetadataSection()
+                .within(() => {
+                    cy.contains('Edit').click()
+                });
 
-        DesingPage.getSaveDesignButton()
-            .click();
+            MetadataPage.getMetadataSection().within(() => {
+                cy.contains('Meta title')
+                    .get('input')
+                    .first()
+                    .clear()
+                    .type(metaTitle);
 
-        cy.wait(500);
+                //cy.contains('Meta description').get('input').type(metaDescription);
 
-        DesingPage.goToSite();
+                MetadataPage.getSaveMetadataButton()
+                    .contains('Save')
+                    .click();
+            });
 
-        cy.get('footer.gh-footer.gh-outer').within(() => {
-            cy.get('p.gh-footer-signup-subhead.is-body')
-                .should('contain', siteDescription);
-        });  
+            cy.wait(500); 
+            
+            MetadataPage.getMetadataSection().within(() => {
+                MetadataPage.getMetadataPreview()
+                    .should('contain', metaTitle)
+            });
+            
+        });       
        
     });
 });

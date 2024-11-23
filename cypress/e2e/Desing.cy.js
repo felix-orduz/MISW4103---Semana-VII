@@ -19,8 +19,8 @@ describe('Feature: El usuario admin puede editar el design.', () => {
         cy.wait(500)
 
         cy.fixture("design.data.apriori.json").then((data) => {
-            let siteDescription = data[9].site_description;
-            let accentColor = data[9].accent_color;
+            let siteDescription = data[5].site_description;
+            let accentColor = data[5].accent_color;
 
             DesingPage.getSiteDescriptionInput()
                 .clear();
