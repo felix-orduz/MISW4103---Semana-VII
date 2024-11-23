@@ -35,4 +35,14 @@ export class FakerGenerador {
 
     return randomData;
   }
+
+  //Metodo para genera cadena de caracteres especiales
+  static randomSpecialCharacters(length) {
+    let caracteresEspeciales = "!@#$%^&*()_+[]{}|;:',.<>?/`~";
+
+    // Generar una cadena de caracteres especiales
+    return Array.from({ length: length }, () =>
+      faker.helpers.arrayElement(caracteresEspeciales)
+    ).join("");
+  }
 }
