@@ -247,3 +247,10 @@ Then("Confirma eliminación de Miembro", async function () {
 Then("Confirma eliminación de Miembro Base", async function () {
   await confirmDeleteMemberBase(this.driver);
 });
+
+Then("Contenido de member para eliminar A Priori {int}", async function (index) {
+  initialMemberData = membersDataAPriori[index];
+  memberData = initialMemberData
+
+  await writeFormMember(this.driver, memberData.name, memberData.email, memberData.note);
+});
