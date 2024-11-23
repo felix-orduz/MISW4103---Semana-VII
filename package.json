@@ -14,6 +14,7 @@
     "chai": "^5.1.2",
     "cypress": "^13.15.2",
     "kraken-node": "^1.0.24",
+    "playwright": "^1.49.0",
     "resemblejs": "^5.0.0"
   },
   "devDependencies": {
