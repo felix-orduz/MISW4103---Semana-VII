@@ -13,7 +13,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   }
 });
 
-describe("Escenarios E00031 - E00033", function () {
+describe("Escenarios E00034 - E00036", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -46,7 +46,7 @@ describe("Escenarios E00031 - E00033", function () {
     });
   });
 
-  it("E00031 - Crear un tag con nombre y descripción (A-priori)", function () {
+  it("E00034 - Crear un tag con nombre y descripción (A-priori)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -84,7 +84,7 @@ describe("Escenarios E00031 - E00033", function () {
     TagPage.busqueda(name, "notClick");
   });
 
-  it("E00032 - Crear un tag con nombre y descripción (Pseudo)", function () {
+  it("E00035 - Crear un tag con nombre y descripción (Pseudo)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -122,7 +122,7 @@ describe("Escenarios E00031 - E00033", function () {
     TagPage.busqueda(name, "notClick");
   });
 
-  it("E00033 - Crear un tag con nombre y descripción (Aleatorio)", function () {
+  it("E00036 - Crear un tag con nombre y descripción (Aleatorio)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -161,7 +161,7 @@ describe("Escenarios E00031 - E00033", function () {
   });
 });
 
-describe("Escenarios E00034 - E00036", function () {
+describe("Escenarios E00037 - E00039", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -194,7 +194,7 @@ describe("Escenarios E00034 - E00036", function () {
     });
   });
 
-  it("E00034 - Editar un tag con su descripción (A-priori)", function () {
+  it("E00037 - Editar un tag con su descripción (A-priori)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -253,7 +253,7 @@ describe("Escenarios E00034 - E00036", function () {
     TagPage.busqueda(name, "notClick");
   });
 
-  it("E00035 - Editar un tag con su descripción (Pseudo)", function () {
+  it("E00038 - Editar un tag con su descripción (Pseudo)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -312,7 +312,7 @@ describe("Escenarios E00034 - E00036", function () {
     TagPage.busqueda(name, "notClick");
   });
 
-  it("E00036 - Editar un tag con su descripción (Aleatorio)", function () {
+  it("E00039 - Editar un tag con su descripción (Aleatorio)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -372,7 +372,7 @@ describe("Escenarios E00034 - E00036", function () {
   });
 });
 
-describe("Escenarios E00037 - E00039", function () {
+describe("Escenarios E00040 - E00042", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -405,7 +405,7 @@ describe("Escenarios E00037 - E00039", function () {
     });
   });
 
-  it("E00037 - Editar un tag con titulo y descripción (A-priori)", function () {
+  it("E00040 - Editar un tag con titulo y descripción (A-priori)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -469,7 +469,7 @@ describe("Escenarios E00037 - E00039", function () {
     TagPage.busqueda(newName, "notClick");
   });
 
-  it("E00038 - Editar un tag con titulo y descripción (Pseudo)", function () {
+  it("E00041 - Editar un tag con titulo y descripción (Pseudo)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -533,7 +533,7 @@ describe("Escenarios E00037 - E00039", function () {
     TagPage.busqueda(newName, "notClick");
   });
 
-  it("E00039 - Editar un tag con titulo y descripción (Aleatorio)", function () {
+  it("E00042 - Editar un tag con titulo y descripción (Aleatorio)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -598,7 +598,7 @@ describe("Escenarios E00037 - E00039", function () {
   });
 });
 
-describe("Escenarios E00040 - E00042", function () {
+describe("Escenarios E00043 - E00045", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -631,7 +631,7 @@ describe("Escenarios E00040 - E00042", function () {
     });
   });
 
-  it("E00040 - Crear un tag duplicado nombre y la descripción (A-priori)", function () {
+  it("E00043 - Crear un tag duplicado nombre y la descripción (A-priori)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -698,7 +698,7 @@ describe("Escenarios E00040 - E00042", function () {
     TagPage.busqueda(name, "notClick");
   });
 
-  it("E00041 - Crear un tag duplicado nombre y la descripción (Pseudo)", function () {
+  it("E00044 - Crear un tag duplicado nombre y la descripción (Pseudo)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -765,7 +765,7 @@ describe("Escenarios E00040 - E00042", function () {
     TagPage.busqueda(name, "notClick");
   });
 
-  it("E00042 - Crear un tag duplicado nombre y la descripción (Aleatorio)", function () {
+  it("E00045 - Crear un tag duplicado nombre y la descripción (Aleatorio)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -833,7 +833,7 @@ describe("Escenarios E00040 - E00042", function () {
   });
 });
 
-describe("Escenarios E00043 - E00045", function () {
+describe("Escenarios E00046 - E00048", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -866,7 +866,7 @@ describe("Escenarios E00043 - E00045", function () {
     });
   });
 
-  it("E00043 - Eliminar un tag con titulo y descripción (A-priori)", function () {
+  it("E00046 - Eliminar un tag con titulo y descripción (A-priori)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -913,7 +913,7 @@ describe("Escenarios E00043 - E00045", function () {
     TagPage.clickDeleteConfirmTag();
   });
 
-  it("E00044 - Eliminar un tag con titulo y descripción (Pseudo)", function () {
+  it("E00047 - Eliminar un tag con titulo y descripción (Pseudo)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -960,7 +960,7 @@ describe("Escenarios E00043 - E00045", function () {
     TagPage.clickDeleteConfirmTag();
   });
 
-  it("E00045 - Eliminar un tag con titulo y descripción (Aleatorio)", function () {
+  it("E00048 - Eliminar un tag con titulo y descripción (Aleatorio)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -1008,7 +1008,7 @@ describe("Escenarios E00043 - E00045", function () {
   });
 });
 
-describe("Escenarios E00046 - E00048", function () {
+describe("Escenarios E00049 - E00051", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -1041,7 +1041,7 @@ describe("Escenarios E00046 - E00048", function () {
     });
   });
 
-  it("E00046 - Crear tac con caracteres especiales (A-priori)", function () {
+  it("E00049 - Crear tac con caracteres especiales (A-priori)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -1079,7 +1079,7 @@ describe("Escenarios E00046 - E00048", function () {
     TagPage.busqueda(name, "notClick");
   });
 
-  it("E00047 - Crear tac con caracteres especiales (Pseudo)", function () {
+  it("E00050 - Crear tac con caracteres especiales (Pseudo)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
@@ -1117,7 +1117,7 @@ describe("Escenarios E00046 - E00048", function () {
     TagPage.busqueda(name, "notClick");
   });
 
-  it("E00048 - Crear tac con caracteres especiales (Aleatorio)", function () {
+  it("E00051 - Crear tac con caracteres especiales (Aleatorio)", function () {
     //Given le de click en la sección de Tags
     PrincipalPage.clickTags();
     cy.screenshot("ss");
