@@ -9,9 +9,11 @@ Scenario: E0017 - Invalid Email Validation
   And Tomo pantallazo "E00017-1-RC.png"
   And I clic to Sign in
   And Clic en la sección de Members
+  And I wait for 3 seconds
   And Tomo pantallazo "E00017-2-RC.png"
   And Clic en el botón de New Member
-  And Contenido de member con email inválido
+  And I wait for 3 seconds
+  And Contenido de member con email inválido A Priori 1
   And Tomo pantallazo "E00017-3-RC.png"
   And Clic en Save Member
   When I wait for 2 seconds

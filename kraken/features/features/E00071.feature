@@ -1,7 +1,7 @@
 Feature: Ghost
 
 @user1 @web
-Scenario: E00016 - Crear Member - Datos A Priori
+Scenario: E00071 - Crear Member - Datos A Priori
   Given I navigate to page principal
   And Tomo pantallazo "E00016-0-RC.png"
   And I enter email y password

@@ -24,7 +24,8 @@ const {
   clickSaveMember,
   validateMemberInList,
   confirmDeleteMember,
-  validateUpdatedMemberName
+  validateUpdatedMemberName,
+  writeFormMember
 } = require("../pages/version_rc/member");
 const { clickMembers } = require("../pages/version_rc/principal");
 const { clickMembersBase } = require("../pages/version_base/principal");
@@ -57,11 +58,12 @@ Then("Contenido del member base A Priori {int}", async function (index) {
 
   const createdEmail = initialMemberData.email;
   this.createEmail = createdEmail;
-  let name = faker.person.fullName();
-  let email = this.createEmail;
-  let note = faker.lorem.sentence();
 
-  await writeFormMemberBase(this.driver, name, email, note);
+  let name = initialMemberData.name;
+  let email = initialMemberData.email;
+  let note = initialMemberData.note;
+
+  await writeFormMember(this.driver, name, email, note);
 });
 
 Then("Contenido del member base", async function () {
@@ -88,6 +90,17 @@ Then("Contenido de member con email inválido", async function () {
   await writeFormMemberBase(this.driver, name, email, note);
 });
 
+
+Then("Contenido de member con email inválido A Priori {int}", async function (index) {
+  initialMemberData = membersDataAPriori[index];
+
+  let name = initialMemberData.name;
+  let email = initialMemberData.email;
+  let note = initialMemberData.note;
+
+  await writeFormMemberBase(this.driver, name, email, note);
+});
+
 Then("Verifica mensaje de error de email inválido", async function () {
   await checkInvalidEmailError(this.driver);
 });
@@ -97,6 +110,17 @@ Then("Contenido de member con email inválido y nota larga", async function () {
   const email = "invalid-email-format";
   const longNote = "a".repeat(501);
   await writeFormMemberBase(this.driver, name, email, longNote);
+});
+
+Then("Contenido de member con email inválido y nota larga A Priori {int}", async function (index) {
+
+  initialMemberData = membersDataAPriori[index];
+
+  let name = initialMemberData.name;
+  let email = initialMemberData.email;
+  let note = initialMemberData.note;
+  const longNote = "a".repeat(501);
+  await writeFormMember(this.driver, name, email, longNote);
 });
 
 Then("Verifica contador de caracteres de nota", async function () {

@@ -9,9 +9,11 @@ Scenario: E0018 - Validación de Email Inválido y Longitud de Nota
   And Tomo pantallazo "E00018-1-RC.png"
   And I clic to Sign in
   And Clic en la sección de Members
+  And I wait for 3 seconds
   And Tomo pantallazo "E00018-2-RC.png"
   And Clic en el botón de New Member
-  And Contenido de member con email inválido y nota larga
+  And I wait for 3 seconds
+  And Contenido de member con email inválido y nota larga A Priori 2
   And Tomo pantallazo "E00018-3-RC.png"
   And Clic en Save Member
   When Verifica mensaje de error de email inválido
