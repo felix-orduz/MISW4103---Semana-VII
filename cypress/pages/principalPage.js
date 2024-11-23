@@ -17,4 +17,8 @@ export class PrincipalPage {
     static visitMembers(BASE_URL) {
         return cy.visit(BASE_URL + "ghost/#/members");
     }
+
+    static clickSettings() {
+        return cy.get('[data-test-nav="settings"]').click({ force: true });
+      }
 }

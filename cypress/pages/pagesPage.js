@@ -188,4 +188,3 @@ static getListPages() {
     });
   }
 }
-
