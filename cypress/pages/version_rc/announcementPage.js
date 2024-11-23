@@ -23,7 +23,8 @@ export class AnnouncementPage {
     }
 
     static getAnnouncementInput() {
-        return cy.contains('Announcement').get('span[data-lexical-text="true"]');
+        // return cy.contains('Announcement').get('span[data-lexical-text="true"]');
+        return cy.get('p[data-koenig-dnd-droppable="true"]');
     }
 
     static getBackgroundColorButton(color) {
@@ -44,5 +45,18 @@ export class AnnouncementPage {
         return cy.get('div[data-testid="announcement-bar"]');
     }
 
+    static goToSite() {
+        cy.fixture("properties.json").then((data) => {
+          cy.visit(data.siteURL + "/"); 
+        });
+    }
+
+    static getAnnouncementBarInSite() {
+        return cy.get('div.gh-announcement-bar');
+    }
+
+    static getSaveAnnouncementButton() {
+        return cy.get('button.cursor-pointer.bg-black');
+    }
   
 }
