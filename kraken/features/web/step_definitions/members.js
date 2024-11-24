@@ -1,7 +1,7 @@
 const { faker } = require("@faker-js/faker");
 const fs = require("fs"); // Asegúrate de requerir 'fs' al principio del archivo
 const { Given, When, Then, Before } = require("@cucumber/cucumber");
-let membersDataAPriori = []
+let membersDataAPriori = [];
 //Version base
 const {
   writeFormMemberBase,
@@ -11,7 +11,7 @@ const {
   clickSaveMemberBase,
   goToListMembersBase,
   updateMemberNameBase,
-  confirmDeleteMemberBase
+  confirmDeleteMemberBase,
 } = require("../pages/version_base/member");
 const {
   clickNewMember,
@@ -25,13 +25,13 @@ const {
   validateMemberInList,
   confirmDeleteMember,
   validateUpdatedMemberName,
-  writeFormMember
+  writeFormMember,
 } = require("../pages/version_rc/member");
 const { clickMembers } = require("../pages/version_rc/principal");
 const { clickMembersBase } = require("../pages/version_base/principal");
 
 Before(() => {
-  const data = fs.readFileSync('./features/web/dataPoolMembers.json', 'utf8');
+  const data = fs.readFileSync("./features/web/dataPoolMembers.json", "utf8");
   membersDataAPriori = JSON.parse(data);
 });
 
@@ -53,6 +53,25 @@ Then("Clic en el botón de New Member Base", async function () {
 
 Then("Contenido del member base A Priori {int}", async function (index) {
   initialMemberData = membersDataAPriori[index];
+
+  this.initialMemberData = initialMemberData;
+
+  const createdEmail = initialMemberData.email;
+  this.createEmail = createdEmail;
+
+  let name = initialMemberData.name;
+  let email = initialMemberData.email;
+  let note = initialMemberData.note;
+
+  await writeFormMember(this.driver, name, email, note);
+});
+
+Then("Contenido del member base Aletorio Faker", async function () {
+  initialMemberData = {
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    note: faker.lorem.sentence(),
+  };
 
   this.initialMemberData = initialMemberData;
 
@@ -90,9 +109,25 @@ Then("Contenido de member con email inválido", async function () {
   await writeFormMemberBase(this.driver, name, email, note);
 });
 
+Then(
+  "Contenido de member con email inválido A Priori {int}",
+  async function (index) {
+    initialMemberData = membersDataAPriori[index];
 
-Then("Contenido de member con email inválido A Priori {int}", async function (index) {
-  initialMemberData = membersDataAPriori[index];
+    let name = initialMemberData.name;
+    let email = initialMemberData.email;
+    let note = initialMemberData.note;
+
+    await writeFormMemberBase(this.driver, name, email, note);
+  }
+);
+
+Then("Contenido de member con email inválido Faker", async function () {
+  initialMemberData = {
+    name: faker.person.fullName(),
+    email: "invalid-email-format",
+    note: faker.lorem.sentence(),
+  };
 
   let name = initialMemberData.name;
   let email = initialMemberData.email;
@@ -112,28 +147,40 @@ Then("Contenido de member con email inválido y nota larga", async function () {
   await writeFormMemberBase(this.driver, name, email, longNote);
 });
 
-Then("Contenido de member con email inválido y nota larga A Priori {int}", async function (index) {
+Then(
+  "Contenido de member con email inválido y nota larga A Priori {int}",
+  async function (index) {
+    initialMemberData = membersDataAPriori[index];
 
-  initialMemberData = membersDataAPriori[index];
+    let name = initialMemberData.name;
+    let email = initialMemberData.email;
+    let note = initialMemberData.note;
+    const longNote = "a".repeat(501);
+    await writeFormMember(this.driver, name, email, longNote);
+  }
+);
 
-  let name = initialMemberData.name;
-  let email = initialMemberData.email;
-  let note = initialMemberData.note;
-  const longNote = "a".repeat(501);
-  await writeFormMember(this.driver, name, email, longNote);
-});
+Then(
+  "Contenido de member con email inválido y nota larga Faker",
+  async function () {
+    const initialMemberData = {
+      name: faker.person.fullName(),
+      email: faker.person.fullName(),
+      note: faker.lorem.sentence(),
+    };
+
+    let name = initialMemberData.name;
+    let email = initialMemberData.email;
+    const longNote = "a".repeat(501);
+    await writeFormMember(this.driver, name, email, longNote);
+  }
+);
 
 Then("Verifica contador de caracteres de nota", async function () {
   await checkLongNoteCharacterCount(this.driver);
 });
 
 Then("Contenido de member inicial", async function () {
-  const initialMemberData = {
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    note: faker.lorem.sentence(),
-  };
-
   this.initialMemberData = initialMemberData;
 
   await writeFormMemberBase(
@@ -170,7 +217,6 @@ Then("Editar nombre del miembro A Priori {int}", async function (index) {
   this.updatedName = updatedName;
   await updateMemberName(this.driver, updatedName);
 });
-
 
 Then("Valida nombre del miembro actualizado", async function () {
   await validateUpdatedMemberName(
@@ -231,7 +277,6 @@ Then("Selecciona miembro por email Base", async function () {
   await clickMemberByEmail(this.driver, this.initialMemberData.email);
 });
 
-
 Then("Editar nombre del miembro base", async function () {
   const updatedName = faker.person.fullName();
   this.initialMemberData.name = updatedName;
@@ -243,14 +288,21 @@ Then("Confirma eliminación de Miembro", async function () {
   await confirmDeleteMember(this.driver);
 });
 
-
 Then("Confirma eliminación de Miembro Base", async function () {
   await confirmDeleteMemberBase(this.driver);
 });
 
-Then("Contenido de member para eliminar A Priori {int}", async function (index) {
-  initialMemberData = membersDataAPriori[index];
-  memberData = initialMemberData
+Then(
+  "Contenido de member para eliminar A Priori {int}",
+  async function (index) {
+    initialMemberData = membersDataAPriori[index];
+    memberData = initialMemberData;
 
-  await writeFormMember(this.driver, memberData.name, memberData.email, memberData.note);
-});
+    await writeFormMember(
+      this.driver,
+      memberData.name,
+      memberData.email,
+      memberData.note
+    );
+  }
+);
