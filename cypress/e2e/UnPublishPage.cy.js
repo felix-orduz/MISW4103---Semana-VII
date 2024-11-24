@@ -17,7 +17,7 @@ describe('Feature: Unpublish Page', () => {
         PagesPage.doLogIn();
     });
 
-    it("Escenario 41: Unpublish page creada con contenido aleatorio", () => {
+    it("E000101: Unpublish page creada con contenido aleatorio", () => {
         //Given usuario logueado y una pagina publicada
         PagesPage.goToPages();  
         let title = faker.lorem.sentence();

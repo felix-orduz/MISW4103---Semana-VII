@@ -1,7 +1,7 @@
 Feature: Ghost
 
 @user3 @web
-Scenario: E00014 - Actualizar el estado de la page previamente creada a unpublish
+Scenario: E000122 - Actualizar el estado de la page previamente creada a unpublish
   Given I navigate to page principal
   And I enter email y password
   And I wait for 1 seconds

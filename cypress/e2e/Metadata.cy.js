@@ -10,7 +10,7 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
         MetadataPage.doLogIn();
     });
 
-    it("Escenario 49: Editar meta Title y meta Description con datos a-priori generados con Mockaroo", () => {
+    it("E000111: Editar meta Title y meta Description con datos a-priori generados con Mockaroo", () => {
         //Given usuario logueado
         MetadataPage.goToSettings();
 
@@ -52,7 +52,7 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
         });       
     });
 
-    it("Escenario 50: Editar subheader con datos pseudo aleatorios generados onlie", () => {
+    it("E000112: Editar subheader con datos pseudo aleatorios generados onlie", () => {
  //Given usuario logueado
  MetadataPage.goToSettings();
 
@@ -92,7 +92,7 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
        
     });
 
-    it("Escenario 51: Editar meta Title y meta Description con datos aleatorios generados onlie", () => {
+    it("E000113: Editar meta Title y meta Description con datos aleatorios generados onlie", () => {
         //Given usuario logueado
         MetadataPage.goToSettings();
 
@@ -131,7 +131,7 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
        
     });
 
-    it("Escenario 52: Editar meta Title con datos a-priori generados con Mockaroo y una longitud superior a 70 characters", () => {
+    it("E000114: Editar meta Title con datos a-priori generados con Mockaroo y una longitud superior a 70 characters", () => {
         //Given usuario logueado
         MetadataPage.goToSettings();
 

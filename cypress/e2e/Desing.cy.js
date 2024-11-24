@@ -12,7 +12,7 @@ describe('Feature: El usuario admin puede editar el design.', () => {
         DesingPage.doLogIn();
     });
 
-    it("Escenario 45: Editar subheader con datos a-priori generados con Mockaroo", () => {
+    it("E000103: Editar subheader con datos a-priori generados con Mockaroo", () => {
         //Given usuario logueado
         DesingPage.goToSettings();
 
@@ -47,7 +47,7 @@ describe('Feature: El usuario admin puede editar el design.', () => {
         });       
     });
 
-    it("Escenario 46: Editar subheader con datos a-priori generados con Mockaroo con un subheader superior a 200", () => {
+    it("E000104: Editar subheader con datos a-priori generados con Mockaroo con un subheader superior a 200", () => {
         //Given usuario logueado
         DesingPage.goToSettings();
 
@@ -84,7 +84,7 @@ describe('Feature: El usuario admin puede editar el design.', () => {
         });       
     });
 
-    it("Escenario 47: Editar subheader con datos pseudo aleatorios generados onlie", () => {
+    it("E000105: Editar subheader con datos pseudo aleatorios generados onlie", () => {
         pseudo.getDataFromMockaroo();
 
         //Given usuario logueado
@@ -119,7 +119,7 @@ describe('Feature: El usuario admin puede editar el design.', () => {
          });       
     });
 
-    it("Escenario 48: Editar subheader con datos aleatorios generados onlie", () => {
+    it("E000107: Editar subheader con datos aleatorios generados onlie", () => {
         //Given usuario logueado
         DesingPage.goToSettings();
 

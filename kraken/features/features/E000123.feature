@@ -1,7 +1,7 @@
 Feature: Ghost
 
 @user5 @web
-Scenario: E015 - Eliminamos una Page previamente creada
+Scenario: E000123 - Eliminamos una Page previamente creada
   Given I navigate to page principal
   And I enter email y password
   And I wait for 1 seconds

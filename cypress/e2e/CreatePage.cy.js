@@ -16,7 +16,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         PagesPage.doLogIn();
     });
 
-    it("Escenario 31: Crear nueva Page con datos a-priori generados con Mockaroo", () => {
+    it("E00091: Crear nueva Page con datos a-priori generados con Mockaroo", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -53,7 +53,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         });
     });
 
-    it("Escenario 32: Crear nueva Page con datos online generados pseudo aleatorios.", () => {
+    it("E00092: Crear nueva Page con datos online generados pseudo aleatorios.", () => {
         pseudo.getDataFromMockaroo();
 
         //Given usuario logueado
@@ -90,7 +90,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         });
     });
 
-    it("Escenario 33: Crear nueva Page con datos online generados aleatorios.", () => {
+    it("E00093: Crear nueva Page con datos online generados aleatorios.", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -123,7 +123,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("Escenario 34: Crear Page vacia. [BUG]", () => {
+    it("E00094: Crear Page vacia. [BUG]", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -157,7 +157,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         PagesPage.deletePageByTitle("(Untitled)");
     });
 
-    it("Escenario 35: Crear Page con un titulo mayor a 255 characteres generado on line aleatorio.", () => {
+    it("E00095: Crear Page con un titulo mayor a 255 characteres generado on line aleatorio.", () => {
         //Given usuario logueado
         PagesPage.goToPages();
     
@@ -188,7 +188,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
     
     });
 
-    it("Escenario 36: Crear Page con contenido html generedo aleatorio online", () => {
+    it("E00096: Crear Page con contenido html generedo aleatorio online", () => {
         //Given usuario logueado
         PagesPage.goToPages();
 
@@ -219,7 +219,7 @@ describe('Feature: El usuario admin puede crear Pages', () => {
         PagesPage.deletePageByTitle(PAGE_TITLE);
     });
 
-    it("Escenario 37: Crear Page con contenido corrupto html generedo aleatorio online", () => {
+    it("E00097: Crear Page con contenido corrupto html generedo aleatorio online", () => {
         //Given usuario logueado
         PagesPage.goToPages();
     

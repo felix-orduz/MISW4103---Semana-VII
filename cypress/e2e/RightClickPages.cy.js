@@ -11,7 +11,7 @@ describe("Feature: El usuario puede acceder a funcionalidades al hacer click der
     PagesPage.doLogIn();
   });
 
-  it("Escenario 042: Duplicar una Pagina con contenido aleatorio generado online.", () => {
+  it("E000108: Duplicar una Pagina con contenido aleatorio generado online.", () => {
     let PAGE_TITLE = faker.lorem.sentence(3);
 
     //Given usuario logueado
@@ -53,7 +53,7 @@ describe("Feature: El usuario puede acceder a funcionalidades al hacer click der
     .should("contain", "Draft");
   });
 
-  it("Escenario 043: Agregar Tag una Pagina con contenido aleatorio generado online.", () => {
+  it("E000109: Agregar Tag una Pagina con contenido aleatorio generado online.", () => {
         let PAGE_TITLE = faker.lorem.sentence(3);
 
         //Given usuario logueado
@@ -105,7 +105,7 @@ describe("Feature: El usuario puede acceder a funcionalidades al hacer click der
             .contains(TagName);
   });
 
-  it("Escenario 044: Agregar Feature a una Pagina con contenido generado online.", () => {
+  it("E000110: Agregar Feature a una Pagina con contenido generado online.", () => {
     let PAGE_TITLE = faker.lorem.sentence(3);
 
     //Given usuario logueado
