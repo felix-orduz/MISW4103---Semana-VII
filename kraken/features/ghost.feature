@@ -1,7 +1,7 @@
 Feature: Ghost - Eliminar Miembro
 
 @user1 @web
-Scenario: E00080 - Delete Member Aletorio Faker
+Scenario: E000124 - Delete Member Aletorio Faker
   Given I navigate to page principal
   And Tomo pantallazo "E00020-1-RC.png"
   And I enter email y password

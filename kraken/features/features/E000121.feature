@@ -1,14 +1,13 @@
 Feature: Ghost
 
-@user3 @web
-Scenario: E000121 - Editar una page
+@user5 @web
+Scenario: E000121 - Eliminamos una Page previamente creada
   Given I navigate to page principal
   And I enter email y password
   And I wait for 1 seconds
   And I clic to Sign in
   And Click en la sección de Pages
   And Página de listado de Pages
-  And Tomo pantallazo "E00013-1-RC.png"
   When Click en el boton New Page
   And Titulo del page
   And Clic en Contenido page
@@ -18,9 +17,8 @@ Scenario: E000121 - Editar una page
   And Clic en el boton Continue page
   And Clic en el boton Publish Page
   And Cierre el modal de confirmación page
-  Then Entro a la Page creada
-  And Edito el titulo de la Page
-  And Clic en Contenido page
-  And Clic en boton de Update
-  And Clic para devolverse a las Pages
-  And Tomo pantallazo "E00013-2-RC.png"
+  And Valida Page publicado en la lista de Pages
+  And Tomo pantallazo "E00015-1-RC.png"
+  Then Clic derecho en la Page creada
+  And Elimino la Page
+  And Tomo pantallazo "E00015-2-RC.png"

@@ -1,25 +1,29 @@
-Feature: Ghost
+Feature: Ghost - Eliminar Miembro
 
-@user3 @web
-Scenario: E000122 - Actualizar el estado de la page previamente creada a unpublish
+@user1 @web
+Scenario: E000122 - Delete Member Aletorio Faker
   Given I navigate to page principal
+  And Tomo pantallazo "E00020-1-RC.png"
   And I enter email y password
   And I wait for 1 seconds
+  And Tomo pantallazo "E00020-2-RC.png"
   And I clic to Sign in
-  And Click en la sección de Pages
-  And Página de listado de Pages
-  And Tomo pantallazo "E00014-1-RC.png"
-  And Clic en el boton New Page
-  And Titulo del Page
-  And Clic en Contenido page
-  And Contenido del Page
+  And Clic en la sección de Members
+  And I wait for 3 seconds
+  And Tomo pantallazo "E00020-3-RC.png"
+  And Clic en el botón de New Member
+  And I wait for 3 seconds
+  And Contenido de member para eliminar Faker
+  And Clic en Save Member
+  And I wait for 3 seconds
+  And clic en List Members
   And I wait for 1 seconds
-  When Clic en el boton publish-flow page
-  Then Clic en el boton Continue page
-  And Clic en el boton Publish Page
-  And Cierre el modal de confirmación page
-  And Entro a la Page creada
-  And Click en el boton UnPublish Page
-  And Click en el boton revert to draft Page
-  And Clic para devolverse a las Pages
-  And Tomo pantallazo "E00014-2-RC.png"
+  And Tomo pantallazo "E00020-5-RC.png"
+  And Selecciona miembro por email
+  And Abre menú de acciones del miembro
+  And Tomo pantallazo "E00020-6-RC.png"
+  And Clic en Eliminar Miembro
+  And I wait for 2 seconds
+  When Confirma eliminación de Miembro
+  And Tomo pantallazo "E00020-7-RC.png"
+  Then Verifica Miembro eliminado en la lista
