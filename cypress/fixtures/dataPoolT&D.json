@@ -1,0 +1,8 @@
+[
+    {"tituloSitio": "Sitio de ghost 1", "descripcionSitio": "Descripción de ghost 1", "lenguajeSitio": "es"},
+    {"tituloSitio": "Sitio de ghost 2", "descripcionSitio": "Descripción de ghost 2", "lenguajeSitio": "fr"},
+    {"tituloSitio": "Sitio de ghost 3", "descripcionSitio": "Descripción de ghost 3", "lenguajeSitio": "ja"},
+    {"tituloSitio": "Sitio de ghost 4", "descripcionSitio": "Descripción de ghost 4", "lenguajeSitio": "ko"},
+    {"tituloSitio": "Sitio de ghost 5", "descripcionSitio": "Descripción de ghost 5", "lenguajeSitio": "zh"}
+    
+]

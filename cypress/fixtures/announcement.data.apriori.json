@@ -1,0 +1,5 @@
+[{"announcement":"Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.","background_color":"Light","visibility":"free_members"},
+{"announcement":"Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.","background_color":"Dark","visibility":"free_members"},
+{"announcement":"Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.","background_color":"Dark","visibility":"free_members"},
+{"announcement":"Mauris ullamcorper purus sit amet nulla.","background_color":"Light","visibility":"visitors"},
+{"announcement":"Cras in purus eu magna vulputate luctus.","background_color":"Accent","visibility":"visitors"}]

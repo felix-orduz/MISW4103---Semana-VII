@@ -2,22 +2,12 @@ import { faker } from "@faker-js/faker";
 import { LogIn } from "../pages/logIn";
 import { PostPage } from "../pages/postPage";
 import { PrincipalPage } from "../pages/principalPage";
+import { FakerGenerador } from "../fixtures/generateRandom";
 
 //JSONs de información
 let data = require("../fixtures/properties.json");
 let dataPool = require("../fixtures/dataPoolPosts.json");
-
-//Categorias faker
-let categoryMethods = {
-    name: ['fullName', 'firstName', 'lastName', 'jobTitle'],
-    address: ['streetAddress', 'city', 'state', 'country', 'zipCode'],
-    internet: ['email', 'userName', 'url', 'domainName', 'password'],
-    commerce: ['productName', 'price', 'department', 'productDescription'],
-    company: ['companyName', 'catchPhrase', 'industry'],
-    finance: ['account', 'amount', 'currencyCode'],
-    phone: ['phoneNumber'],
-    lorem: ['word', 'sentence', 'paragraph'],
-};
+let dataPoolInvalid = require("../fixtures/dataPoolPostsInvalid.json");
 
 //Manejo de excepciones
 Cypress.on("uncaught:exception", (err, runnable) => {
@@ -27,6 +17,8 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 });
 
 describe("Escenarios E0001 - E0003", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -35,8 +27,24 @@ describe("Escenarios E0001 - E0003", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -44,14 +52,14 @@ describe("Escenarios E0001 - E0003", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0001-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0001-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -59,7 +67,7 @@ describe("Escenarios E0001 - E0003", function () {
     //And escribe el titulo del post
     let titulo = dataPool[0].tituloPost;
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0001-3-RC");
+    cy.screenshot("ss");
 
     //And da click en contenido
     PostPage.clickInContent();
@@ -81,32 +89,29 @@ describe("Escenarios E0001 - E0003", function () {
     //Then debería ver el post publicado en la lista de posts
     PostPage.lastPostCreated(titulo, "notClick");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0001-4-RC");
+    cy.screenshot("ss");
   });
 
   it("E0002 - Crear un post con titulo (Pseudo)", function () {
-    //Creamos semilla de faker
-    faker.seed(123);
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0002-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0002-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = faker.lorem.word();
+    let titulo = randomRow.tituloPost;
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0002-3-RC");
+    cy.screenshot("ss");
 
     //And da click en contenido
     PostPage.clickInContent();
@@ -128,35 +133,29 @@ describe("Escenarios E0001 - E0003", function () {
     //Then debería ver el post publicado en la lista de posts
     PostPage.lastPostCreated(titulo, "notClick");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0002-4-RC");
+    cy.screenshot("ss");
   });
 
   it("E0003 - Crear un post con titulo (Aletorio)", function () {
-    //Generamos datos aleatorios con faker
-    faker.seed();
-    let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-    let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-    let randomData = faker[randomCategory][randomMethod]();
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0003-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0003-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = randomData;
+    let titulo = FakerGenerador.generateRandomData();
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0003-3-RC");
+    cy.screenshot("ss");
 
     //And da click en contenido
     PostPage.clickInContent();
@@ -169,15 +168,17 @@ describe("Escenarios E0001 - E0003", function () {
     //And le da click en el boton Continue, final review
     PostPage.continueButton();
 
-    //And le da click en el boton Publish post, right now
+    //When le da click en el boton Publish post, right now
     PostPage.publishPostButtonFinal();
 
-    //When cierre el modal de confirmación de publicación
+    //Then cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
   });
 });
 
 describe("Escenarios E0004 - E0006", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -186,8 +187,24 @@ describe("Escenarios E0004 - E0006", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -195,14 +212,14 @@ describe("Escenarios E0004 - E0006", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0004-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0004-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -210,12 +227,12 @@ describe("Escenarios E0004 - E0006", function () {
     //And escribe el titulo del post
     let titulo = dataPool[1].tituloPost;
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0004-3-RC");
+    cy.screenshot("ss");
 
     //And escribe el contenido
     let contenido = dataPool[1].contenidoPost;
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0004-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -235,42 +252,39 @@ describe("Escenarios E0004 - E0006", function () {
     //When le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0004-5-RC");
+    cy.screenshot("ss");
 
     //Then el contenido del post debería ser el que se escribió
     PostPage.viewContent(contenido);
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0004-6-RC");
+    cy.screenshot("ss");
   });
 
   it("E0005 - Crear un post con contenido (Pseudo)", function () {
-    //Creamos semilla de faker
-    faker.seed(123);
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0005-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0005-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = faker.lorem.word();
+    let titulo = randomRow.tituloPost;
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0005-3-RC");
+    cy.screenshot("ss");
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph();
+    let contenido = randomRow.contenidoPost;
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0005-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -290,45 +304,39 @@ describe("Escenarios E0004 - E0006", function () {
     //When le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0005-5-RC");
+    cy.screenshot("ss");
 
     //Then el contenido del post debería ser el que se escribió
     PostPage.viewContent(contenido);
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0005-6-RC");
+    cy.screenshot("ss");
   });
 
   it("E0006 - Crear un post con contenido (Aleatorio)", function () {
-    //Creamos semilla de faker
-    faker.seed();
-    let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-    let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-    let randomData = faker[randomCategory][randomMethod]();
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0006-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0006-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = randomData;
+    let titulo = FakerGenerador.generateRandomData();
     PostPage.writeTitle(titulo);
-    cy.screenshot("../../ghost-5.96/E0006-3-RC");
+    cy.screenshot("ss");
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph();
+    let contenido = FakerGenerador.generateRandomData();
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0006-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -341,18 +349,20 @@ describe("Escenarios E0004 - E0006", function () {
     PostPage.publishPostButtonFinal();
     cy.wait(1000);
 
-    //And cierre el modal de confirmación de publicación
+    //When cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
 
-    //When le de click en el post creado
+    //Then le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0006-5-RC");
+    cy.screenshot("ss");
   });
 });
 
 describe("Escenarios E0007 - E0009", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -361,8 +371,24 @@ describe("Escenarios E0007 - E0009", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -370,14 +396,14 @@ describe("Escenarios E0007 - E0009", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0007-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0007-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -389,7 +415,7 @@ describe("Escenarios E0007 - E0009", function () {
     //And escribe el contenido
     let contenido = dataPool[2].contenidoPost;
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0007-3-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -404,17 +430,17 @@ describe("Escenarios E0007 - E0009", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0007-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0007-5-RC");
+    cy.screenshot("ss");
 
     //And edito el titulo del post
     let tituloEditado = dataPool[2].tituloEditado;
     PostPage.writeTitle(tituloEditado);
-    cy.screenshot("../../ghost-5.96/E0007-6-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -425,36 +451,33 @@ describe("Escenarios E0007 - E0009", function () {
     //Then debería ver el post publicado en la lista de posts con titulo editado
     PostPage.lastPostCreated(tituloEditado, "notClick");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0007-7-RC");
+    cy.screenshot("ss");
   });
 
   it("E0008 - Editar el titulo de un post previamente creado (Pseudo)", function () {
-    //Creamos semilla de faker
-    faker.seed(123);
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0008-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0008-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = faker.lorem.word();
+    let titulo = randomRow.tituloPost;
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph();
+    let contenido = randomRow.contenidoPost;
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0008-3-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -469,17 +492,17 @@ describe("Escenarios E0007 - E0009", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0008-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0008-5-RC");
+    cy.screenshot("ss");
 
     //And edito el titulo del post
-    let tituloEditado = faker.lorem.word(5);
+    let tituloEditado = randomRow.tituloEditadoPost;
     PostPage.writeTitle(tituloEditado);
-    cy.screenshot("../../ghost-5.96/E0008-6-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -490,39 +513,33 @@ describe("Escenarios E0007 - E0009", function () {
     //Then debería ver el post publicado en la lista de posts con titulo editado
     PostPage.lastPostCreated(tituloEditado, "notClick");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0008-7-RC");
+    cy.screenshot("ss");
   });
 
   it("E0009 - Editar el titulo de un post previamente creado (Aleatorio)", function () {
-    //Creamos semilla de faker
-    faker.seed();
-    let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-    let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-    let randomData = faker[randomCategory][randomMethod]();
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0009-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E0009-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = randomData;
+    let titulo = FakerGenerador.generateRandomData();
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph();
+    let contenido = FakerGenerador.generateRandomData();
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E0009-3-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -537,27 +554,29 @@ describe("Escenarios E0007 - E0009", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0009-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0009-5-RC");
+    cy.screenshot("ss");
 
     //And edito el titulo del post
-    let tituloEditado = faker.lorem.word();
+    let tituloEditado = FakerGenerador.generateRandomData();
     PostPage.writeTitle(tituloEditado);
-    cy.screenshot("../../ghost-5.96/E0009-6-RC");
+    cy.screenshot("ss");
 
-    //And le de click en el boton de update
+    //When le de click en el boton de update
     PostPage.updatePostButton();
 
-    //When le de click en el boton de devolverse a la lista de posts
+    //Then le de click en el boton de devolverse a la lista de posts
     PostPage.clickBackToPosts();
   });
 });
 
 describe("Escenarios E00010 - E00012", function () {
+  let randomRow;
+
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -566,8 +585,24 @@ describe("Escenarios E00010 - E00012", function () {
       //Iniciamos sesion
       LogIn.logIn(data.email, data.password);
       LogIn.logInButton();
-      cy.screenshot("../../ghost-5.96/E0000-0-RC");
+      cy.screenshot("ss");
       cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
 
@@ -575,14 +610,14 @@ describe("Escenarios E00010 - E00012", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00010-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E00010-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
@@ -592,9 +627,9 @@ describe("Escenarios E00010 - E00012", function () {
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = dataPool[3].contenidoPost; 
+    let contenido = dataPool[3].contenidoPost;
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E00010-3-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -609,17 +644,17 @@ describe("Escenarios E00010 - E00012", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00010-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E0004-5-RC");
+    cy.screenshot("ss");
 
     //And edita el contenido del post
     let contenidoEditado = dataPool[3].contenidoEditado;
     PostPage.writeContent(contenidoEditado);
-    cy.screenshot("../../ghost-5.96/E00010-6-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -634,36 +669,33 @@ describe("Escenarios E00010 - E00012", function () {
     //Then el contenido del post debería ser el editado
     PostPage.viewContent(contenidoEditado);
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00010-7-RC");
+    cy.screenshot("ss");
   });
 
   it("E00011 - Editar el contenido de un post previamente creado (Pseudo)", function () {
-    //Creamos semilla de faker
-    faker.seed(123);
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00011-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E00011-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = faker.lorem.word();
+    let titulo = randomRow.tituloPost;
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph(); 
+    let contenido = randomRow.contenidoPost;
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E00011-3-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -678,17 +710,17 @@ describe("Escenarios E00010 - E00012", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00011-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00011-5-RC");
+    cy.screenshot("ss");
 
     //And edita el contenido del post
-    let contenidoEditado = faker.lorem.paragraph(5);
+    let contenidoEditado = randomRow.contenidoEditadoPost;
     PostPage.writeContent(contenidoEditado);
-    cy.screenshot("../../ghost-5.96/E00011-6-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
@@ -703,39 +735,33 @@ describe("Escenarios E00010 - E00012", function () {
     //Then el contenido del post debería ser el editado
     PostPage.viewContent(contenidoEditado);
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00011-7-RC");
+    cy.screenshot("ss");
   });
 
   it("E00012 - Editar el contenido de un post previamente creado (Aleatorio)", function () {
-    //Creamos semilla de faker
-    faker.seed();
-    let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-    let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-    let randomData = faker[randomCategory][randomMethod]();
-
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00012-1-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de listado de posts
     PostPage.getTitleSection().should("include.text", "Posts");
 
     //And le da click en el boton New Post
     PostPage.clickNewPost();
-    cy.screenshot("../../ghost-5.96/E00012-2-RC");
+    cy.screenshot("ss");
 
     //And el administrador ve la página de creación de post
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = randomData;
+    let titulo = FakerGenerador.generateRandomData();
     PostPage.writeTitle(titulo);
 
     //And escribe el contenido
-    let contenido = faker.lorem.paragraph(); 
+    let contenido = FakerGenerador.generateRandomData();
     PostPage.writeContent(contenido);
-    cy.screenshot("../../ghost-5.96/E00012-3-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de Publish
     PostPage.publishPostButton();
@@ -750,201 +776,595 @@ describe("Escenarios E00010 - E00012", function () {
     //And cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00012-4-RC");
+    cy.screenshot("ss");
 
     //And le de click en el post creado
     PostPage.lastPostCreated(titulo, "click");
     cy.wait(1000);
-    cy.screenshot("../../ghost-5.96/E00012-5-RC");
+    cy.screenshot("ss");
 
     //And edita el contenido del post
-    let contenidoEditado = faker.lorem.paragraph();
+    let contenidoEditado = FakerGenerador.generateRandomData();
     PostPage.writeContent(contenidoEditado);
-    cy.screenshot("../../ghost-5.96/E00012-6-RC");
+    cy.screenshot("ss");
 
     //And le de click en el boton de update
     PostPage.updatePostButton();
 
-    //And le de click en el boton de devolverse a la lista de posts
+    //When le de click en el boton de devolverse a la lista de posts
     PostPage.clickBackToPosts();
     cy.wait(1000);
 
-    //When le de click en el post editado
+    //Then le de click en el post editado
     PostPage.lastPostCreated(titulo, "click");
   });
 });
 
 describe("Escenarios E00013 - E00015", function () {
-    beforeEach(() => {
-      cy.fixture("properties.json").then((data) => {
-        //Vistamos sitio de Ghost
-        cy.visit(data.baseURL);
-  
-        //Iniciamos sesion
-        LogIn.logIn(data.email, data.password);
-        LogIn.logInButton();
-        cy.screenshot("../../ghost-5.96/E0000-0-RC");
-        cy.wait(1000);
+  let randomRow;
+
+  beforeEach(() => {
+    cy.fixture("properties.json").then((data) => {
+      //Vistamos sitio de Ghost
+      cy.visit(data.baseURL);
+
+      //Iniciamos sesion
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+      cy.screenshot("ss");
+      cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
       });
     });
-  
-    it('E00013 - Eliminamos un post previamente creado (A-priori)', function () {
-        //Given que voy a la sección de posts
-        PrincipalPage.clickPosts();
-        cy.screenshot('../../ghost-5.96/E00013-1-RC');
+  });
 
-        //And el administrador ve la página de listado de posts
-        PostPage.getTitleSection().should('include.text', 'Posts');
+  it("E00013 - Eliminamos un post previamente creado (A-priori)", function () {
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.screenshot("ss");
 
-        //And le da click en el boton New Post
-        PostPage.clickNewPost();
-        cy.screenshot('../../ghost-5.96/E00013-2-RC');
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
 
-        //And el administrador ve la página de creación de post
-        PostPage.creationPostPage().should('have.value', '');
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
 
-        //And escribe el titulo del post
-        let titulo = dataPool[4].tituloPost;
-        PostPage.writeTitle(titulo);
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
 
-        //And escribe el contenido
-        let contenido = dataPool[4].contenidoPost;
-        PostPage.writeContent(contenido);
-        cy.screenshot('../../ghost-5.96/E00013-3-RC');
+    //And escribe el titulo del post
+    let titulo = dataPool[4].tituloPost;
+    PostPage.writeTitle(titulo);
 
-        //And le de click en el boton de Publish
-        PostPage.publishPostButton();
-        cy.wait(1000);
+    //And escribe el contenido
+    let contenido = dataPool[4].contenidoPost;
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
 
-        //And le da click en el boton Continue, final review
-        PostPage.continueButton();
-       
-        //And le da click en el boton Publish post, right now
-        PostPage.publishPostButtonFinal();
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
 
-        //And cierre el modal de confirmación de publicación
-        PostPage.closePublishModal();
-        cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00013-4-RC');
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
 
-        //And le de click derecho en el post creado
-        PostPage.lastPostCreated(titulo, 'rightClick');
-        cy.screenshot('../../ghost-5.96/E00013-5-RC');
+    //And le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
 
-        //When le da click en el boton de delete
-        PostPage.deletePost();
+    //And cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
 
-        //Then el post es eliminado
-        PostPage.deletePostModal();
-        cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00013-6-RC');
-    });
+    //And le de click derecho en el post creado
+    PostPage.lastPostCreated(titulo, "rightClick");
+    cy.screenshot("ss");
 
-    it('E00014 - Eliminamos un post previamente creado (Pseudo)', function () {
-        //Creamos semilla de faker
-        faker.seed(123);
+    //When le da click en el boton de delete
+    PostPage.deletePost();
 
-        //Given que voy a la sección de posts
-        PrincipalPage.clickPosts();
-        cy.screenshot('../../ghost-5.96/E00014-1-RC');
+    //Then el post es eliminado
+    PostPage.deletePostModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+  });
 
-        //And el administrador ve la página de listado de posts
-        PostPage.getTitleSection().should('include.text', 'Posts');
+  it("E00014 - Eliminamos un post previamente creado (Pseudo)", function () {
+    //Creamos semilla de faker
+    faker.seed(123);
 
-        //And le da click en el boton New Post
-        PostPage.clickNewPost();
-        cy.screenshot('../../ghost-5.96/E00014-2-RC');
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.screenshot("ss");
 
-        //And el administrador ve la página de creación de post
-        PostPage.creationPostPage().should('have.value', '');
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
 
-        //And escribe el titulo del post
-        let titulo = faker.lorem.word();
-        PostPage.writeTitle(titulo);
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
 
-        //And escribe el contenido
-        let contenido = faker.lorem.paragraph();
-        PostPage.writeContent(contenido);
-        cy.screenshot('../../ghost-5.96/E00014-3-RC');
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
 
-        //And le de click en el boton de Publish
-        PostPage.publishPostButton();
-        cy.wait(1000);
+    //And escribe el titulo del post
+    let titulo = randomRow.tituloPost;
+    PostPage.writeTitle(titulo);
 
-        //And le da click en el boton Continue, final review
-        PostPage.continueButton();
-       
-        //And le da click en el boton Publish post, right now
-        PostPage.publishPostButtonFinal();
+    //And escribe el contenido
+    let contenido = randomRow.contenidoPost;
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
 
-        //And cierre el modal de confirmación de publicación
-        PostPage.closePublishModal();
-        cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00014-4-RC');
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
 
-        //And le de click derecho en el post creado
-        PostPage.lastPostCreated(titulo, 'rightClick');
-        cy.screenshot('../../ghost-5.96/E00014-5-RC');
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
 
-        //When le da click en el boton de delete
-        PostPage.deletePost();
+    //And le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
 
-        //Then el post es eliminado
-        PostPage.deletePostModal();
-        cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00014-6-RC');
-    });
+    //And cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
 
-    it('E00015 - Eliminamos un post previamente creado (Aleatorio)', function () {
-        //Creamos semilla de faker
-        faker.seed();
-        let randomCategory = faker.helpers.arrayElement(Object.keys(categoryMethods));
-        let randomMethod = faker.helpers.objectKey(faker[randomCategory]);
-        let randomData = faker[randomCategory][randomMethod]();
+    //And le de click derecho en el post creado
+    PostPage.lastPostCreated(titulo, "rightClick");
+    cy.screenshot("ss");
 
-        //Given que voy a la sección de posts
-        PrincipalPage.clickPosts();
-        cy.screenshot('../../ghost-5.96/E00015-1-RC');
+    //When le da click en el boton de delete
+    PostPage.deletePost();
 
-        //And el administrador ve la página de listado de posts
-        PostPage.getTitleSection().should('include.text', 'Posts');
+    //Then el post es eliminado
+    PostPage.deletePostModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+  });
 
-        //And le da click en el boton New Post
-        PostPage.clickNewPost();
-        cy.screenshot('../../ghost-5.96/E00015-2-RC');
+  it("E00015 - Eliminamos un post previamente creado (Aleatorio)", function () {
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.screenshot("ss");
 
-        //And el administrador ve la página de creación de post
-        PostPage.creationPostPage().should('have.value', '');
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
 
-        //And escribe el titulo del post
-        let titulo = randomData;
-        PostPage.writeTitle(titulo);
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
 
-        //And escribe el contenido
-        let contenido = faker.lorem.paragraph();
-        PostPage.writeContent(contenido);
-        cy.screenshot('../../ghost-5.96/E00015-3-RC');
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
 
-        //And le de click en el boton de Publish
-        PostPage.publishPostButton();
-        cy.wait(1000);
+    //And escribe el titulo del post
+    let titulo = FakerGenerador.generateRandomData();
+    PostPage.writeTitle(titulo);
 
-        //And le da click en el boton Continue, final review
-        PostPage.continueButton();
-       
-        //And le da click en el boton Publish post, right now
-        PostPage.publishPostButtonFinal();
+    //And escribe el contenido
+    let contenido = FakerGenerador.generateRandomData();
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
 
-        //And cierre el modal de confirmación de publicación
-        PostPage.closePublishModal();
-        cy.wait(1000);
-        cy.screenshot('../../ghost-5.96/E00015-4-RC');
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
 
-        //And le de click derecho en el post creado
-        PostPage.lastPostCreated(titulo, 'rightClick');
-        cy.screenshot('../../ghost-5.96/E00015-5-RC');
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
 
-        //When le da click en el boton de delete
-        PostPage.deletePost();
+    //And le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
+
+    //And cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //When le de click derecho en el post creado
+    PostPage.lastPostCreated(titulo, "rightClick");
+    cy.screenshot("ss");
+
+    //Then le da click en el boton de delete
+    PostPage.deletePost();
+  });
+});
+
+describe("Escenarios E00016 - E00018", function () {
+  let randomRow;
+
+  beforeEach(() => {
+    cy.fixture("properties.json").then((data) => {
+      //Vistamos sitio de Ghost
+      cy.visit(data.baseURL);
+
+      //Iniciamos sesion
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+      cy.screenshot("ss");
+      cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_invalid_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
     });
   });
+
+  it("E00016 - Editar el titulo de un post previamente creado con caracteres especiales (A-priori)", function () {
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
+
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
+
+    //And escribe el titulo del post
+    let titulo = dataPoolInvalid[2].tituloPost;
+    PostPage.writeTitle(titulo);
+
+    //And escribe el contenido
+    let contenido = dataPoolInvalid[2].contenidoPost;
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
+
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
+
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
+
+    //And le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
+
+    //And cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And le de click en el post creado
+    PostPage.lastPostCreated(titulo, "click");
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And edito el titulo del post
+    let tituloEditado = dataPoolInvalid[2].tituloEditado;
+    PostPage.writeTitle(tituloEditado);
+    cy.screenshot("ss");
+
+    //And le de click en el boton de update
+    PostPage.updatePostButton();
+
+    //When le de click en el boton de devolverse a la lista de posts
+    PostPage.clickBackToPosts();
+
+    //Then debería ver el post publicado en la lista de posts con titulo editado
+    PostPage.lastPostCreated(tituloEditado, "notClick");
+    cy.wait(1000);
+    cy.screenshot("ss");
+  });
+
+  it("E00017 - Editar el titulo de un post previamente creado con caracteres especiales (Pseudo)", function () {
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
+
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
+
+    //And escribe el titulo del post
+    let titulo = randomRow.tituloPost;
+    PostPage.writeTitle(titulo);
+
+    //And escribe el contenido
+    let contenido = randomRow.contenidoPost;
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
+
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
+
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
+
+    //And le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
+
+    //And cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And le de click en el post creado
+    PostPage.lastPostCreated(titulo, "click");
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And edito el titulo del post
+    let tituloEditado = randomRow.tituloEditadoPost;
+    PostPage.writeTitle(tituloEditado);
+    cy.screenshot("ss");
+
+    //And le de click en el boton de update
+    PostPage.updatePostButton();
+
+    //When le de click en el boton de devolverse a la lista de posts
+    PostPage.clickBackToPosts();
+
+    //Then debería ver el post publicado en la lista de posts con titulo editado
+    PostPage.lastPostCreated(tituloEditado, "notClick");
+    cy.wait(1000);
+    cy.screenshot("ss");
+  });
+
+  it("E00018 - Editar el titulo de un post previamente creado con caracteres especiales (Aleatorio)", function () {
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
+
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
+
+    //And escribe el titulo del post
+    let titulo = FakerGenerador.generateRandomData();
+    PostPage.writeTitle(titulo);
+
+    //And escribe el contenido
+    let contenido = FakerGenerador.generateRandomData();
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
+
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
+
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
+
+    //And le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
+
+    //And cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And le de click en el post creado
+    PostPage.lastPostCreated(titulo, "click");
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And edito el titulo del post
+    let tituloEditado = FakerGenerador.randomSpecialCharacters(10);
+    PostPage.writeTitle(tituloEditado);
+    cy.screenshot("ss");
+
+    //When le de click en el boton de update
+    PostPage.updatePostButton();
+
+    //Then le de click en el boton de devolverse a la lista de posts
+    PostPage.clickBackToPosts();
+  });
+});
+
+describe("Escenarios E00019 - E00021", function () {
+  let randomRow;
+
+  beforeEach(() => {
+    cy.fixture("properties.json").then((data) => {
+      //Vistamos sitio de Ghost
+      cy.visit(data.baseURL);
+
+      //Iniciamos sesion
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+      cy.screenshot("ss");
+      cy.wait(1000);
+
+      //Guardamos la apiKey de posts
+      let apiKey = data.apiKey;
+
+      //Realizamos la solicitud a la API de Mockaroo
+      cy.request({
+        method: "GET",
+        url: `https://my.api.mockaroo.com/posts_invalid_schema.json?key=${apiKey}`,
+      }).then((response) => {
+        // Verificamos que la respuesta sea exitosa
+        expect(response.status).to.eq(200);
+
+        //Seleccionamos data para la prueba
+        randomRow =
+          response.body[Math.floor(Math.random() * response.body.length)];
+      });
+    });
+  });
+
+  it("E00019 - Crear un post vacío (A-priori)", function () {
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
+
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
+
+    //And escribe el titulo del post
+    let titulo = dataPoolInvalid[3].tituloPost;
+    PostPage.writeTitle(titulo);
+
+    //And escribe el contenido
+    let contenido = dataPoolInvalid[3].contenidoPost;
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
+
+    //And borramos contenido
+    PostPage.clearContent();
+    cy.screenshot("ss");
+
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
+
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
+
+    //When le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
+
+    //Then cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+  });
+
+  it("E00020 - Crear un post vacío (Pseudo)", function () {
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
+
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
+
+    //And escribe el titulo del post
+    let titulo = randomRow.tituloPost;
+    PostPage.writeTitle(titulo);
+
+    //And escribe el contenido
+    let contenido = randomRow.contenidoPost;
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
+
+    //And borramos contenido
+    PostPage.clearContent();
+    cy.screenshot("ss");
+
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
+
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
+
+    //When le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
+
+    //Then cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+  });
+
+  it("E00021 - Crear un post vacío (Aleatorio)", function () {
+    //Given que voy a la sección de posts
+    PrincipalPage.clickPosts();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de listado de posts
+    PostPage.getTitleSection().should("include.text", "Posts");
+
+    //And le da click en el boton New Post
+    PostPage.clickNewPost();
+    cy.screenshot("ss");
+
+    //And el administrador ve la página de creación de post
+    PostPage.creationPostPage().should("have.value", "");
+
+    //And escribe el titulo del post
+    let titulo = FakerGenerador.generateRandomData();
+    PostPage.writeTitle(titulo);
+
+    //And escribe el contenido
+    let contenido = FakerGenerador.generateRandomData();
+    PostPage.writeContent(contenido);
+    cy.screenshot("ss");
+
+    //And borramos contenido
+    PostPage.clearContent();
+    cy.screenshot("ss");
+
+    //And le de click en el boton de Publish
+    PostPage.publishPostButton();
+    cy.wait(1000);
+
+    //And le da click en el boton Continue, final review
+    PostPage.continueButton();
+
+    //When le da click en el boton Publish post, right now
+    PostPage.publishPostButtonFinal();
+
+    //Then cierre el modal de confirmación de publicación
+    PostPage.closePublishModal();
+    cy.wait(1000);
+    cy.screenshot("ss");
+  });
+});
