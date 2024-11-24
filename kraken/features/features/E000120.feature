@@ -1,7 +1,7 @@
 Feature: Ghost
 
 @user2 @web
-Scenario: E012 - Crear una page vacia. sin contenido.
+Scenario: E000120 - Crear una page vacia. sin contenido.
   Given I navigate to page principal
   And I enter email y password
   And I wait for 1 seconds

@@ -18,7 +18,7 @@ describe('Feature: El usuario admin puede Editar Pages', () => {
         PagesPage.createPage("Page to be Edited", "Random content");
     });
 
-    it("Escenario 38: Editar Page con datos a-priori generados con Mockaroo", () => {
+    it("E00098: Editar Page con datos a-priori generados con Mockaroo", () => {
         //Given usuario logueado con paginas creadas
         PagesPage.goToPages();
 
@@ -51,7 +51,7 @@ describe('Feature: El usuario admin puede Editar Pages', () => {
         });
     });
 
-    it("Escenario 39: Editar Page con datos generados aleatorimente con FakeJS", () => {
+    it("E00099: Editar Page con datos generados aleatorimente con FakeJS", () => {
         //Given usuario logueado con paginas creadas
         PagesPage.goToPages();
 
@@ -82,7 +82,7 @@ describe('Feature: El usuario admin puede Editar Pages', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("Escenario 40: Edita Page con datos online generados pseudo aleatorios.", () => {
+    it("E000100: Edita Page con datos online generados pseudo aleatorios.", () => {
         pseudo.getDataFromMockaroo();
 
        //Given usuario logueado con paginas creadas

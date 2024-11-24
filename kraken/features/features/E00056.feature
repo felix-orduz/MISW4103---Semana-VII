@@ -1,7 +1,7 @@
 Feature: Ghost - Eliminar Miembro
 
 @user1 @web
-Scenario: E00075 - Delete Member A Priori
+Scenario: E00056 - Delete Member A Priori
   Given I navigate to page principal
   And Tomo pantallazo "E00020-1-RC.png"
   And I enter email y password

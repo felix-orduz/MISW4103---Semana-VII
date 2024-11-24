@@ -1,7 +1,7 @@
 Feature: Ghost
 
 @user1 @web
-Scenario: E00071 - Crear Member - Datos A Priori
+Scenario: E00057 - Crear Member - Aletorio Faker
   Given I navigate to page principal
   And Tomo pantallazo "E00016-0-RC.png"
   And I enter email y password
@@ -14,7 +14,7 @@ Scenario: E00071 - Crear Member - Datos A Priori
   And Clic en el botón de New Member
   And I wait for 3 seconds
   And Tomo pantallazo "E00016-3-RC.png"
-  And Contenido del member base A Priori 0
+  And Contenido del member base Aletorio Faker
   And Clic en Save Member
   And I wait for 3 seconds
   And Tomo pantallazo "E00016-4-RC.png"

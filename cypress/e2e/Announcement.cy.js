@@ -11,7 +11,7 @@ describe('Feature: El usuario admin puede editar el design.', () => {
         AnnouncementPage.doLogIn();
     });
 
-    it("Escenario 53: Editar subheader con datos a-priori generados con Mockaroo", () => {
+    it("E000115: Editar subheader con datos a-priori generados con Mockaroo", () => {
         //Given usuario logueado
         AnnouncementPage.goToSettings();
 
@@ -48,7 +48,7 @@ describe('Feature: El usuario admin puede editar el design.', () => {
         });       
     });
 
-    it("Escenario 54: Editar announcement con datos a-priori generados con Mockaroo con un texto superior a 200", () => {
+    it("E000116: Editar announcement con datos a-priori generados con Mockaroo con un texto superior a 200", () => {
          //Given usuario logueado
       AnnouncementPage.goToSettings();
 
@@ -84,7 +84,7 @@ describe('Feature: El usuario admin puede editar el design.', () => {
             .and("have.class", aBackgroundColor.toLowerCase())
     });
      
-    it("Escenario 55: Editar announcement con datos pseudo aleatorios generados online", () => {
+    it("E000117: Editar announcement con datos pseudo aleatorios generados online", () => {
 
         pseudo.getDataFromMockaroo();
           
@@ -128,7 +128,7 @@ describe('Feature: El usuario admin puede editar el design.', () => {
        
     });
 
-    it("Escenario 56: Editar announcement con datos aleatorios generados onlie", () => {
+    it("E000118: Editar announcement con datos aleatorios generados onlie", () => {
       //Given usuario logueado
       AnnouncementPage.goToSettings();
 

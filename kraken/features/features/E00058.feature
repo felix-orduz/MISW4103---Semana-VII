@@ -1,7 +1,7 @@
 Feature: Ghost - Validación de Email Inválido
 
 @user1 @web
-Scenario: E00077- Invalid Email Validation Aletorio Faker
+Scenario: E00058- Invalid Email Validation Aletorio Faker
   And I wait for 3 seconds
   Given I navigate to page principal
   And Tomo pantallazo "E00017-0-RC.png"

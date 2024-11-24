@@ -17,14 +17,14 @@ describe('Feature: Unpublish Page', () => {
         PagesPage.doLogIn();
     });
 
-    it("Escenario 41: Unpublish page creada con contenido aleatorio", () => {
-        //Given usuario logueado
+    it("E000101: Unpublish page creada con contenido aleatorio", () => {
+        //Given usuario logueado y una pagina publicada
         PagesPage.goToPages();  
         let title = faker.lorem.sentence();
         let content = faker.lorem.paragraph();
         PagesPage.createPage(title, content);      
 
-        //When editar página
+        //And doy click en editar página
         PagesPage.goToPages();  
         PagesPage.getEditPageButtonByTitle(title); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
@@ -32,7 +32,7 @@ describe('Feature: Unpublish Page', () => {
 
         cy.wait(500)
 
-        //And da click en unpublish Página
+        //When da click en unpublish Página
         PagesPage.getUnPublishPageButton()
             .contains('Unpublish').first().click(); // click en unpublish
 
@@ -44,7 +44,7 @@ describe('Feature: Unpublish Page', () => {
         })
 
         cy.wait(500)
-        // Then Verifica que el estado sea Draft
+        // Then El estado de la pagina sea Draft
         PagesPage.getPageStatus().contains('Draft');
 
     });

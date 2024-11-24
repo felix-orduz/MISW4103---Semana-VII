@@ -1,7 +1,7 @@
 Feature: Ghost - Editar Miembro
 
 @user1 @web
-Scenario: E00074 - Edit Member A priori
+Scenario: E00055 - Edit Member A priori
   Given I navigate to page principal
   And Tomo pantallazo "E00019-0-RC.png"
   And I enter email y password
