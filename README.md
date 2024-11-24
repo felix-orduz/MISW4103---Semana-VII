@@ -1,4 +1,4 @@
-# MISW4103-Semana-VI
+# MISW4103-Semana-VII
 - Daniel Andrade Suárez - d.andrades@uniandes.edu.co
 - Daniel Oicatá Hernández - d.oicata@uniandes.edu.co
 - Felix Orduz - f.orduz@uniandes.edu.co
