@@ -204,6 +204,23 @@ Then("Contenido de member inicial A Priori {int}", async function (index) {
   );
 });
 
+Then("Contenido de member inicial Faker", async function () {
+  initialMemberData = {
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    note: faker.lorem.sentence(),
+  };
+
+  this.initialMemberData = initialMemberData;
+
+  await writeFormMemberBase(
+    this.driver,
+    initialMemberData.name,
+    initialMemberData.email,
+    initialMemberData.note
+  );
+});
+
 Then("Editar nombre del miembro", async function () {
   const updatedName = faker.person.fullName();
   this.updatedName = updatedName;
@@ -212,6 +229,18 @@ Then("Editar nombre del miembro", async function () {
 
 Then("Editar nombre del miembro A Priori {int}", async function (index) {
   initialMemberData = membersDataAPriori[index];
+
+  const updatedName = initialMemberData.name;
+  this.updatedName = updatedName;
+  await updateMemberName(this.driver, updatedName);
+});
+
+Then("Editar nombre del miembro Faker", async function () {
+  initialMemberData = {
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    note: faker.lorem.sentence(),
+  };
 
   const updatedName = initialMemberData.name;
   this.updatedName = updatedName;
@@ -296,6 +325,28 @@ Then(
   "Contenido de member para eliminar A Priori {int}",
   async function (index) {
     initialMemberData = membersDataAPriori[index];
+    memberData = initialMemberData;
+
+    await writeFormMember(
+      this.driver,
+      memberData.name,
+      memberData.email,
+      memberData.note
+    );
+  }
+);
+
+Then(
+  "Contenido de member para eliminar Faker",
+  async function () {
+    initialMemberData = {
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+      note: faker.lorem.sentence(),
+    };
+
+    this.initialMemberData = initialMemberData;
+
     memberData = initialMemberData;
 
     await writeFormMember(
