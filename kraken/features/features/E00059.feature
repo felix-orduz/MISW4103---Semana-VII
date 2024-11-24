@@ -1,7 +1,7 @@
 Feature: Ghost - Validación de Email Inválido y Longitud de Nota
 
 @user1 @web
-Scenario: E00073 - Validación de Email Inválido y Longitud de Nota A priori
+Scenario: E00059 - Validación de Email Inválido y Longitud de Nota Aletorio Faker
   Given I navigate to page principal
   And Tomo pantallazo "E00018-0-RC.png"
   And I enter email y password
@@ -13,7 +13,7 @@ Scenario: E00073 - Validación de Email Inválido y Longitud de Nota A priori
   And Tomo pantallazo "E00018-2-RC.png"
   And Clic en el botón de New Member
   And I wait for 3 seconds
-  And Contenido de member con email inválido y nota larga A Priori 2
+  And Contenido de member con email inválido y nota larga Faker
   And Tomo pantallazo "E00018-3-RC.png"
   And Clic en Save Member
   When Verifica mensaje de error de email inválido

@@ -1,7 +1,7 @@
 Feature: Ghost - Editar Miembro
 
 @user1 @web
-Scenario: E00079 - Edit Member Aletorio Faker
+Scenario: E00060 - Edit Member Aletorio Faker
   Given I navigate to page principal
   And Tomo pantallazo "E00019-0-RC.png"
   And I enter email y password
