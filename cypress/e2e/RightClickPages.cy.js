@@ -17,39 +17,37 @@ describe("Feature: El usuario puede acceder a funcionalidades al hacer click der
     //Given usuario logueado
     PagesPage.goToPages();
 
-    //Then Crear nueva página
+    //And Crea una nueva página
     cy.get(CONTENT.newPageButton).click(); //Click on New Page
     cy.location("hash").should("contain", "#/editor/page"); // check location
 
-    //Then pone contenido
+    //And pone contenido
     let content = faker.lorem.paragraph(2);
     PagesPage.addContentToPage(PAGE_TITLE, content);
     cy.wait(500);
     
     //And publica la página
     cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
-
     cy.wait(500);
-
     PagesPage.clickConfirmCreatePage();
     cy.wait(500);
-
     PagesPage.closeModal();
-
     PagesPage.goToPages();
 
+    // When doy click derecho 
     PagesPage.getListPages().within(() => {
-        // cy.get("h3.gh-content-entry-title")
-        cy.contains(PAGE_TITLE)
-          .first()
-          .rightclick({ force: true });
-      });
+      cy.contains(PAGE_TITLE)
+        .first()
+        .rightclick({ force: true });
+    });
 
+    // And duplico la pagina
     cy.wait(100);
     PagesPage.getButtonOnRigthClickMenu('duplicate')
         .first()
         .click({ force: true });
-    
+    // Then debe existir otra Page con el titulo de la Page + (Copy)
+    // And status draft
     PagesPage.getListPages()
     .contains(PAGE_TITLE + " (Copy)")
     .should("contain", "Draft");
@@ -61,34 +59,32 @@ describe("Feature: El usuario puede acceder a funcionalidades al hacer click der
         //Given usuario logueado
         PagesPage.goToPages();
 
-        //Then Crear nueva página
+        //And Crear nueva página
         cy.get(CONTENT.newPageButton).click(); //Click on New Page
         cy.location("hash").should("contain", "#/editor/page"); // check location
     
-        //Then pone contenido
+        //And pone contenido
         let content = faker.lorem.paragraph(2);
         PagesPage.addContentToPage(PAGE_TITLE, content);
         cy.wait(500);
         
         //And publica la página
         cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
-    
         cy.wait(500);
-    
         PagesPage.clickConfirmCreatePage();
         cy.wait(500);
-    
         PagesPage.closeModal();
-    
         PagesPage.goToPages();
     
+        // When Doy click derecho sobre la Page
         PagesPage.getListPages().within(() => {
             // cy.get("h3.gh-content-entry-title")
             cy.contains(PAGE_TITLE)
               .first()
               .rightclick({ force: true });
           });
-    
+        
+        // And agrego tag al Page
         cy.wait(100);
         PagesPage.getButtonOnRigthClickMenu('add-tag')
             .first()
@@ -103,7 +99,7 @@ describe("Feature: El usuario puede acceder a funcionalidades al hacer click der
             PagesPage.getListOfTagsAvailableForPage().contains(TagName).click();
             PagesPage.buttonAddTagToPage().click();
         });
-        
+        // Then verifico que la Page tenga el tag
         cy.wait(500);
         PagesPage.getListPages()
             .contains(TagName);

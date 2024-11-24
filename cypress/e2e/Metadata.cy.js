@@ -16,17 +16,18 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
 
         MetadataPage.goToEditMetadata();
 
-        cy.wait(500)
+        cy.wait(500);
 
+        // And cargo datos apriori
         cy.fixture("metadata.data.apriori.json").then((data) => {
             let metaTitle = data[0].meta_title;
-            let metaDescription = data[0].meta_description;
 
             MetadataPage.getMetadataSection()
                 .within(() => {
                     cy.contains('Edit').click()
                 });
 
+            // When Cambio el meta titulo
             MetadataPage.getMetadataSection().within(() => {
                 cy.contains('Meta title')
                     .get('input')
@@ -34,8 +35,7 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
                     .clear()
                     .type(metaTitle);
 
-                //cy.contains('Meta description').get('input').type(metaDescription);
-
+                //And guardo cambios
                 MetadataPage.getSaveMetadataButton()
                     .contains('Save')
                     .click();
@@ -43,7 +43,7 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
 
 
             cy.wait(500); 
-            
+            // Then
             MetadataPage.getMetadataSection().within(() => {
                 MetadataPage.getMetadataPreview()
                     .should('contain', metaTitle)
@@ -53,7 +53,42 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
     });
 
     it("Escenario 50: Editar subheader con datos pseudo aleatorios generados onlie", () => {
+ //Given usuario logueado
+ MetadataPage.goToSettings();
 
+ MetadataPage.goToEditMetadata();
+
+ cy.wait(500)
+ // And cargo datos pseudo aleatorios desde mockaroo
+ cy.get('@data').then(response => {
+    let metaTitle = response.body[0].page_title;
+    
+     MetadataPage.getMetadataSection()
+         .within(() => {
+             cy.contains('Edit').click()
+         });
+     // When Cambio el meta titulo
+     MetadataPage.getMetadataSection().within(() => {
+         cy.contains('Meta title')
+             .get('input')
+             .first()
+             .clear()
+             .type(metaTitle);
+
+         // And guardio los cambios
+         MetadataPage.getSaveMetadataButton()
+             .contains('Save')
+             .click();
+     });
+
+     cy.wait(500); 
+     // Then verifico que exita
+     MetadataPage.getMetadataSection().within(() => {
+         MetadataPage.getMetadataPreview()
+             .should('contain', metaTitle)
+     });
+     
+ });       
        
     });
 
@@ -64,38 +99,35 @@ describe('Feature: El usuario admin puede editar la metadata del site.', () => {
         MetadataPage.goToEditMetadata();
 
         cy.wait(500)
+        // And generodatos aleatorios 
+        let metaTitle = faker.lorem.sentence();
+        let metaDescription = faker.lorem.sentence();
 
-        cy.fixture("metadata.data.apriori.json").then((data) => {
-            let metaTitle = faker.lorem.sentence();
-            let metaDescription = faker.lorem.sentence();
-
-            MetadataPage.getMetadataSection()
-                .within(() => {
-                    cy.contains('Edit').click()
-                });
-
-            MetadataPage.getMetadataSection().within(() => {
-                cy.contains('Meta title')
-                    .get('input')
-                    .first()
-                    .clear()
-                    .type(metaTitle);
-
-                //cy.contains('Meta description').get('input').type(metaDescription);
-
-                MetadataPage.getSaveMetadataButton()
-                    .contains('Save')
-                    .click();
+        MetadataPage.getMetadataSection()
+            .within(() => {
+                cy.contains('Edit').click()
             });
+        // When Cambio el meta titulo
+        MetadataPage.getMetadataSection().within(() => {
+            cy.contains('Meta title')
+                .get('input')
+                .first()
+                .clear()
+                .type(metaTitle);
 
-            cy.wait(500); 
+            // And guardio los cambios
+            MetadataPage.getSaveMetadataButton()
+                .contains('Save')
+                .click();
+        });
+
+        cy.wait(500); 
+        // Then verifico que exita
+        MetadataPage.getMetadataSection().within(() => {
+            MetadataPage.getMetadataPreview()
+                .should('contain', metaTitle)
+        });
             
-            MetadataPage.getMetadataSection().within(() => {
-                MetadataPage.getMetadataPreview()
-                    .should('contain', metaTitle)
-            });
-            
-        });       
        
     });
 
