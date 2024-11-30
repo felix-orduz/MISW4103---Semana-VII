@@ -27,22 +27,22 @@ export class Settings {
 
   static validateTitle(titleEditado) {
     cy.get('[data-testid="title-and-description"]')
-      .find('h6')
-      .contains('Site title')
+      .find("h6")
+      .contains("Site title")
       .parent()
-      .find('.flex.items-center.mt-1')
+      .find(".flex.items-center.mt-1")
       .should("have.text", titleEditado);
   }
 
   static validateDesc(descEditado) {
     cy.get('[data-testid="title-and-description"]')
-      .find('h6')
-      .contains('Site description')
+      .find("h6")
+      .contains("Site description")
       .parent()
-      .find('.flex.items-center.mt-1')
+      .find(".flex.items-center.mt-1")
       .should("have.text", descEditado);
   }
-  
+
   static clickTitleLang() {
     return cy.get("#publication-language").first().click({ force: true });
   }
@@ -83,7 +83,10 @@ export class Settings {
   }
 
   static editSocial(socialEditado) {
-    return cy.get('[placeholder="https://x.com/ghost"]').clear().type(socialEditado);
+    return cy
+      .get('[placeholder="https://x.com/ghost"]')
+      .clear()
+      .type(socialEditado);
   }
 
   static cancelChangesSocial() {
@@ -98,5 +101,33 @@ export class Settings {
       .find(".flex.items-center.mt-1")
       .eq(1)
       .should("have.text", socialEditado);
+  }
+
+  static clickAnalytics() {
+    return cy.get("#analytics").first().click({ force: true });
+  }
+
+  static disableAnalyticsButton(selector) {
+    cy.get(selector)
+      .should('have.attr', 'aria-checked', 'true') // Verifica que esté habilitado
+      .click(); // Hacemos clic para deshabilitarlo
+  }
+  
+  static clickSaveChangesAnalytics() {
+    // Guardamos los cambios
+    cy.get('[data-testid="analytics"]')
+      .find("span")
+      .contains("Save")
+      .click({ force: true });
+  }
+
+  static validateAnalyticsButton(buttonSelector, check, status) {
+    // Encuentra el botón por su selector
+    cy.get(buttonSelector) // Usamos el selector pasado como parámetro
+      .should("have.attr", check, status); // Verificamos que esté habilitado o deshabilitado
+  }
+
+  static clickIntegrations() {
+    return cy.get("#integrations").first().click({ force: true });
   }
 }

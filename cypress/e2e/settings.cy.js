@@ -442,4 +442,28 @@ describe("Escenarios E00031 - E00033", function () {
     //Then el language es el esperado
     Settings.validateSocial(socialEditado);
   });
+
+  it("E0001 - Editar Analitics Newsletter opens", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot('ss');
+
+    //And le doy click en analytics
+    Settings.clickAnalytics();
+
+    //And le doy click check en Newsletter opens
+    Settings.clickEditAnalyticsNewsletterOpens();
+    cy.screenshot('ss');
+
+    //And le doy click Guardar cambios
+    Settings.clickSaveChangesAnalyticsNewsletterOpens();
+    cy.screenshot('ss');
+
+    cy.wait(1000);
+
+    //Then el check es el esperado
+    Settings.validateAnalyticsNewsletterOpens(descEditado);
+  });
+
 });
